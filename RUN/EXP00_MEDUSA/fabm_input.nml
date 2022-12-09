@@ -1,0 +1,102 @@
+!              !  file name   ! frequency (hours) ! variable  ! time interp. !  clim  ! 'yearly'/ ! weights  ! rotation ! land/sea mask !
+!              !              !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename ! pairing  ! filename      !
+!&variable
+!   name='mole_fraction_of_carbon_dioxide_in_air'
+!   sn=         'pCO2a',  -12,  'pCO2a', .false.,  .true., 'yearly', '', '', ''
+!/
+&variable
+   name='mole_fraction_of_carbon_dioxide_in_air'
+   sn = 'INPUTS/eORCA1_pCO2a_global', -1, 'pCO2a', .true., .false., 'yearly', '', '', ''
+/
+&variable
+   name='N4_flux/flux'
+   sn=  'INPUTS/ndep-nhx_histsoc_monthly_atmosgrid', -1, 'nhx', .false.,  .false., 'yearly', 'weights_coreII_2_eorca1_bilinear.nc', '', ''
+/
+&variable
+   name='N3_flux/flux'
+   sn=  'INPUTS/ndep-noy_histsoc_monthly_atmosgrid', -1, 'noy', .false., .false., 'yearly', 'weights_coreII_2_eorca1_bilinear.nc', '', ''
+/
+!&variable
+!   name='N7_flux/flux'
+!   sn=  'INPUTS/eORCA1_dust.nc', -1, 'dust', .false., .true., 'yearly', '', '', ''
+!/
+&variable
+   name='N7_flux/flux'
+   sn=  'INPUTS/eORCA1_Fe_dep_GESAMP', -1, 'LFe_dep', .false., .true., 'yearly', '', '', ''
+/
+!&riverdata
+!   name='pelagic_DiC'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_ALK'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_DIN'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_FER'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_CHN'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_CHD'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_PHN'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_PHD'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_SIL'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_PDS'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_OXY'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_ZMI'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_ZME'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_DET'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+!&riverdata
+!   name='pelagic_DTC'
+!   sn=  'runoff-icb_DaiTrenberth_Depoorter_eORCA1_JD', -1, 'sorunoff',.true.,   .true.,   'yearly',    '',      '',       ''
+!   rfac=-1.
+!/
+

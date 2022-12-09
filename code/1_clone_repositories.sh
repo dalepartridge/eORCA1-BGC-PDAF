@@ -1,6 +1,7 @@
 #!/bin/bash
   
 # Clone code bases
+source 0_set_environment.sh
 
 svn checkout http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/branchs/xios-2.5 $XIOS_CLONE
 

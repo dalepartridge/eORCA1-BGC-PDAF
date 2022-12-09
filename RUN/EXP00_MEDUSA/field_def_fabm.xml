@@ -1,0 +1,618 @@
+<field_definition level="1" prec="4" operation="average" enabled=".TRUE." default_value="1.e20" >
+ <field_group id="ptrc_T" grid_ref="grid_T_3D">
+  <field id="pelagic_CHN" long_name="pelagic chlorophyll in non-diatoms" unit="mg chl/m**3" default_value="-.200E+21" />
+  <field id="pelagic_CHD" long_name="pelagic chlorophyll in diatoms" unit="mg chl/m**3" default_value="-.200E+21" />
+  <field id="pelagic_PHN" long_name="pelagic non-diatom phytoplankton" unit="mmol N/m**3" default_value="-.200E+21" />
+  <field id="pelagic_PHD" long_name="pelagic diatom phytoplankton" unit="mmol N/m**3" default_value="-.200E+21" />
+  <field id="pelagic_PDS" long_name="pelagic diatom phytoplankton (silicon)" unit="mmol Si/m**3" default_value="-.200E+21" />
+  <field id="pelagic_DIN" long_name="pelagic nitrogen nutrient" unit="mmol N/m**3" default_value="-.200E+21" />
+  <field id="pelagic_FER" long_name="pelagic iron nutrient" unit="mmol Fe/m**3" default_value="-.200E+21" />
+  <field id="pelagic_SIL" long_name="pelagic silicic acid" unit="mmol Si/m**3" default_value="-.200E+21" />
+  <field id="pelagic_DET" long_name="pelagic slow-sinking detritus (N)" unit="mmol N/m**3" default_value="-.200E+21" />
+  <field id="pelagic_DTC" long_name="pelagic slow-sinking detritus (C)" unit="mmol C/m**3" default_value="-.200E+21" />
+  <field id="pelagic_ZMI" long_name="pelagic microzooplankton" unit="mmol N/m**3" default_value="-.200E+21" />
+  <field id="pelagic_ZME" long_name="pelagic mesozooplankton" unit="mmol N/m**3" default_value="-.200E+21" />
+  <field id="pelagic_ALK" long_name="pelagic total alkalinity" unit="meq/m**3" default_value="-.200E+21" />
+  <field id="pelagic_DiC" long_name="pelagic dissolved inorganic carbon" unit="mmol C/m**3" default_value="-.200E+21" />
+  <field id="pelagic_OXY" long_name="pelagic dissolved oxygen" unit="mmol O_2/m**3" default_value="-.200E+21" />
+ </field_group>
+ <field_group id="sf_T" grid_ref="grid_T_2D">
+  <field id="benthic_BEN_C" long_name="benthic sediment organic carbon pool" unit="mmol C/m**2" default_value="-.200E+21" />
+  <field id="benthic_BEN_N" long_name="benthic sediment organic nitrogen pool" unit="mmol N/m**2" default_value="-.200E+21" />
+  <field id="benthic_BEN_FE" long_name="benthic sediment organic iron pool" unit="mmol Fe/m**2" default_value="-.200E+21" />
+  <field id="benthic_BEN_SI" long_name="benthic sediment organic silica pool" unit="mmol Si/m**2" default_value="-.200E+21" />
+  <field id="benthic_BEN_CA" long_name="benthic sediment organic calcite pool" unit="mmol C/m**2" default_value="-.200E+21" />
+ </field_group>
+ <field_group id="diad_T" grid_ref="grid_T_2D">
+  <field id="light_MED_XPAR" long_name="light photosynthetically active radiation" unit="W/m^2" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="gas_transfer__attenuation_coefficient_of_photosynthetic_radiative_flux" long_name="gas_transfer light extinction contribution computed by get_light_extinction" unit="m-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="carbonate_DiC_sms" long_name="carbonate dissolved inorganic carbon sources-sinks" unit="mmol C/m^3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="carbonate_DiC_w" long_name="carbonate dissolved inorganic carbon vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="carbonate_PH3" long_name="carbonate Ocean pH 3D" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="carbonate_pCO2" long_name="carbonate partial pressure of CO2" unit="1e-6" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="carbonate_CarbA" long_name="carbonate carbonic acid concentration" unit="mmol/m^3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="carbonate_BiCarb" long_name="carbonate bicarbonate concentration" unit="mmol/m^3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="carbonate_Carb" long_name="carbonate carbonate concentration" unit="mmol/m^3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="carbonate_OM_CAL3" long_name="carbonate Omega calcite 3D" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="carbonate_OM_ARG3" long_name="carbonate aragonite saturation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="oxygen_OXY_sms" long_name="oxygen dissolved oxygen sources-sinks" unit="mmol O_2/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="oxygen_OXY_w" long_name="oxygen dissolved oxygen vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_CHN_sms" long_name="pelagic chlorophyll in non-diatoms sources-sinks" unit="mg chl/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_CHN_w" long_name="pelagic chlorophyll in non-diatoms vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_CHD_sms" long_name="pelagic chlorophyll in diatoms sources-sinks" unit="mg chl/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_CHD_w" long_name="pelagic chlorophyll in diatoms vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_PHN_sms" long_name="pelagic non-diatom phytoplankton sources-sinks" unit="mmol N/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_PHN_w" long_name="pelagic non-diatom phytoplankton vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_PHD_sms" long_name="pelagic diatom phytoplankton sources-sinks" unit="mmol N/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_PHD_w" long_name="pelagic diatom phytoplankton vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_PDS_sms" long_name="pelagic diatom phytoplankton (silicon) sources-sinks" unit="mmol Si/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_PDS_w" long_name="pelagic diatom phytoplankton (silicon) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DIN_sms" long_name="pelagic nitrogen nutrient sources-sinks" unit="mmol N/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DIN_w" long_name="pelagic nitrogen nutrient vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_FER_sms" long_name="pelagic iron nutrient sources-sinks" unit="mmol Fe/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_FER_w" long_name="pelagic iron nutrient vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_SIL_sms" long_name="pelagic silicic acid sources-sinks" unit="mmol Si/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_SIL_w" long_name="pelagic silicic acid vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DET_sms" long_name="pelagic slow-sinking detritus (N) sources-sinks" unit="mmol N/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DET_w" long_name="pelagic slow-sinking detritus (N) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DTC_sms" long_name="pelagic slow-sinking detritus (C) sources-sinks" unit="mmol C/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DTC_w" long_name="pelagic slow-sinking detritus (C) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZMI_sms" long_name="pelagic microzooplankton sources-sinks" unit="mmol N/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZMI_w" long_name="pelagic microzooplankton vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZME_sms" long_name="pelagic mesozooplankton sources-sinks" unit="mmol N/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZME_w" long_name="pelagic mesozooplankton vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ALK_sms" long_name="pelagic total alkalinity sources-sinks" unit="meq/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ALK_w" long_name="pelagic total alkalinity vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DiC_sms" long_name="pelagic dissolved inorganic carbon sources-sinks" unit="mmol C/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DiC_w" long_name="pelagic dissolved inorganic carbon vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_OXY_sms" long_name="pelagic dissolved oxygen sources-sinks" unit="mmol O_2/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_OXY_w" long_name="pelagic dissolved oxygen vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempn_sms" long_name="pelagic fast-sinking detritus (N) sources-sinks" unit="mmol N/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempn_w" long_name="pelagic fast-sinking detritus (N) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempc_sms" long_name="pelagic fast-sinking detritus (C) sources-sinks" unit="mmol C/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempc_w" long_name="pelagic fast-sinking detritus (C) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempsi_sms" long_name="pelagic fast-sinking detritus (Si) sources-sinks" unit="mmol Si/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempsi_w" long_name="pelagic fast-sinking detritus (Si) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempfe_sms" long_name="pelagic fast-sinking detritus (Fe) sources-sinks" unit="mmol Fe/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempfe_w" long_name="pelagic fast-sinking detritus (Fe) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempca_sms" long_name="pelagic fast-sinking detritus (CaCO3) sources-sinks" unit="mmol CaCO3/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_tempca_w" long_name="pelagic fast-sinking detritus (CaCO3) vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_fscal_part" long_name="pelagic carbon in suspended particles" unit="nmol C cm-2 s-1" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PRN" long_name="pelagic Non-diatom primary production" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PRD" long_name="pelagic Diatom primary production" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_MPN" long_name="pelagic Non-diatom non-grazing losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_MPD" long_name="pelagic Diatom non-grazing losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_OPAL" long_name="pelagic Diatom biogenic opal production" unit="mmolSi/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_OPALDISS" long_name="pelagic Diatom biogenic opal dissolution" unit="mmolSi/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMIPn" long_name="pelagic Microzoo grazing on non-diatoms" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMID" long_name="pelagic Microzoo grazing on detritus" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMEPN" long_name="pelagic Mesozoo grazing on non-diatoms" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMEPD" long_name="pelagic Mesozoo grazing on diatoms" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMEZMI" long_name="pelagic Mesozoo grazing on microzoo" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMED" long_name="pelagic Mesozoo grazing on detritus" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_MZMI" long_name="pelagic Microzoo non-grazing losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_MZME" long_name="pelagic Mesozoo non-grazing losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_DETN" long_name="pelagic Slow detritus creation" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_DETC" long_name="pelagic Slow detritus C creation" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_MDET" long_name="pelagic Detritus non-grazing losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_MDETC" long_name="pelagic Detritus non-grazing losses, carbon" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMIDC" long_name="pelagic Microzoo grazing on detritus, carbon" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_GMEDC" long_name="pelagic Mesozoo  grazing on detritus, carbon" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_regen_slow" long_name="pelagic Total slow remin flux N 3D" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_regen2d" long_name="pelagic Total slow remin flux N 3D * dz" unit="mmolN/m2/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_regenSi_slow" long_name="pelagic Total slow remin flux Si 3D" unit="mmolSi/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_flux_slow" long_name="pelagic Total slow detrital flux 3D" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PD_JLIM" long_name="pelagic Diatom light limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PD_NLIM" long_name="pelagic Diatom N limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PD_FELIM" long_name="pelagic Diatom Fe limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PD_SILIM" long_name="pelagic Diatom Si limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PD_SILIM2" long_name="pelagic Diatom Si uptake limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PN_JLIM" long_name="pelagic Non-diatom light limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PN_NLIM" long_name="pelagic Non-diatom N limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PN_FELIM" long_name="pelagic Non-diatom Fe limitation" unit="-" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PN_LLOSS" long_name="pelagic Non-diatom linear losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_PD_LLOSS" long_name="pelagic Diatom linear losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_LLOSS" long_name="pelagic Microzooplankton linear losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_LLOSS" long_name="pelagic Mesozooplankton linear losses" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_MES_N" long_name="pelagic Microzoo messy feeding loss to N" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_MES_D" long_name="pelagic Microzoo messy feeding loss to D" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_MES_C" long_name="pelagic Microzoo messy feeding loss to C" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_MESDC" long_name="pelagic Microzoo messy feeding loss to Dc" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_MES_N" long_name="pelagic Mesozoo messy feeding loss to N" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_MES_D" long_name="pelagic Mesozoo messy feeding loss to D" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_MES_C" long_name="pelagic Mesozoo messy feeding loss to C" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_MESDC" long_name="pelagic Mesozoo messy feeding loss to Dc" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_EXCR" long_name="pelagic Microzoo excretion" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_RESP" long_name="pelagic Microzoo respiration" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZI_GROW" long_name="pelagic Microzoo growth" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_EXCR" long_name="pelagic Mesozoo excretion" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_C_PROD" long_name="pelagic Carbon production" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_C_CONS" long_name="pelagic Carbon consumption" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_N_PROD" long_name="pelagic Nitogen production" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_N_CONS" long_name="pelagic Nitrogen consumption" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_O2_PROD" long_name="pelagic Oxygen production" unit="mmolO2/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_O2_CONS" long_name="pelagic Oxygen consumption" unit="mmolO2/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_O2_ANOX" long_name="pelagic Unrealised oxygen consumption" unit="mmolO2/m3/d" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_RESP" long_name="pelagic Mesozoo respiration" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_ZE_GROW" long_name="pelagic Mesozoo growth" unit="mmolN/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_fcomm_resp" long_name="pelagic Community respiration" unit="mmolC/m3/d" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_FASTN" long_name="pelagic fast-sinking detritus (N)" unit="mmol N/m**3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_FASTC" long_name="pelagic fast-sinking detritus (C)" unit="mmol C/m**3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_FASTSI" long_name="pelagic fast-sinking detritus (Si)" unit="mmol Si/m**3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_FASTFE" long_name="pelagic fast-sinking detritus (Fe)" unit="mmol Fe/m**3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_FASTCA" long_name="pelagic fast-sinking detritus (CaCO3)" unit="mmol CaCO3/m**3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="pelagic_fslownflux" long_name="pelagic slow detritus sinking flux" unit="mmol N/m**2" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="iron_scavenging_FER_sms" long_name="iron_scavenging iron nutrient sources-sinks" unit="mmol Fe/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="iron_scavenging_FER_w" long_name="iron_scavenging iron nutrient vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="iron_scavenging_SCAVENGE" long_name="iron_scavenging scavenged iron" unit="mmol Fe/m**3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_tempc" long_name="fast_detritus fast-sinking detritus (C)" unit="mmol C m-3" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_tempn" long_name="fast_detritus fast-sinking detritus (N)" unit="mmol N m-3" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_tempfe" long_name="fast_detritus fast-sinking detritus (Fe)" unit="-" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_tempsi" long_name="fast_detritus fast-sinking detritus (Si)" unit="mmol Si m-3" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_tempca" long_name="fast_detritus fast-sinking detritus (CaCO3)" unit="mmol CaCO3 m-3" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_OXY_sms" long_name="fast_detritus dissolved oxygen sources-sinks" unit="mmol O_2 m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_OXY_w" long_name="fast_detritus dissolved oxygen vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DIN_sms" long_name="fast_detritus nitrogen nutrient sources-sinks" unit="mmol N m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DIN_w" long_name="fast_detritus nitrogen nutrient vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_SIL_sms" long_name="fast_detritus silicic acid sources-sinks" unit="mmol Si m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_SIL_w" long_name="fast_detritus silicic acid vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_FER_sms" long_name="fast_detritus iron nutrient sources-sinks" unit="mmol Fe m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_FER_w" long_name="fast_detritus iron nutrient vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DiC_sms" long_name="fast_detritus dissolved inorganic carbon sources-sinks" unit="mmol C m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DiC_w" long_name="fast_detritus dissolved inorganic carbon vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DET_sms" long_name="fast_detritus detritus nitrogen sources-sinks" unit="mmol N m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DET_w" long_name="fast_detritus detritus nitrogen vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DTC_sms" long_name="fast_detritus detritus carbon sources-sinks" unit="mmol C m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_DTC_w" long_name="fast_detritus detritus carbon vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_ALK_sms" long_name="fast_detritus total alkalinity sources-sinks" unit="meq/m**3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_ALK_w" long_name="fast_detritus total alkalinity vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_freminc" long_name="fast_detritus remineralisation of detritus (C)" unit="mmol C m-3 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_freminn" long_name="fast_detritus remineralisation of detritus (N)" unit="mmol N m-3 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_freminsi" long_name="fast_detritus remineralisation of detritus (Si)" unit="mmol Si m-3 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_freminfe" long_name="fast_detritus remineralisation of detritus (Fe)" unit="mmol Fe m-3 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_freminca" long_name="fast_detritus remineralisation of calcite (CaCO3)" unit="mmol CaCO3 m-3 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_ffastc_loc" long_name="fast_detritus local remineralisation of detritus (C)" unit="mmol C m-2 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_ffastn_loc" long_name="fast_detritus local remineralisation of detritus (N)" unit="mmol C m-2 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_ffastca_loc" long_name="fast_detritus local remineralisation of detritus (Ca)" unit="mmol Ca m-2 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_ffastsi_loc" long_name="fast_detritus local remineralisation of detritus (Si)" unit="mmol Si m-2 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_ffastn_loc_3d" long_name="fast_detritus local remineralisation of detritus (N)" unit="mmol Si m-2 s-1" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="fast_detritus_freminn2d" long_name="fast_detritus remineralisation of detritus (N) * dz" unit="mmol N m-2 s-1" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="benthic_OXY_sms" long_name="benthic dissolved oxygen sources-sinks" unit="mmol O_2 m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_OXY_w" long_name="benthic dissolved oxygen vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DIN_sms" long_name="benthic nitrogen nutrient sources-sinks" unit="mmol N m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DIN_w" long_name="benthic nitrogen nutrient vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_SIL_sms" long_name="benthic silicic acid sources-sinks" unit="mmol Si m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_SIL_w" long_name="benthic silicic acid vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_FER_sms" long_name="benthic iron nutrient sources-sinks" unit="mmol Fe m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_FER_w" long_name="benthic iron nutrient vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DiC_sms" long_name="benthic dissolved inorganic carbon sources-sinks" unit="mmol C m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DiC_w" long_name="benthic dissolved inorganic carbon vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DET_sms" long_name="benthic detritus nitrogen sources-sinks" unit="mmol N m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DET_w" long_name="benthic detritus nitrogen vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DTC_sms" long_name="benthic detritus carbon sources-sinks" unit="mmol C m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_DTC_w" long_name="benthic detritus carbon vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_ALK_sms" long_name="benthic total alkalinity sources-sinks" unit="meq m-3/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="benthic_ALK_w" long_name="benthic total alkalinity vertical velocity" unit="m/s" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="TPP3_result" long_name="Total primary production 3D result" unit="" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="REMIN3N_result" long_name="Total remin flux N 3D result" unit="" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="DETFLUX3_result" long_name="Total detrital flux 3D result" unit="" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="C_PROD1_result" long_name="Carbon production pelagic with CaCO3 remin result" unit="" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="zero" long_name="zero" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="total_carbon_calculator_result" long_name="total_carbon_calculator result" unit="mmol m-3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="total_nitrogen_calculator_result" long_name="total_nitrogen_calculator result" unit="mmol m-3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="total_silicate_calculator_result" long_name="total_silicate_calculator result" unit="mmol m-3" default_value="-.200E+21" grid_ref="grid_T_3D" />
+  <field id="zero_sms_tot" long_name="zero_sms_tot" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="zero_w_tot" long_name="zero_w_tot" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DIN_sms_tot_calculator_result" long_name="pelagic DIN_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DIN_w_tot_calculator_result" long_name="pelagic DIN_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_FER_sms_tot_calculator_result" long_name="pelagic FER_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_FER_w_tot_calculator_result" long_name="pelagic FER_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_SIL_sms_tot_calculator_result" long_name="pelagic SIL_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_SIL_w_tot_calculator_result" long_name="pelagic SIL_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DET_sms_tot_calculator_result" long_name="pelagic DET_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DET_w_tot_calculator_result" long_name="pelagic DET_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DTC_sms_tot_calculator_result" long_name="pelagic DTC_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DTC_w_tot_calculator_result" long_name="pelagic DTC_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ALK_sms_tot_calculator_result" long_name="pelagic ALK_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_ALK_w_tot_calculator_result" long_name="pelagic ALK_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DiC_sms_tot_calculator_result" long_name="pelagic DiC_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_DiC_w_tot_calculator_result" long_name="pelagic DiC_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_OXY_sms_tot_calculator_result" long_name="pelagic OXY_sms_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="pelagic_OXY_w_tot_calculator_result" long_name="pelagic OXY_w_tot_calculator result" unit="" default_value="0.000E+00" grid_ref="grid_T_3D" />
+  <field id="light_MED_QSR" long_name="light Sea surface radiation" unit="W/m^2" default_value="-.200E+21" />
+  <field id="light_MED_XZE" long_name="light Euphotic depth" unit="m" default_value="-.200E+21" />
+  <field id="gas_transfer_KW660" long_name="gas_transfer Piston velocity" unit="m/s" default_value="-.200E+21" />
+  <field id="gas_transfer_WIND" long_name="gas_transfer Surface scalar wind" unit="m/s" default_value="-.200E+21" />
+  <field id="gas_transfer__surface_albedo" long_name="gas_transfer albedo contribution computed by get_albedo" unit="-" default_value="0.000E+00" />
+  <field id="gas_transfer__surface_drag_coefficient_in_air" long_name="gas_transfer surface drag contribution computed by get_drag" unit="-" default_value="0.000E+00" />
+  <field id="carbonate_DiC_sfl" long_name="carbonate dissolved inorganic carbon surface flux" unit="mmol C/m^3*m/s" default_value="0.000E+00" />
+  <field id="carbonate_DiC_bfl" long_name="carbonate dissolved inorganic carbon bottom flux" unit="mmol C/m^3*m/s" default_value="0.000E+00" />
+  <field id="carbonate_CO2FLUX" long_name="carbonate Air-sea CO2 flux" unit="mmol C/m^2/d" default_value="-.200E+21" />
+  <field id="carbonate_OCN_PCO2" long_name="carbonate Surface ocean pCO2" unit="-" default_value="-.200E+21" />
+  <field id="carbonate_TALK" long_name="carbonate Surface ocean pCO2" unit="-" default_value="-.200E+21" />
+  <field id="carbonate_TCO2" long_name="carbonate Surface ocean pCO2" unit="-" default_value="-.200E+21" />
+  <field id="carbonate_ATM_PCO2" long_name="carbonate Atmospheric pCO2" unit="ppmv" default_value="-.200E+21" />
+  <field id="carbonate_OM_CAL" long_name="carbonate Surface omega calcite" unit="-" default_value="-.200E+21" />
+  <field id="carbonate_OM_ARG" long_name="carbonate Surface_omega_aragonite" unit="-" default_value="-.200E+21" />
+  <field id="oxygen_OXY_sfl" long_name="oxygen dissolved oxygen surface flux" unit="mmol O_2/m**3*m/s" default_value="0.000E+00" />
+  <field id="oxygen_OXY_bfl" long_name="oxygen dissolved oxygen bottom flux" unit="mmol O_2/m**3*m/s" default_value="0.000E+00" />
+  <field id="oxygen_O2FLUX" long_name="oxygen Air-sea O2 flux" unit="mmol O_2/m^2/d" default_value="-.200E+21" />
+  <field id="oxygen_O2SAT" long_name="oxygen Surface ocean O2 saturation" unit="mmol O_2/m2/d" default_value="-.200E+21" />
+  <field id="pelagic_CHN_sfl" long_name="pelagic chlorophyll in non-diatoms surface flux" unit="mg chl/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_CHN_bfl" long_name="pelagic chlorophyll in non-diatoms bottom flux" unit="mg chl/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_CHD_sfl" long_name="pelagic chlorophyll in diatoms surface flux" unit="mg chl/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_CHD_bfl" long_name="pelagic chlorophyll in diatoms bottom flux" unit="mg chl/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_PHN_sfl" long_name="pelagic non-diatom phytoplankton surface flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_PHN_bfl" long_name="pelagic non-diatom phytoplankton bottom flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_PHD_sfl" long_name="pelagic diatom phytoplankton surface flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_PHD_bfl" long_name="pelagic diatom phytoplankton bottom flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_PDS_sfl" long_name="pelagic diatom phytoplankton (silicon) surface flux" unit="mmol Si/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_PDS_bfl" long_name="pelagic diatom phytoplankton (silicon) bottom flux" unit="mmol Si/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DIN_sfl" long_name="pelagic nitrogen nutrient surface flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DIN_bfl" long_name="pelagic nitrogen nutrient bottom flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_FER_sfl" long_name="pelagic iron nutrient surface flux" unit="mmol Fe/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_FER_bfl" long_name="pelagic iron nutrient bottom flux" unit="mmol Fe/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_SIL_sfl" long_name="pelagic silicic acid surface flux" unit="mmol Si/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_SIL_bfl" long_name="pelagic silicic acid bottom flux" unit="mmol Si/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DET_sfl" long_name="pelagic slow-sinking detritus (N) surface flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DET_bfl" long_name="pelagic slow-sinking detritus (N) bottom flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DTC_sfl" long_name="pelagic slow-sinking detritus (C) surface flux" unit="mmol C/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DTC_bfl" long_name="pelagic slow-sinking detritus (C) bottom flux" unit="mmol C/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_ZMI_sfl" long_name="pelagic microzooplankton surface flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_ZMI_bfl" long_name="pelagic microzooplankton bottom flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_ZME_sfl" long_name="pelagic mesozooplankton surface flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_ZME_bfl" long_name="pelagic mesozooplankton bottom flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_ALK_sfl" long_name="pelagic total alkalinity surface flux" unit="meq/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_ALK_bfl" long_name="pelagic total alkalinity bottom flux" unit="meq/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DiC_sfl" long_name="pelagic dissolved inorganic carbon surface flux" unit="mmol C/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_DiC_bfl" long_name="pelagic dissolved inorganic carbon bottom flux" unit="mmol C/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_OXY_sfl" long_name="pelagic dissolved oxygen surface flux" unit="mmol O_2/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_OXY_bfl" long_name="pelagic dissolved oxygen bottom flux" unit="mmol O_2/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempn_sfl" long_name="pelagic fast-sinking detritus (N) surface flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempn_bfl" long_name="pelagic fast-sinking detritus (N) bottom flux" unit="mmol N/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempc_sfl" long_name="pelagic fast-sinking detritus (C) surface flux" unit="mmol C/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempc_bfl" long_name="pelagic fast-sinking detritus (C) bottom flux" unit="mmol C/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempsi_sfl" long_name="pelagic fast-sinking detritus (Si) surface flux" unit="mmol Si/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempsi_bfl" long_name="pelagic fast-sinking detritus (Si) bottom flux" unit="mmol Si/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempfe_sfl" long_name="pelagic fast-sinking detritus (Fe) surface flux" unit="mmol Fe/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempfe_bfl" long_name="pelagic fast-sinking detritus (Fe) bottom flux" unit="mmol Fe/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempca_sfl" long_name="pelagic fast-sinking detritus (CaCO3) surface flux" unit="mmol CaCO3/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_tempca_bfl" long_name="pelagic fast-sinking detritus (CaCO3) bottom flux" unit="mmol CaCO3/m**3*m/s" default_value="0.000E+00" />
+  <field id="pelagic_BEN_C_sms" long_name="pelagic sediment (C) sources-sinks" unit="mmol C m-2/s" default_value="0.000E+00" />
+  <field id="pelagic_BEN_N_sms" long_name="pelagic sediment (N) sources-sinks" unit="mmol N m-2/s" default_value="0.000E+00" />
+  <field id="pelagic_BEN_P_sms" long_name="pelagic sediment (P) sources-sinks" unit="mmol P m-2/s" default_value="0.000E+00" />
+  <field id="pelagic_BEN_FE_sms" long_name="pelagic sediment (Fe) sources-sinks" unit="mmol Fe m-2/s" default_value="0.000E+00" />
+  <field id="pelagic_sbenin_c" long_name="pelagic Benthic input slow carbon" unit="mmolC/m2/d" default_value="-.200E+21" />
+  <field id="pelagic_sbenin_n" long_name="pelagic Benthic input slow nitrogen" unit="mmolN/m2/d" default_value="-.200E+21" />
+  <field id="pelagic_sbenin_fe" long_name="pelagic Benthic input slow iron" unit="mmolFe/m2/d" default_value="-.200E+21" />
+  <field id="iron_scavenging_FER_sfl" long_name="iron_scavenging iron nutrient surface flux" unit="mmol Fe/m**3*m/s" default_value="0.000E+00" />
+  <field id="iron_scavenging_FER_bfl" long_name="iron_scavenging iron nutrient bottom flux" unit="mmol Fe/m**3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_OXY_sfl" long_name="fast_detritus dissolved oxygen surface flux" unit="mmol O_2 m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_OXY_bfl" long_name="fast_detritus dissolved oxygen bottom flux" unit="mmol O_2 m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DIN_sfl" long_name="fast_detritus nitrogen nutrient surface flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DIN_bfl" long_name="fast_detritus nitrogen nutrient bottom flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_SIL_sfl" long_name="fast_detritus silicic acid surface flux" unit="mmol Si m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_SIL_bfl" long_name="fast_detritus silicic acid bottom flux" unit="mmol Si m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_FER_sfl" long_name="fast_detritus iron nutrient surface flux" unit="mmol Fe m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_FER_bfl" long_name="fast_detritus iron nutrient bottom flux" unit="mmol Fe m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DiC_sfl" long_name="fast_detritus dissolved inorganic carbon surface flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DiC_bfl" long_name="fast_detritus dissolved inorganic carbon bottom flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DET_sfl" long_name="fast_detritus detritus nitrogen surface flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DET_bfl" long_name="fast_detritus detritus nitrogen bottom flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DTC_sfl" long_name="fast_detritus detritus carbon surface flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_DTC_bfl" long_name="fast_detritus detritus carbon bottom flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_ALK_sfl" long_name="fast_detritus total alkalinity surface flux" unit="meq/m**3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_ALK_bfl" long_name="fast_detritus total alkalinity bottom flux" unit="meq/m**3*m/s" default_value="0.000E+00" />
+  <field id="fast_detritus_ffastc" long_name="fast_detritus remineralisation of detritus (C)" unit="mmol C m-2 s-1" default_value="0.000E+00" />
+  <field id="fast_detritus_ffastn" long_name="fast_detritus remineralisation of detritus (N)" unit="mmol N m-2 s-1" default_value="0.000E+00" />
+  <field id="fast_detritus_ffastfe" long_name="fast_detritus remineralisation of detritus (Fe)" unit="mmol Fe m-2 s-1" default_value="0.000E+00" />
+  <field id="fast_detritus_ffastsi" long_name="fast_detritus remineralisation of detritus (Si)" unit="mmol Si m-2 s-1" default_value="0.000E+00" />
+  <field id="fast_detritus_ffastca" long_name="fast_detritus remineralisation of calcite (CaCO3)" unit="mmol CaCO3 m-2 s-1" default_value="0.000E+00" />
+  <field id="fast_detritus_SEAFLRN" long_name="fast_detritus Seafloor flux of N" unit="mmolN/m2/s" default_value="-.200E+21" />
+  <field id="fast_detritus_SEAFLRSI" long_name="fast_detritus Seafloor flux of Si" unit="mmolSi/m2/s" default_value="-.200E+21" />
+  <field id="fast_detritus_SEAFLRFE" long_name="fast_detritus Seafloor flux of Fe" unit="mmolFe/m2/s" default_value="-.200E+21" />
+  <field id="fast_detritus_SEAFLRC" long_name="fast_detritus Seafloor flux of C" unit="mmolC/m2/s" default_value="-.200E+21" />
+  <field id="fast_detritus_SEAFLRCA" long_name="fast_detritus Seafloor flux of CaCO3" unit="mmolCaCO3/m2/s" default_value="-.200E+21" />
+  <field id="fast_detritus_OCAL_LVL" long_name="fast_detritus Calcite CCD level" unit="m" default_value="-.200E+21" />
+  <field id="fast_detritus_FE_SED" long_name="fast_detritus Seafloor flux of iron" unit="mmol FE m-2 s-1" default_value="0.000E+00" />
+  <field id="fast_detritus_BEN_SI_sms" long_name="fast_detritus sediment (Si) sources-sinks" unit="mmol Si m-2/s" default_value="0.000E+00" />
+  <field id="fast_detritus_BEN_CA_sms" long_name="fast_detritus sediment (Ca) sources-sinks" unit="mmol Ca m-2/s" default_value="0.000E+00" />
+  <field id="fast_detritus_BEN_C_sms" long_name="fast_detritus sediment (C) sources-sinks" unit="mmol C m-2/s" default_value="0.000E+00" />
+  <field id="fast_detritus_BEN_N_sms" long_name="fast_detritus sediment (N) sources-sinks" unit="mmol N m-2/s" default_value="0.000E+00" />
+  <field id="fast_detritus_BEN_P_sms" long_name="fast_detritus sediment (P) sources-sinks" unit="mmol P m-2/s" default_value="0.000E+00" />
+  <field id="fast_detritus_BEN_FE_sms" long_name="fast_detritus sediment (Fe) sources-sinks" unit="mmol Fe m-2/s" default_value="0.000E+00" />
+  <field id="ccd_cal_CCD" long_name="ccd_cal CCD depth" unit="m" default_value="-.200E+21" />
+  <field id="ccd_arg_CCD" long_name="ccd_arg CCD depth" unit="m" default_value="-.200E+21" />
+  <field id="benthic_BEN_C_sms" long_name="benthic sediment organic carbon pool sources-sinks" unit="mmol C/m**2/s" default_value="0.000E+00" />
+  <field id="benthic_BEN_N_sms" long_name="benthic sediment organic nitrogen pool sources-sinks" unit="mmol N/m**2/s" default_value="0.000E+00" />
+  <field id="benthic_BEN_FE_sms" long_name="benthic sediment organic iron pool sources-sinks" unit="mmol Fe/m**2/s" default_value="0.000E+00" />
+  <field id="benthic_BEN_SI_sms" long_name="benthic sediment organic silica pool sources-sinks" unit="mmol Si/m**2/s" default_value="0.000E+00" />
+  <field id="benthic_BEN_CA_sms" long_name="benthic sediment organic calcite pool sources-sinks" unit="mmol C/m**2/s" default_value="0.000E+00" />
+  <field id="benthic_OXY_sfl" long_name="benthic dissolved oxygen surface flux" unit="mmol O_2 m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_OXY_bfl" long_name="benthic dissolved oxygen bottom flux" unit="mmol O_2 m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DIN_sfl" long_name="benthic nitrogen nutrient surface flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DIN_bfl" long_name="benthic nitrogen nutrient bottom flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_SIL_sfl" long_name="benthic silicic acid surface flux" unit="mmol Si m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_SIL_bfl" long_name="benthic silicic acid bottom flux" unit="mmol Si m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_FER_sfl" long_name="benthic iron nutrient surface flux" unit="mmol Fe m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_FER_bfl" long_name="benthic iron nutrient bottom flux" unit="mmol Fe m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DiC_sfl" long_name="benthic dissolved inorganic carbon surface flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DiC_bfl" long_name="benthic dissolved inorganic carbon bottom flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DET_sfl" long_name="benthic detritus nitrogen surface flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DET_bfl" long_name="benthic detritus nitrogen bottom flux" unit="mmol N m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DTC_sfl" long_name="benthic detritus carbon surface flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_DTC_bfl" long_name="benthic detritus carbon bottom flux" unit="mmol C m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_ALK_sfl" long_name="benthic total alkalinity surface flux" unit="meq m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_ALK_bfl" long_name="benthic total alkalinity bottom flux" unit="meq m-3*m/s" default_value="0.000E+00" />
+  <field id="benthic_OBEN_C" long_name="benthic Benthic output carbon" unit="mmolC/m2/d" default_value="-.200E+21" />
+  <field id="benthic_OBEN_N" long_name="benthic Benthic output nitrogen" unit="mmolN/m2/d" default_value="-.200E+21" />
+  <field id="benthic_OBEN_FE" long_name="benthic Benthic output iron" unit="mmolFe/m2/d" default_value="-.200E+21" />
+  <field id="benthic_OBEN_SI" long_name="benthic Benthic output silicate" unit="mmolSi/m2/d" default_value="-.200E+21" />
+  <field id="benthic_OBEN_CA" long_name="benthic Benthic output CaCO3" unit="mmolCa/m2/d" default_value="-.200E+21" />
+  <field id="benthic_LYSO_CA" long_name="benthic Incorrect benthic output CaCO3" unit="mmolCa/m2/d" default_value="0.000E+00" />
+  <field id="N3_flux_target_sfl" long_name="N3_flux target variable surface flux" unit="UNITS m-3*m/s" default_value="0.000E+00" />
+  <field id="N4_flux_target_sfl" long_name="N4_flux target variable surface flux" unit="UNITS m-3*m/s" default_value="0.000E+00" />
+  <field id="N7_flux_target_sfl" long_name="N7_flux target variable surface flux" unit="UNITS m-3*m/s" default_value="0.000E+00" />
+  <field id="pco2a_data" long_name="pco2a data" unit="" default_value="0.400E+03" />
+  <field id="IBEN_C_result" long_name="Benthic input carbon result" unit="" default_value="-.200E+21" />
+  <field id="IBEN_N_result" long_name="Benthic input nitrogen result" unit="" default_value="-.200E+21" />
+  <field id="IBEN_FE_result" long_name="Benthic input iron result" unit="" default_value="-.200E+21" />
+  <field id="IBEN_SI_result" long_name="Benthic input silicon result" unit="" default_value="-.200E+21" />
+  <field id="IBEN_CA_result" long_name="Benthic input CaCO3 result" unit="" default_value="-.200E+21" />
+  <field id="MED_XPAR_result" long_name="Top level radiation surface values" unit="W/m^2" default_value="-.200E+21" />
+  <field id="SFR_OCAL_result" long_name="Seafloor omega calcite bottom values" unit="-" default_value="-.200E+21" />
+  <field id="SFR_OARG_result" long_name="Seafloor omega aragonite bottom values" unit="-" default_value="-.200E+21" />
+  <field id="OCN_PH_result" long_name="Surface ocean pH surface values" unit="-" default_value="-.200E+21" />
+  <field id="OCNH2CO3_result" long_name="Surface ocean H2CO3 conc surface values" unit="mmol/m^3" default_value="-.200E+21" />
+  <field id="OCN_HCO3_result" long_name="Surface ocean HCO3 conc surface values" unit="mmol/m^3" default_value="-.200E+21" />
+  <field id="OCN_CO3_result" long_name="Surface ocean CO3 conc surface values" unit="mmol/m^3" default_value="-.200E+21" />
+  <field id="zero_hz" long_name="zero_hz" unit="" default_value="0.000E+00" />
+  <field id="benthic_total_phosphorus_at_bottom" long_name="benthic total_phosphorus_at_bottom" unit="mmol m-3*m" default_value="-.200E+21" />
+  <field id="zero_sfl_tot" long_name="zero_sfl_tot" unit="" default_value="0.000E+00" />
+  <field id="zero_bfl_tot" long_name="zero_bfl_tot" unit="" default_value="0.000E+00" />
+  <field id="zero_hz_sms_tot" long_name="zero_hz_sms_tot" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DIN_sfl_tot_calculator_result" long_name="pelagic DIN_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DIN_bfl_tot_calculator_result" long_name="pelagic DIN_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_FER_sfl_tot_calculator_result" long_name="pelagic FER_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_FER_bfl_tot_calculator_result" long_name="pelagic FER_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_SIL_sfl_tot_calculator_result" long_name="pelagic SIL_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_SIL_bfl_tot_calculator_result" long_name="pelagic SIL_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DET_sfl_tot_calculator_result" long_name="pelagic DET_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DET_bfl_tot_calculator_result" long_name="pelagic DET_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DTC_sfl_tot_calculator_result" long_name="pelagic DTC_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DTC_bfl_tot_calculator_result" long_name="pelagic DTC_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_ALK_sfl_tot_calculator_result" long_name="pelagic ALK_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_ALK_bfl_tot_calculator_result" long_name="pelagic ALK_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DiC_sfl_tot_calculator_result" long_name="pelagic DiC_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_DiC_bfl_tot_calculator_result" long_name="pelagic DiC_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_OXY_sfl_tot_calculator_result" long_name="pelagic OXY_sfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_OXY_bfl_tot_calculator_result" long_name="pelagic OXY_bfl_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="benthic_BEN_C_sms_tot_calculator_result" long_name="benthic BEN_C_sms_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="benthic_BEN_N_sms_tot_calculator_result" long_name="benthic BEN_N_sms_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="benthic_BEN_FE_sms_tot_calculator_result" long_name="benthic BEN_FE_sms_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="benthic_BEN_SI_sms_tot_calculator_result" long_name="benthic BEN_SI_sms_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="benthic_BEN_CA_sms_tot_calculator_result" long_name="benthic BEN_CA_sms_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="benthic_total_phosphorus_at_bottom_sms_tot_calculator_result" long_name="benthic total_phosphorus_at_bottom_sms_tot_calculator result" unit="" default_value="0.000E+00" />
+  <field id="pelagic_CHN_VINT" long_name="depth-integrated pelagic chlorophyll in non-diatoms" unit="mg chl/m**3*m" default_value="0.0" />
+  <field id="pelagic_CHD_VINT" long_name="depth-integrated pelagic chlorophyll in diatoms" unit="mg chl/m**3*m" default_value="0.0" />
+  <field id="pelagic_PHN_VINT" long_name="depth-integrated pelagic non-diatom phytoplankton" unit="mmol N/m**3*m" default_value="0.0" />
+  <field id="pelagic_PHD_VINT" long_name="depth-integrated pelagic diatom phytoplankton" unit="mmol N/m**3*m" default_value="0.0" />
+  <field id="pelagic_PDS_VINT" long_name="depth-integrated pelagic diatom phytoplankton (silicon)" unit="mmol Si/m**3*m" default_value="0.0" />
+  <field id="pelagic_DIN_VINT" long_name="depth-integrated pelagic nitrogen nutrient" unit="mmol N/m**3*m" default_value="0.0" />
+  <field id="pelagic_FER_VINT" long_name="depth-integrated pelagic iron nutrient" unit="mmol Fe/m**3*m" default_value="0.0" />
+  <field id="pelagic_SIL_VINT" long_name="depth-integrated pelagic silicic acid" unit="mmol Si/m**3*m" default_value="0.0" />
+  <field id="pelagic_DET_VINT" long_name="depth-integrated pelagic slow-sinking detritus (N)" unit="mmol N/m**3*m" default_value="0.0" />
+  <field id="pelagic_DTC_VINT" long_name="depth-integrated pelagic slow-sinking detritus (C)" unit="mmol C/m**3*m" default_value="0.0" />
+  <field id="pelagic_ZMI_VINT" long_name="depth-integrated pelagic microzooplankton" unit="mmol N/m**3*m" default_value="0.0" />
+  <field id="pelagic_ZME_VINT" long_name="depth-integrated pelagic mesozooplankton" unit="mmol N/m**3*m" default_value="0.0" />
+  <field id="pelagic_ALK_VINT" long_name="depth-integrated pelagic total alkalinity" unit="meq/m**3*m" default_value="0.0" />
+  <field id="pelagic_DiC_VINT" long_name="depth-integrated pelagic dissolved inorganic carbon" unit="mmol C/m**3*m" default_value="0.0" />
+  <field id="pelagic_OXY_VINT" long_name="depth-integrated pelagic dissolved oxygen" unit="mmol O_2/m**3*m" default_value="0.0" />
+  <field id="light_MED_XPAR_VINT" long_name="depth-integrated light photosynthetically active radiation" unit="W/m^2*m" default_value="0.0" />
+  <field id="gas_transfer__attenuation_coefficient_of_photosynthetic_radiative_flux_VINT" long_name="depth-integrated gas_transfer light extinction contribution computed by get_light_extinction" unit="m-1*m" default_value="0.0" />
+  <field id="carbonate_DiC_sms_VINT" long_name="depth-integrated carbonate dissolved inorganic carbon sources-sinks" unit="mmol C/m^3/s*m" default_value="0.0" />
+  <field id="carbonate_DiC_w_VINT" long_name="depth-integrated carbonate dissolved inorganic carbon vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="carbonate_PH3_VINT" long_name="depth-integrated carbonate Ocean pH 3D" unit="-*m" default_value="0.0" />
+  <field id="carbonate_pCO2_VINT" long_name="depth-integrated carbonate partial pressure of CO2" unit="1e-6*m" default_value="0.0" />
+  <field id="carbonate_CarbA_VINT" long_name="depth-integrated carbonate carbonic acid concentration" unit="mmol/m^3*m" default_value="0.0" />
+  <field id="carbonate_BiCarb_VINT" long_name="depth-integrated carbonate bicarbonate concentration" unit="mmol/m^3*m" default_value="0.0" />
+  <field id="carbonate_Carb_VINT" long_name="depth-integrated carbonate carbonate concentration" unit="mmol/m^3*m" default_value="0.0" />
+  <field id="carbonate_OM_CAL3_VINT" long_name="depth-integrated carbonate Omega calcite 3D" unit="-*m" default_value="0.0" />
+  <field id="carbonate_OM_ARG3_VINT" long_name="depth-integrated carbonate aragonite saturation" unit="-*m" default_value="0.0" />
+  <field id="oxygen_OXY_sms_VINT" long_name="depth-integrated oxygen dissolved oxygen sources-sinks" unit="mmol O_2/m**3/s*m" default_value="0.0" />
+  <field id="oxygen_OXY_w_VINT" long_name="depth-integrated oxygen dissolved oxygen vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_CHN_sms_VINT" long_name="depth-integrated pelagic chlorophyll in non-diatoms sources-sinks" unit="mg chl/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_CHN_w_VINT" long_name="depth-integrated pelagic chlorophyll in non-diatoms vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_CHD_sms_VINT" long_name="depth-integrated pelagic chlorophyll in diatoms sources-sinks" unit="mg chl/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_CHD_w_VINT" long_name="depth-integrated pelagic chlorophyll in diatoms vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_PHN_sms_VINT" long_name="depth-integrated pelagic non-diatom phytoplankton sources-sinks" unit="mmol N/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_PHN_w_VINT" long_name="depth-integrated pelagic non-diatom phytoplankton vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_PHD_sms_VINT" long_name="depth-integrated pelagic diatom phytoplankton sources-sinks" unit="mmol N/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_PHD_w_VINT" long_name="depth-integrated pelagic diatom phytoplankton vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_PDS_sms_VINT" long_name="depth-integrated pelagic diatom phytoplankton (silicon) sources-sinks" unit="mmol Si/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_PDS_w_VINT" long_name="depth-integrated pelagic diatom phytoplankton (silicon) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_DIN_sms_VINT" long_name="depth-integrated pelagic nitrogen nutrient sources-sinks" unit="mmol N/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_DIN_w_VINT" long_name="depth-integrated pelagic nitrogen nutrient vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_FER_sms_VINT" long_name="depth-integrated pelagic iron nutrient sources-sinks" unit="mmol Fe/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_FER_w_VINT" long_name="depth-integrated pelagic iron nutrient vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_SIL_sms_VINT" long_name="depth-integrated pelagic silicic acid sources-sinks" unit="mmol Si/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_SIL_w_VINT" long_name="depth-integrated pelagic silicic acid vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_DET_sms_VINT" long_name="depth-integrated pelagic slow-sinking detritus (N) sources-sinks" unit="mmol N/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_DET_w_VINT" long_name="depth-integrated pelagic slow-sinking detritus (N) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_DTC_sms_VINT" long_name="depth-integrated pelagic slow-sinking detritus (C) sources-sinks" unit="mmol C/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_DTC_w_VINT" long_name="depth-integrated pelagic slow-sinking detritus (C) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_ZMI_sms_VINT" long_name="depth-integrated pelagic microzooplankton sources-sinks" unit="mmol N/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_ZMI_w_VINT" long_name="depth-integrated pelagic microzooplankton vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_ZME_sms_VINT" long_name="depth-integrated pelagic mesozooplankton sources-sinks" unit="mmol N/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_ZME_w_VINT" long_name="depth-integrated pelagic mesozooplankton vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_ALK_sms_VINT" long_name="depth-integrated pelagic total alkalinity sources-sinks" unit="meq/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_ALK_w_VINT" long_name="depth-integrated pelagic total alkalinity vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_DiC_sms_VINT" long_name="depth-integrated pelagic dissolved inorganic carbon sources-sinks" unit="mmol C/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_DiC_w_VINT" long_name="depth-integrated pelagic dissolved inorganic carbon vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_OXY_sms_VINT" long_name="depth-integrated pelagic dissolved oxygen sources-sinks" unit="mmol O_2/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_OXY_w_VINT" long_name="depth-integrated pelagic dissolved oxygen vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_tempn_sms_VINT" long_name="depth-integrated pelagic fast-sinking detritus (N) sources-sinks" unit="mmol N/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_tempn_w_VINT" long_name="depth-integrated pelagic fast-sinking detritus (N) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_tempc_sms_VINT" long_name="depth-integrated pelagic fast-sinking detritus (C) sources-sinks" unit="mmol C/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_tempc_w_VINT" long_name="depth-integrated pelagic fast-sinking detritus (C) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_tempsi_sms_VINT" long_name="depth-integrated pelagic fast-sinking detritus (Si) sources-sinks" unit="mmol Si/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_tempsi_w_VINT" long_name="depth-integrated pelagic fast-sinking detritus (Si) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_tempfe_sms_VINT" long_name="depth-integrated pelagic fast-sinking detritus (Fe) sources-sinks" unit="mmol Fe/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_tempfe_w_VINT" long_name="depth-integrated pelagic fast-sinking detritus (Fe) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_tempca_sms_VINT" long_name="depth-integrated pelagic fast-sinking detritus (CaCO3) sources-sinks" unit="mmol CaCO3/m**3/s*m" default_value="0.0" />
+  <field id="pelagic_tempca_w_VINT" long_name="depth-integrated pelagic fast-sinking detritus (CaCO3) vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="pelagic_fscal_part_VINT" long_name="depth-integrated pelagic carbon in suspended particles" unit="nmol C cm-2 s-1*m" default_value="0.0" />
+  <field id="pelagic_PRN_VINT" long_name="depth-integrated pelagic Non-diatom primary production" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_PRD_VINT" long_name="depth-integrated pelagic Diatom primary production" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_MPN_VINT" long_name="depth-integrated pelagic Non-diatom non-grazing losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_MPD_VINT" long_name="depth-integrated pelagic Diatom non-grazing losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_OPAL_VINT" long_name="depth-integrated pelagic Diatom biogenic opal production" unit="mmolSi/m3/d*m" default_value="0.0" />
+  <field id="pelagic_OPALDISS_VINT" long_name="depth-integrated pelagic Diatom biogenic opal dissolution" unit="mmolSi/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMIPn_VINT" long_name="depth-integrated pelagic Microzoo grazing on non-diatoms" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMID_VINT" long_name="depth-integrated pelagic Microzoo grazing on detritus" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMEPN_VINT" long_name="depth-integrated pelagic Mesozoo grazing on non-diatoms" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMEPD_VINT" long_name="depth-integrated pelagic Mesozoo grazing on diatoms" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMEZMI_VINT" long_name="depth-integrated pelagic Mesozoo grazing on microzoo" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMED_VINT" long_name="depth-integrated pelagic Mesozoo grazing on detritus" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_MZMI_VINT" long_name="depth-integrated pelagic Microzoo non-grazing losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_MZME_VINT" long_name="depth-integrated pelagic Mesozoo non-grazing losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_DETN_VINT" long_name="depth-integrated pelagic Slow detritus creation" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_DETC_VINT" long_name="depth-integrated pelagic Slow detritus C creation" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_MDET_VINT" long_name="depth-integrated pelagic Detritus non-grazing losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_MDETC_VINT" long_name="depth-integrated pelagic Detritus non-grazing losses, carbon" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMIDC_VINT" long_name="depth-integrated pelagic Microzoo grazing on detritus, carbon" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_GMEDC_VINT" long_name="depth-integrated pelagic Mesozoo  grazing on detritus, carbon" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_regen_slow_VINT" long_name="depth-integrated pelagic Total slow remin flux N 3D" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_regen2d_VINT" long_name="depth-integrated pelagic Total slow remin flux N 3D * dz" unit="mmolN/m2/d*m" default_value="0.0" />
+  <field id="pelagic_regenSi_slow_VINT" long_name="depth-integrated pelagic Total slow remin flux Si 3D" unit="mmolSi/m3/d*m" default_value="0.0" />
+  <field id="pelagic_flux_slow_VINT" long_name="depth-integrated pelagic Total slow detrital flux 3D" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_PD_JLIM_VINT" long_name="depth-integrated pelagic Diatom light limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PD_NLIM_VINT" long_name="depth-integrated pelagic Diatom N limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PD_FELIM_VINT" long_name="depth-integrated pelagic Diatom Fe limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PD_SILIM_VINT" long_name="depth-integrated pelagic Diatom Si limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PD_SILIM2_VINT" long_name="depth-integrated pelagic Diatom Si uptake limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PN_JLIM_VINT" long_name="depth-integrated pelagic Non-diatom light limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PN_NLIM_VINT" long_name="depth-integrated pelagic Non-diatom N limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PN_FELIM_VINT" long_name="depth-integrated pelagic Non-diatom Fe limitation" unit="-*m" default_value="0.0" />
+  <field id="pelagic_PN_LLOSS_VINT" long_name="depth-integrated pelagic Non-diatom linear losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_PD_LLOSS_VINT" long_name="depth-integrated pelagic Diatom linear losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_LLOSS_VINT" long_name="depth-integrated pelagic Microzooplankton linear losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_LLOSS_VINT" long_name="depth-integrated pelagic Mesozooplankton linear losses" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_MES_N_VINT" long_name="depth-integrated pelagic Microzoo messy feeding loss to N" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_MES_D_VINT" long_name="depth-integrated pelagic Microzoo messy feeding loss to D" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_MES_C_VINT" long_name="depth-integrated pelagic Microzoo messy feeding loss to C" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_MESDC_VINT" long_name="depth-integrated pelagic Microzoo messy feeding loss to Dc" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_MES_N_VINT" long_name="depth-integrated pelagic Mesozoo messy feeding loss to N" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_MES_D_VINT" long_name="depth-integrated pelagic Mesozoo messy feeding loss to D" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_MES_C_VINT" long_name="depth-integrated pelagic Mesozoo messy feeding loss to C" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_MESDC_VINT" long_name="depth-integrated pelagic Mesozoo messy feeding loss to Dc" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_EXCR_VINT" long_name="depth-integrated pelagic Microzoo excretion" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_RESP_VINT" long_name="depth-integrated pelagic Microzoo respiration" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZI_GROW_VINT" long_name="depth-integrated pelagic Microzoo growth" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_EXCR_VINT" long_name="depth-integrated pelagic Mesozoo excretion" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_C_PROD_VINT" long_name="depth-integrated pelagic Carbon production" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_C_CONS_VINT" long_name="depth-integrated pelagic Carbon consumption" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_N_PROD_VINT" long_name="depth-integrated pelagic Nitogen production" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_N_CONS_VINT" long_name="depth-integrated pelagic Nitrogen consumption" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_O2_PROD_VINT" long_name="depth-integrated pelagic Oxygen production" unit="mmolO2/m3/d*m" default_value="0.0" />
+  <field id="pelagic_O2_CONS_VINT" long_name="depth-integrated pelagic Oxygen consumption" unit="mmolO2/m3/d*m" default_value="0.0" />
+  <field id="pelagic_O2_ANOX_VINT" long_name="depth-integrated pelagic Unrealised oxygen consumption" unit="mmolO2/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_RESP_VINT" long_name="depth-integrated pelagic Mesozoo respiration" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_ZE_GROW_VINT" long_name="depth-integrated pelagic Mesozoo growth" unit="mmolN/m3/d*m" default_value="0.0" />
+  <field id="pelagic_fcomm_resp_VINT" long_name="depth-integrated pelagic Community respiration" unit="mmolC/m3/d*m" default_value="0.0" />
+  <field id="pelagic_FASTN_VINT" long_name="depth-integrated pelagic fast-sinking detritus (N)" unit="mmol N/m**3*m" default_value="0.0" />
+  <field id="pelagic_FASTC_VINT" long_name="depth-integrated pelagic fast-sinking detritus (C)" unit="mmol C/m**3*m" default_value="0.0" />
+  <field id="pelagic_FASTSI_VINT" long_name="depth-integrated pelagic fast-sinking detritus (Si)" unit="mmol Si/m**3*m" default_value="0.0" />
+  <field id="pelagic_FASTFE_VINT" long_name="depth-integrated pelagic fast-sinking detritus (Fe)" unit="mmol Fe/m**3*m" default_value="0.0" />
+  <field id="pelagic_FASTCA_VINT" long_name="depth-integrated pelagic fast-sinking detritus (CaCO3)" unit="mmol CaCO3/m**3*m" default_value="0.0" />
+  <field id="pelagic_fslownflux_VINT" long_name="depth-integrated pelagic slow detritus sinking flux" unit="mmol N/m**2*m" default_value="0.0" />
+  <field id="iron_scavenging_FER_sms_VINT" long_name="depth-integrated iron_scavenging iron nutrient sources-sinks" unit="mmol Fe/m**3/s*m" default_value="0.0" />
+  <field id="iron_scavenging_FER_w_VINT" long_name="depth-integrated iron_scavenging iron nutrient vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="iron_scavenging_SCAVENGE_VINT" long_name="depth-integrated iron_scavenging scavenged iron" unit="mmol Fe/m**3*m" default_value="0.0" />
+  <field id="fast_detritus_tempc_VINT" long_name="depth-integrated fast_detritus fast-sinking detritus (C)" unit="mmol C m-3*m" default_value="0.0" />
+  <field id="fast_detritus_tempn_VINT" long_name="depth-integrated fast_detritus fast-sinking detritus (N)" unit="mmol N m-3*m" default_value="0.0" />
+  <field id="fast_detritus_tempfe_VINT" long_name="depth-integrated fast_detritus fast-sinking detritus (Fe)" unit="-*m" default_value="0.0" />
+  <field id="fast_detritus_tempsi_VINT" long_name="depth-integrated fast_detritus fast-sinking detritus (Si)" unit="mmol Si m-3*m" default_value="0.0" />
+  <field id="fast_detritus_tempca_VINT" long_name="depth-integrated fast_detritus fast-sinking detritus (CaCO3)" unit="mmol CaCO3 m-3*m" default_value="0.0" />
+  <field id="fast_detritus_OXY_sms_VINT" long_name="depth-integrated fast_detritus dissolved oxygen sources-sinks" unit="mmol O_2 m-3/s*m" default_value="0.0" />
+  <field id="fast_detritus_OXY_w_VINT" long_name="depth-integrated fast_detritus dissolved oxygen vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_DIN_sms_VINT" long_name="depth-integrated fast_detritus nitrogen nutrient sources-sinks" unit="mmol N m-3/s*m" default_value="0.0" />
+  <field id="fast_detritus_DIN_w_VINT" long_name="depth-integrated fast_detritus nitrogen nutrient vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_SIL_sms_VINT" long_name="depth-integrated fast_detritus silicic acid sources-sinks" unit="mmol Si m-3/s*m" default_value="0.0" />
+  <field id="fast_detritus_SIL_w_VINT" long_name="depth-integrated fast_detritus silicic acid vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_FER_sms_VINT" long_name="depth-integrated fast_detritus iron nutrient sources-sinks" unit="mmol Fe m-3/s*m" default_value="0.0" />
+  <field id="fast_detritus_FER_w_VINT" long_name="depth-integrated fast_detritus iron nutrient vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_DiC_sms_VINT" long_name="depth-integrated fast_detritus dissolved inorganic carbon sources-sinks" unit="mmol C m-3/s*m" default_value="0.0" />
+  <field id="fast_detritus_DiC_w_VINT" long_name="depth-integrated fast_detritus dissolved inorganic carbon vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_DET_sms_VINT" long_name="depth-integrated fast_detritus detritus nitrogen sources-sinks" unit="mmol N m-3/s*m" default_value="0.0" />
+  <field id="fast_detritus_DET_w_VINT" long_name="depth-integrated fast_detritus detritus nitrogen vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_DTC_sms_VINT" long_name="depth-integrated fast_detritus detritus carbon sources-sinks" unit="mmol C m-3/s*m" default_value="0.0" />
+  <field id="fast_detritus_DTC_w_VINT" long_name="depth-integrated fast_detritus detritus carbon vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_ALK_sms_VINT" long_name="depth-integrated fast_detritus total alkalinity sources-sinks" unit="meq/m**3/s*m" default_value="0.0" />
+  <field id="fast_detritus_ALK_w_VINT" long_name="depth-integrated fast_detritus total alkalinity vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="fast_detritus_freminc_VINT" long_name="depth-integrated fast_detritus remineralisation of detritus (C)" unit="mmol C m-3 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_freminn_VINT" long_name="depth-integrated fast_detritus remineralisation of detritus (N)" unit="mmol N m-3 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_freminsi_VINT" long_name="depth-integrated fast_detritus remineralisation of detritus (Si)" unit="mmol Si m-3 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_freminfe_VINT" long_name="depth-integrated fast_detritus remineralisation of detritus (Fe)" unit="mmol Fe m-3 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_freminca_VINT" long_name="depth-integrated fast_detritus remineralisation of calcite (CaCO3)" unit="mmol CaCO3 m-3 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_ffastc_loc_VINT" long_name="depth-integrated fast_detritus local remineralisation of detritus (C)" unit="mmol C m-2 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_ffastn_loc_VINT" long_name="depth-integrated fast_detritus local remineralisation of detritus (N)" unit="mmol C m-2 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_ffastca_loc_VINT" long_name="depth-integrated fast_detritus local remineralisation of detritus (Ca)" unit="mmol Ca m-2 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_ffastsi_loc_VINT" long_name="depth-integrated fast_detritus local remineralisation of detritus (Si)" unit="mmol Si m-2 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_ffastn_loc_3d_VINT" long_name="depth-integrated fast_detritus local remineralisation of detritus (N)" unit="mmol Si m-2 s-1*m" default_value="0.0" />
+  <field id="fast_detritus_freminn2d_VINT" long_name="depth-integrated fast_detritus remineralisation of detritus (N) * dz" unit="mmol N m-2 s-1*m" default_value="0.0" />
+  <field id="benthic_OXY_sms_VINT" long_name="depth-integrated benthic dissolved oxygen sources-sinks" unit="mmol O_2 m-3/s*m" default_value="0.0" />
+  <field id="benthic_OXY_w_VINT" long_name="depth-integrated benthic dissolved oxygen vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="benthic_DIN_sms_VINT" long_name="depth-integrated benthic nitrogen nutrient sources-sinks" unit="mmol N m-3/s*m" default_value="0.0" />
+  <field id="benthic_DIN_w_VINT" long_name="depth-integrated benthic nitrogen nutrient vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="benthic_SIL_sms_VINT" long_name="depth-integrated benthic silicic acid sources-sinks" unit="mmol Si m-3/s*m" default_value="0.0" />
+  <field id="benthic_SIL_w_VINT" long_name="depth-integrated benthic silicic acid vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="benthic_FER_sms_VINT" long_name="depth-integrated benthic iron nutrient sources-sinks" unit="mmol Fe m-3/s*m" default_value="0.0" />
+  <field id="benthic_FER_w_VINT" long_name="depth-integrated benthic iron nutrient vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="benthic_DiC_sms_VINT" long_name="depth-integrated benthic dissolved inorganic carbon sources-sinks" unit="mmol C m-3/s*m" default_value="0.0" />
+  <field id="benthic_DiC_w_VINT" long_name="depth-integrated benthic dissolved inorganic carbon vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="benthic_DET_sms_VINT" long_name="depth-integrated benthic detritus nitrogen sources-sinks" unit="mmol N m-3/s*m" default_value="0.0" />
+  <field id="benthic_DET_w_VINT" long_name="depth-integrated benthic detritus nitrogen vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="benthic_DTC_sms_VINT" long_name="depth-integrated benthic detritus carbon sources-sinks" unit="mmol C m-3/s*m" default_value="0.0" />
+  <field id="benthic_DTC_w_VINT" long_name="depth-integrated benthic detritus carbon vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="benthic_ALK_sms_VINT" long_name="depth-integrated benthic total alkalinity sources-sinks" unit="meq m-3/s*m" default_value="0.0" />
+  <field id="benthic_ALK_w_VINT" long_name="depth-integrated benthic total alkalinity vertical velocity" unit="m/s*m" default_value="0.0" />
+  <field id="TPP3_result_VINT" long_name="depth-integrated Total primary production 3D result" unit="*m" default_value="0.0" />
+  <field id="REMIN3N_result_VINT" long_name="depth-integrated Total remin flux N 3D result" unit="*m" default_value="0.0" />
+  <field id="DETFLUX3_result_VINT" long_name="depth-integrated Total detrital flux 3D result" unit="*m" default_value="0.0" />
+  <field id="C_PROD1_result_VINT" long_name="depth-integrated Carbon production pelagic with CaCO3 remin result" unit="*m" default_value="0.0" />
+  <field id="zero_VINT" long_name="depth-integrated zero" unit="*m" default_value="0.0" />
+  <field id="total_carbon_calculator_result_VINT" long_name="depth-integrated total_carbon_calculator result" unit="mmol m-3*m" default_value="0.0" />
+  <field id="total_nitrogen_calculator_result_VINT" long_name="depth-integrated total_nitrogen_calculator result" unit="mmol m-3*m" default_value="0.0" />
+  <field id="total_silicate_calculator_result_VINT" long_name="depth-integrated total_silicate_calculator result" unit="mmol m-3*m" default_value="0.0" />
+  <field id="zero_sms_tot_VINT" long_name="depth-integrated zero_sms_tot" unit="*m" default_value="0.0" />
+  <field id="zero_w_tot_VINT" long_name="depth-integrated zero_w_tot" unit="*m" default_value="0.0" />
+  <field id="pelagic_DIN_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic DIN_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_DIN_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic DIN_w_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_FER_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic FER_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_FER_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic FER_w_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_SIL_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic SIL_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_SIL_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic SIL_w_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_DET_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic DET_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_DET_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic DET_w_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_DTC_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic DTC_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_DTC_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic DTC_w_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_ALK_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic ALK_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_ALK_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic ALK_w_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_DiC_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic DiC_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_DiC_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic DiC_w_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_OXY_sms_tot_calculator_result_VINT" long_name="depth-integrated pelagic OXY_sms_tot_calculator result" unit="*m" default_value="0.0" />
+  <field id="pelagic_OXY_w_tot_calculator_result_VINT" long_name="depth-integrated pelagic OXY_w_tot_calculator result" unit="*m" default_value="0.0" />
+ </field_group>
+ <field_group id="fabm_scalar" grid_ref="grid_0">
+  <field id="total_silicate" long_name="total_silicate" unit="mmol m-3" default_value="-.200E+21" />
+  <field id="total_nitrogen" long_name="total_nitrogen" unit="mmol m-3" default_value="-.200E+21" />
+  <field id="total_carbon" long_name="total_carbon" unit="mmol m-3" default_value="-.200E+21" />
+ </field_group>
+ <field_group id="fabm_input" grid_ref="grid_T_2D">
+  <field id="INP_LFe_dep" long_name="LFe_dep input" unit="" default_value="-.200E+21" />
+  <field id="INP_noy" long_name="noy input" unit="" default_value="-.200E+21" />
+  <field id="INP_nhx" long_name="nhx input" unit="" default_value="-.200E+21" />
+  <field id="INP_pCO2a" long_name="pCO2a input" unit="" default_value="-.200E+21" />
+ </field_group>
+</field_definition>

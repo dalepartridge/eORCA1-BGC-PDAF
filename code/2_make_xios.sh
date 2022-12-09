@@ -5,6 +5,7 @@
 # Note that a precompiled version of XIOS2.5 is available for use here:
 # /work/n01/shared/acc/xios-2.5
 #################################################
+source 0_set_environment.sh
 
 if [ "$ARCHER2" = true ] ; then
 yes | cp $CODE_DIR/archer2-files/xios/arch-GCC_ARCHER2* $XIOS_CLONE/arch/

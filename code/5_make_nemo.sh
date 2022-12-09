@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source 0_set_environment.sh
+
 ############# COMPILE NEMO ##########################
 cd $NEMO_DIR
 

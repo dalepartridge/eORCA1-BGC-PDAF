@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+
+<!--
+============================================================================================================
+=                                           output files definition                                        =
+=                                            Define your own filesfor ocean dynamics context                                         =
+=                                         put the variables you want...                                    =
+============================================================================================================
+    -->
+   
+    <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4">
+    
+      <file_group id="1ts" output_freq="1ts"  output_level="10" enabled=".TRUE."/> <!-- 1 time step files -->
+
+      <file_group id="1h" output_freq="1h"  output_level="10" enabled=".TRUE."/> <!-- 1h files -->
+
+      <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
+
+      <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE."/> <!-- 3h files -->     
+
+      <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
+
+      <file_group id="6h" output_freq="6h"  output_level="10" enabled=".TRUE."/> <!-- 6h files -->     
+      <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE."> <!-- 1d files -->
+         <file id="file60" name_suffix="_ptrc_T" description="tracer variables" sync_freq="1d">
+          <field field_ref="pelagic_CHN" name='CHN' operation="average" />
+          <field field_ref="pelagic_CHD" name='CHD' operation="average" />
+          <field field_ref="pelagic_PHN" name='PHN' operation="average" />
+          <field field_ref="pelagic_PHD" name='PHD' operation="average" />
+          <field field_ref="pelagic_PDS" name='PDS' operation="average" />
+          <field field_ref="pelagic_DIN" name='DIN' operation="average" />
+          <field field_ref="pelagic_FER" name='FER' operation="average" />
+          <field field_ref="pelagic_SIL" name='SIL' operation="average" />
+          <field field_ref="pelagic_DET" name='DET' operation="average" />
+          <field field_ref="pelagic_DTC" name='DTC' operation="average" />
+          <field field_ref="pelagic_ZMI" name='ZMI' operation="average" />
+          <field field_ref="pelagic_ZME" name='ZME' operation="average" />
+          <field field_ref="pelagic_ALK" name='ALK' operation="average" />
+          <field field_ref="pelagic_DiC" name='DiC' operation="average" />
+          <field field_ref="pelagic_OXY" name='OXY' operation="average" />
+     </file>
+
+    <file id="file222" name_suffix="_diad_T" description="tracer variables"  sync_freq="1d">
+      <field field_ref="carbonate_CO2FLUX" name='CO2FLUX' operation="average" />
+      <field field_ref="carbonate_OM_CAL3" name='OM_CAL3' operation="average" />
+          <field field_ref="carbonate_PH3" name='PH3' operation="average" />
+          <field field_ref="carbonate_OM_CAL" name='OM_CAL' operation="average" />
+          <field field_ref="carbonate_OM_ARG" name='OM_ARG' operation="average" />
+          <field field_ref="oxygen_O2FLUX" name='O2FLUX' operation="average" />
+          <field field_ref="oxygen_O2SAT" name='O2SAT' operation="average" />
+          <field field_ref="gas_transfer_KW660" name='KW660' operation="average" />
+          <field field_ref="gas_transfer_WIND" name='WIND' operation="average" />
+          <field field_ref="benthic_BEN_C" name='BEN_C' operation="average" />
+          <field field_ref="benthic_BEN_N" name='BEN_N' operation="average" />
+          <field field_ref="benthic_BEN_FE" name='BEN_FE' operation="average" />
+          <field field_ref="benthic_BEN_SI" name='BEN_SI' operation="average" />
+          <field field_ref="benthic_BEN_CA" name='BEN_CA' operation="average" />
+          <field field_ref="MED_XPAR_result" name='MED_XPAR' operation="average" />
+          <field field_ref="light_MED_QSR" name='MED_QSR' operation="average" />
+          <field field_ref="carbonate_OCN_PCO2" name='OCN_PCO2' operation="average" />
+          <field field_ref="OCNH2CO3_result" name='OCNH2CO3' operation="average" />
+          <field field_ref="OCN_HCO3_result" name='OCN_HCO3' operation="average" />
+          <field field_ref="OCN_CO3_result" name='OCN_CO3' operation="average" />
+          <field field_ref="OCN_PH_result" name='OCN_PH' operation="average" />
+          <field field_ref="iron_scavenging_SCAVENGE_VINT" name='SCAVENGE' operation="average" />
+          <field field_ref="TPP3_result" name='TPP3' operation="average" />
+          <field field_ref="REMIN3N_result" name="REMIN3N" unit="mmolN/m3/d" operation="average" />
+          <field field_ref="DETFLUX3_result" name="DETFLUX3" unit="mmolN/m3/d" operation="average" />
+          <field field_ref="IBEN_C_result" name="IBEN_C" unit="mmolC/m2/d" operation="average" />
+          <field field_ref="IBEN_N_result" name="IBEN_N" unit="mmolN/m2/d" operation="average" />
+          <field field_ref="IBEN_FE_result" name="IBEN_FE" unit="mmolFe/m2/d" operation="average" />
+          <field field_ref="IBEN_SI_result" name="IBEN_SI" unit="mmolSi/m2/d" operation="average" />
+          <field field_ref="IBEN_CA_result" name="IBEN_CA" unit="mmolCa/m2/d" operation="average" />
+          <field field_ref="benthic_OBEN_C" name="OBEN_C" operation="average" />
+          <field field_ref="benthic_OBEN_N" name="OBEN_N" operation="average" />
+          <field field_ref="benthic_OBEN_FE" name="OBEN_FE" operation="average" />
+          <field field_ref="benthic_OBEN_SI" name="OBEN_SI" operation="average" />
+          <field field_ref="benthic_OBEN_CA" name="OBEN_CA" operation="average" />
+          <field field_ref="pelagic_PRN_VINT" name='PRN' operation="average" />
+          <field field_ref="pelagic_PRD_VINT" name='PRD' operation="average" />
+          <field field_ref="pelagic_MPN_VINT" name='MPN' operation="average" />
+          <field field_ref="pelagic_MPD_VINT" name='MPD' operation="average" />
+          <field field_ref="pelagic_OPAL_VINT" name='OPAL' operation="average" />
+          <field field_ref="pelagic_OPALDISS_VINT" name='OPALDISS' operation="average" />
+          <field field_ref="pelagic_GMIPn_VINT" name='GMIPn' operation="average" />
+          <field field_ref="pelagic_GMID_VINT" name='GMID' operation="average" />
+          <field field_ref="pelagic_GMEPN_VINT" name='GMEPN' operation="average" />
+          <field field_ref="pelagic_GMEPD_VINT" name='GMEPD' operation="average" />
+          <field field_ref="pelagic_GMEZMI_VINT" name='GMEZMI' operation="average" />
+          <field field_ref="pelagic_GMED_VINT" name='GMED' operation="average" />
+          <field field_ref="pelagic_MZMI_VINT" name='MZMI' operation="average" />
+          <field field_ref="pelagic_MZME_VINT" name='MZME' operation="average" />
+          <field field_ref="pelagic_DETN_VINT" name='DETN' operation="average" />
+          <field field_ref="pelagic_DETC_VINT" name='DETC' operation="average" />
+          <field field_ref="pelagic_MDET_VINT" name='MDET' operation="average" />
+          <field field_ref="pelagic_MDETC_VINT" name='MDETC' operation="average" />
+          <field field_ref="pelagic_GMIDC_VINT" name='GMIDC' operation="average" />
+          <field field_ref="pelagic_GMEDC_VINT" name='GMEDC' operation="average" />
+          <field field_ref="pelagic_PD_JLIM_VINT" name='PD_JLIM' operation="average" />
+          <field field_ref="pelagic_PD_NLIM_VINT" name='PD_NLIM' operation="average" />
+          <field field_ref="pelagic_PD_FELIM_VINT" name='PD_FELIM' operation="average" />
+          <field field_ref="pelagic_PD_SILIM_VINT" name='PD_SILIM' operation="average" />
+          <field field_ref="pelagic_PD_SILIM2_VINT" name='PDSILIM2' operation="average" />
+          <field field_ref="pelagic_PN_JLIM_VINT" name='PN_JLIM' operation="average" />
+          <field field_ref="pelagic_PN_NLIM_VINT" name='PN_NLIM' operation="average" />
+          <field field_ref="pelagic_PN_FELIM_VINT" name='PN_FELIM' operation="average" />
+          <field field_ref="pelagic_PN_LLOSS_VINT"  name='PN_LLOSS' operation="average" />
+          <field field_ref="pelagic_PD_LLOSS_VINT" name='PD_LLOSS' operation="average" />
+          <field field_ref="pelagic_ZI_LLOSS_VINT" name='ZI_LLOSS' operation="average" />
+          <field field_ref="pelagic_ZE_LLOSS_VINT" name='ZE_LLOSS' operation="average" />
+          <field field_ref="pelagic_ZI_MES_N_VINT" name='ZI_MES_N' operation="average" />
+          <field field_ref="pelagic_ZI_MES_D_VINT" name='ZI_MES_D' operation="average" />
+          <field field_ref="pelagic_ZI_MES_C_VINT" name='ZI_MES_C' operation="average" />
+          <field field_ref="pelagic_ZI_MESDC_VINT" name='ZI_MESDC' operation="average" />
+          <field field_ref="pelagic_ZE_MES_N_VINT" name='ZE_MES_N' operation="average" />
+          <field field_ref="pelagic_ZE_MES_D_VINT" name='ZE_MES_D' operation="average" />
+          <field field_ref="pelagic_ZE_MES_C_VINT" name='ZE_MES_C' operation="average" />
+          <field field_ref="pelagic_ZE_MESDC_VINT" name='ZE_MESDC' operation="average" />
+          <field field_ref="pelagic_ZI_EXCR_VINT" name='ZI_EXCR' operation="average" />
+          <field field_ref="pelagic_ZI_RESP_VINT" name='ZI_RESP' operation="average" />
+          <field field_ref="pelagic_ZI_GROW_VINT" name='ZI_GROW' operation="average" />
+          <field field_ref="pelagic_ZE_EXCR_VINT" name='ZE_EXCR' operation="average" />
+          <field field_ref="pelagic_ZE_RESP_VINT" name='ZE_RESP' operation="average" />
+          <field field_ref="pelagic_ZE_GROW_VINT" name='ZE_GROW' operation="average" />
+          <field field_ref="fast_detritus_SEAFLRC" name='SEAFLRC' operation="average" />
+          <field field_ref="fast_detritus_SEAFLRN" name='SEAFLRN' operation="average" />
+          <field field_ref="fast_detritus_SEAFLRSI" name='SEAFLRSI' operation="average" />
+          <field field_ref="fast_detritus_SEAFLRFE" name='SEAFLRFE' operation="average" />
+          <field field_ref="fast_detritus_SEAFLRCA" name='SEAFLRCA' operation="average" />
+      <field field_ref="fast_detritus_OCAL_LVL" name='OCAL_LVL' operation="average" />
+      <field field_ref="fast_detritus_FE_SED" name='FE_SED' operation="average" />
+          <field field_ref="pelagic_N_PROD_VINT" name='N_PROD' operation="average" />
+          <field field_ref="pelagic_N_CONS_VINT" name='N_CONS' operation="average" />
+          <field field_ref="pelagic_C_CONS_VINT" name='C_CONS' operation="average" />
+          <field field_ref="pelagic_O2_PROD_VINT" name='O2_PROD' operation="average" />
+          <field field_ref="pelagic_O2_CONS_VINT" name='O2_CONS' operation="average" />
+          <field field_ref="pelagic_O2_ANOX_VINT" name='O2_ANOX' operation="average" />
+          <field field_ref="light_MED_XZE" name='MED_XZE' operation="average" />
+          <field field_ref="carbonate_ATM_PCO2" name='ATM_PCO2' operation="average" />
+          <field field_ref="carbonate_TALK" name='TALK' operation="average" />
+          <field field_ref="carbonate_TCO2" name='TCO2' operation="average" />
+          <field field_ref="ccd_cal_CCD" name='CAL_CCD' operation="average" />
+          <field field_ref="ccd_arg_CCD" name='ARG_CCD' operation="average" />
+          <field field_ref="pelagic_PHD_VINT" name='INT_PD' operation="average" />
+          <field field_ref="pelagic_PHN_VINT" name='INT_PN' operation="average" />
+          <field field_ref="pelagic_ZMI_VINT" name='INT_ZMI' operation="average" />
+          <field field_ref="pelagic_ZME_VINT" name='INT_ZME' operation="average" />
+          <field field_ref="pelagic_DET_VINT" name='INT_DET' operation="average" />
+          <field field_ref="pelagic_DTC_VINT" name='INT_DTC' operation="average" />
+          <field field_ref="pelagic_FASTN_VINT" name='FASTN' operation="average" />
+          <field field_ref="pelagic_FASTC_VINT" name='FASTC' operation="average" />
+          <field field_ref="pelagic_FASTCA_VINT" name='FASTCA' operation="average" />
+          <field field_ref="pelagic_FASTSI_VINT" name='FASTSI' operation="average" />
+          <field field_ref="pelagic_FASTFE_VINT" name='FASTFE' operation="average" />
+          <field field_ref="fast_detritus_freminn_VINT" name='REMINN' operation="average" />
+          <field field_ref="fast_detritus_freminsi_VINT" name='REMINSI' operation="average" />
+          <field field_ref="fast_detritus_freminfe_VINT" name='REMINFE' operation="average" />
+          <field field_ref="SFR_OCAL_result" name='SFR_OCAL' operation="average" />
+          <field field_ref="SFR_OARG_result" name='SFR_OARG' operation="average" />
+          <field field_ref="pelagic_fcomm_resp_VINT" name='COM_RESP' operation="average" />
+          <field field_ref="benthic_LYSO_CA" name='LYSO_CA' operation="average" />
+          <field field_ref="pelagic_regen_slow_VINT" name='TOTREG_N' operation="average" />
+          <field field_ref="pelagic_regenSi_slow_VINT" name='TOTRG_SI' operation="average" />
+      <field field_ref="C_PROD1_result_VINT" name='C_PROD' operation="average" />
+     </file>
+      </file_group>
+
+
+      <file_group id="5d" output_freq="5d"  output_level="10" enabled=".TRUE."/>  <!-- 5d files -->
+
+	      <!--        <file id="file99" name_suffix="_grid_T" description="global means">
+          <field field_ref="sshtot"       name="sshtot"     />
+          <field field_ref="voltot"       name="voltot"     />
+          <field field_ref="temptot_pot"  name="temptot_pot" />
+          <field field_ref="saltot"       name="saltot"     />
+          <field field_ref="masstot"      name="masstot"     />
+          <field field_ref="sshsteric"    name="sshsteric"  />
+        </file>
+
+
+      </file_group> -->
+
+
+      <file_group id="1m" output_freq="1mo" output_level="10" split_freq="1mo" enabled=".TRUE.">
+      <!--file_group id="1m" output_freq="1mo" output_level="10" enabled=".TRUE."--> <!-- real monthly files -->
+
+      <file id="file99" name_suffix="_grid_T_globmean" description="global means">
+          <field field_ref="sshtot"       name="sshtot"     />
+          <field field_ref="voltot"       name="voltot"     />
+          <field field_ref="temptot_pot"  name="temptot_pot" />
+          <field field_ref="saltot"       name="saltot"     />
+          <field field_ref="masstot"      name="masstot"     />
+          <field field_ref="sshsteric"    name="sshsteric"  />
+        </file>
+
+        <file id="file8" name_suffix="_grid_T" >
+	  <field field_ref="e3t"          name="thkcello"  />
+          <field field_ref="ssh"          name="zos"       />
+          <!--field field_ref="ssh2"         name="zossq"     /-->
+
+          <field field_ref="sst_con"      name="tos_con"    />
+          <field field_ref="sss_abs"      name="sos_abs"    />
+          <field field_ref="sbt_con"      name="thetaob_con"/>
+          <field field_ref="sbs_abs"      name="sob_abs"    />
+          <field field_ref="toce_con"     name="thetao_con" operation="average" freq_op="1mo"  cell_methods="time: mean (thickness weighted)"   > @toce_con_e3t / @e3t </field>
+          <field field_ref="soce_abs"     name="so_abs"       operation="average" freq_op="1mo"  cell_methods="time: mean (thickness weighted)"   > @soce_abs_e3t / @e3t </field>
+          <field field_ref="mldzint_1"    name="somxzint1"  />
+	  <field field_ref="qt"           name="hfds"       />
+	  <field field_ref="qsr3d"        name="rsdo"       />
+	  <field field_ref="empmr"        name="sowaflup"   />
+          <field field_ref="ice_cover"    name="soicecov"   />
+          <field field_ref="berg_melt"       name="ficeberg"               />
+          <field field_ref="berg_melt_qlat"  name="berg_latent_heat_flux"  />
+          <field field_ref="botpres"      name="botpres"   standard_name="sea_water_pressure_at_sea_floor" prec="8"   />
+	  <field field_ref="sshdyn"       name="sshdyn"     />
+	  <field field_ref="emp_oce"      name="soemp_oce"  />
+	  <field field_ref="emp_ice"      name="soemp_ice"  />
+	  <field field_ref="snowpre"      name="snowpre"    />
+	  <field field_ref="precip"       name="soprecip"   />
+	  <field field_ref="fmmflx"       name="fsitherm"   />
+	  <field field_ref="runoffs"      name="friver"     />
+	  <field field_ref="erp"          name="so_erp"     />
+	  <field field_ref="saltflx"      name="sfdsi"      />
+	  <field field_ref="qlatisf"      name="sohflisf"  />
+	  <field field_ref="qhcisf"       name="sohfcisf"   />
+	  <field field_ref="fwfisf"       name="sowflisf"   />
+        </file>
+
+	<file id="file9" name_suffix="_grid_U" description="ocean U grid variables" >
+	  <field field_ref="e3u"          name="thkcello"   />
+          <field field_ref="ssu"          name="sozocrtx"   />
+          <field field_ref="uoce"         name="uo"      operation="average" freq_op="1mo"  cell_methods="time: mean (thickness weighted)"   > @uoce_e3u / @e3u </field>
+          <field field_ref="uoce"         name="u2o" standard_name="square_of_sea_water_x_velocity" long_name="UU"  operation="average" freq_op="1mo"  cell_methods="time: mean (thickness weighted)"   > @uoce2_e3u / @e3u </field>
+	  <field field_ref="utau"         name="tauuo"      />
+	</file>
+	
+	<file id="file10" name_suffix="_grid_V" description="ocean V grid variables" >
+	  <field field_ref="e3v"          name="thkcello"  />
+          <field field_ref="ssv"          name="somecrty"  />
+          <field field_ref="voce"         name="vo"      operation="average" freq_op="1mo"  cell_methods="time: mean (thickness weighted)"   > @voce_e3v / @e3v </field>
+          <field field_ref="voce"         name="v2o" standard_name="square_of_sea_water_y_velocity" long_name="VV"  operation="average" freq_op="1mo" cell_methods="time: mean (thickness weighted)"   > @voce2_e3v / @e3v </field>
+	  <field field_ref="vtau"         name="tauvo"     />
+	</file>
+	
+	<file id="file11" name_suffix="_grid_W" description="ocean W grid variables" >
+	  <field field_ref="e3w" long_name="W-cell thickness"  />
+	  <field field_ref="woce"         name="wo"            />
+          <field field_ref="woce"         name="w2o" standard_name="square_of_upward_sea_water_velocity" long_name="WW"  operation="average" > woce * woce </field>
+	  <field field_ref="avt"          name="difvho"        />
+	  <field field_ref="avm"          name="difvmo"        />
+	</file>
+
+
+      </file_group>
+
+      <file_group id="2m" output_freq="2mo" output_level="10" enabled=".TRUE."/> <!-- real 2m files -->
+      <file_group id="3m" output_freq="3mo" output_level="10" enabled=".TRUE."/> <!-- real 3m files -->
+      <file_group id="4m" output_freq="4mo" output_level="10" enabled=".TRUE."/> <!-- real 4m files -->
+      <file_group id="6m" output_freq="6mo" output_level="10" enabled=".TRUE."/> <!-- real 6m files -->
+
+
+      <file_group id="2y"  output_freq="2y" output_level="10" enabled=".TRUE."/> <!-- real 2y files -->
+      <file_group id="5y"  output_freq="5y" output_level="10" enabled=".TRUE."/> <!-- real 5y files -->
+      <file_group id="10y" output_freq="10y" output_level="10" enabled=".TRUE."/> <!-- real 10y files -->
+
+   </file_definition>
+    
+
+
+

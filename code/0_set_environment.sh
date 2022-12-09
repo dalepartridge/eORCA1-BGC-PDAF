@@ -1,10 +1,12 @@
 #!/bin/bash
 
-export ARCHER2=true
+#************* CHANGE TO WORKING AREA *******************
+export WORK=/work/n01/n01/dapa/NCEO/eORCA1-BGC-PDAF
+#********************************************************
 
 #Config options
-export WORK=/work/n01/n01/dapa/NCEO/eORCA1-BGC-PDAF
 export CODE_DIR=$WORK/code
+export ARCHER2=true
 
 #Load modules
 source $CODE_DIR/archer2-files/ucx_env

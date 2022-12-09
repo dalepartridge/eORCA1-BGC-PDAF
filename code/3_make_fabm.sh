@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Build FABM with cray compiler
+source 0_set_environment.sh
 
 mkdir -p $FABM_BUILD
 cd $FABM_BUILD
