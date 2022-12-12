@@ -7,6 +7,7 @@ export WORK=/work/n01/n01/dapa/NCEO/eORCA1-BGC-PDAF
 #Config options
 export CODE_DIR=$WORK/code
 export ARCHER2=true
+export USE_PDAF=true
 
 #Load modules
 source $CODE_DIR/archer2-files/ucx_env
@@ -36,3 +37,6 @@ export NEMO_DIR=$CODE_DIR/nemo
 export NEMO_ARCH=GCC_ARCHER2
 export NEMO_REF=eORCA1
 export NEMO_CFG=eORCA1-build
+
+#NEMO_PDAF options
+export NEMO_PDAF_CLONE=$CODE_DIR/nemo_pdaf
