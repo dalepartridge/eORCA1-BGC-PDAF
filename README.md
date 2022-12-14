@@ -7,4 +7,7 @@ To compile code, cd into code directory. Update the work directory in 0_set_envi
 # Link Larger run files
 cd to INPUTS directory and execute link_inputs.sh. This will create directories with links to all the files needed to run. 
 
-
+# To run a simulation
+cd to cycle and update parameters in set_environment.sh. Then submit a job using the command:
+sbatch --export=year=XXXX cycle_year.slurm
+where XXXX is the year you want to start, e.g. 2000. The run will submit 12 months on a single job and will cycle each year up until the end year specified in set_environment.sh. 
