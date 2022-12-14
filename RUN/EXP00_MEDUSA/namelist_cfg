@@ -43,7 +43,7 @@
 !-----------------------------------------------------------------------
    ln_meshmask = .false.
                            !
-   rn_rdt      = 2700.      !  time step for the dynamics (and tracer if nn_acc=0)
+   rn_rdt      = 2700      !  time step for the dynamics (and tracer if nn_acc=0)
    rn_atfp     =    0.1    !  asselin time filter parameter
 /
 !-----------------------------------------------------------------------

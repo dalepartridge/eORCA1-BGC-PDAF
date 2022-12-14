@@ -1,0 +1,141 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+use Pod::Usage;
+
+# Arguments:
+my $verbose = 0;       # Verbose output
+my $file;              # Namelist file to edit
+my $runid;             # Job name
+my $l_restart;         # Restart logical indicator
+my $final_ts;          # End time-step
+my $start_ts;          # Start date
+my $restart_file;      # Physics restart filename 
+my $ice_file;          # Ice Namelist file to edit
+my $ice_restart_file;  # Ice restart filename
+my $trc_file;          # Tracer Namelist file to edit
+my $trc_restart_file;  # Tracer restart filename
+my $help;
+
+# Process arguments:
+if (@ARGV > 0) {
+  GetOptions('f|file=s'              => \$file,
+             'e|final_step=s'        => \$final_ts,
+             'g|restart=s'           => \$l_restart,
+             'n|next_step=s'         => \$start_ts,
+             'p|restart_file=s'      => \$restart_file,
+             'r|runid=s'             => \$runid,
+             'i|ice_file=s'          => \$ice_file,
+             'j|ice_restart_file=s'  => \$ice_restart_file,
+             't|trc_file=s'          => \$trc_file,
+             'u|trc_restart_file=s'  => \$trc_restart_file,
+             'v|verbose'             => \$verbose,
+             'help|?'                => \$help) or pod2usage(1);
+
+
+} else {
+# Requires an input file at a minimum
+  pod2usage(1);
+}
+
+pod2usage(1) if $help;
+
+if ($verbose) {
+  print "NEMO namelist update settings:\n";
+  print "  file = $file\n" if ($file);
+  print "  runid = $runid\n" if ($runid);
+  print "  l_restart = $l_restart\n" if ($l_restart);
+  print "  final_ts = $final_ts\n" if ($final_ts);
+  print "  start_ts = $start_ts\n" if ($start_ts);
+  print "  restart_file = $restart_file\n" if ($restart_file);
+  print "  ice_file = $ice_file\n" if ($ice_file);
+  print "  ice_restart_file = $ice_restart_file\n" if ($ice_restart_file);
+  print "  trc_file = $trc_file\n" if ($trc_file);
+  print "  trc_restart_file = $trc_restart_file\n" if ($trc_restart_file);
+}
+
+print "  Updating namelist file: $file\n" if ($verbose);
+my @lines = read_file($file);
+
+foreach my $line (@lines) {
+
+  $line =~ s/^(\s*?ln_rstart\s*?)=.*/$1=  .$l_restart./ if ($l_restart);
+
+  $line =~ s/^(\s*?nn_itend\s*?)=.*/$1=  $final_ts/ if ($final_ts);
+
+  $line =~ s/^(\s*?nn_it000\s*?)=.*/$1=  $start_ts/ if ($start_ts);
+
+  $line =~ s/^(\s*?cn_exp\s*?)=.*/$1=  '$runid'/ if ($runid);
+
+  $line =~ s/^(\s*?cn_ocerst_in\s*?)=.*/$1=  '$restart_file'/ if ($restart_file);
+}
+
+write_file($file,@lines);
+
+print "  Updating ice namelist file: $ice_file\n" if ($verbose);
+my @lines2 = read_file($ice_file);
+
+foreach my $line2 (@lines2) {
+
+  $line2 =~ s/^(\s*?cn_icerst_in\s*?)=.*/$1=  '$ice_restart_file'/ if ($ice_restart_file);
+}
+
+write_file($ice_file,@lines2);
+
+print "  Updating tracer namelist file: $trc_file\n" if ($verbose);
+my @lines3 = read_file($trc_file);
+
+foreach my $line3 (@lines3) {
+
+  $line3 =~ s/^(\s*?cn_trcrst_in\s*?)=.*/$1=  '$trc_restart_file'/ if ($trc_restart_file);
+}
+
+write_file($trc_file,@lines3);
+
+sub read_file {
+
+  my $file = shift;  # input filename
+  open (my $fh, '<', $file) or die "Cannot read $file: $!\n";
+  my @lines = <$fh>;
+  close $fh;
+  return @lines;
+}
+
+sub write_file {
+
+  my $file = shift;     # Output filename
+  my @lines = @_;       # Data for writing
+  open (my $fh, '>', $file) or die "Cannot write $file: $!\n";
+  print $fh @lines;
+  close $fh;
+  return;
+}
+
+
+__END__
+
+=head1 NAME
+
+update_nemo_nl - Update the NEMO namelist file
+
+=head1 SYNOPSIS
+
+update_nemo_nl -f <file> [OPTIONS]
+
+  Arguments:
+    --file, -f <file>                 File containing namelists to edit
+    --final_step, -e <int>            End timestep
+    --restart, -g <logical>           Restart logical indicator
+    --next_step, -n <int>             Next timestep for a CRUN
+    --runid, -r <string>              Job name
+    --restart_file, -p <string>       Name of input restart file
+    --trc_file, -t <file>             File containing tracer namelist to edit
+    --trc_restart_file, -u <string>   Name of tracer input restart file
+    --verbose, -v                     Verbose output
+    --help, -?                        Display help
+
+=cut
+

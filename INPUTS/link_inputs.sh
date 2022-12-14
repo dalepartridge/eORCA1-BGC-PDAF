@@ -22,8 +22,6 @@ ln -s $MEDUSA_DIR/../test1/nemo/cfgs/eORCA1/EXP00/eddy_viscosity_3D.nc
 #Surface BCs
 mkdir -p ./SBC
 ln -s /work/n01/shared/nemo/FORCING/JRA/JRA_v1.5.0_rechunk/*.nc SBC/ # Atmospheric forcing
-ln -s $PHYS_DIR/weights_JRA*nc SBC/ #weights files
-ln -s $PHYS_DIR/weights_WOA*nc SBC/ #weights files
 ln -s $PHYS_DIR/merged_ESACCI_BIOMER4V1R1_CHL_REG05.nc SBC/ #solar radiation
 ln -s $PHYS_DIR/sss_absolute_salinity_WOA13_decav_Reg1L75_clim.nc SBC/ # surface salinity restore
 

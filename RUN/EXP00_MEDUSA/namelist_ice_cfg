@@ -23,6 +23,10 @@
 !------------------------------------------------------------------------------
    jpl              =    10         !  number of ice  categories
    nlay_i           =    5          !  number of ice  layers
+   cn_icerst_in     = "restart_ice"   !  suffix of ice restart name (input)
+   cn_icerst_out    = "restart_ice"   !  suffix of ice restart name (output)
+   cn_icerst_indir  = "./restarts/"             !  directory to read   input ice restarts
+   cn_icerst_outdir = "./restarts/"             !  directory to write output ice restarts
 /
 !------------------------------------------------------------------------------
 &namitd         !   Ice discretization
