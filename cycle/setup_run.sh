@@ -1,7 +1,11 @@
 
+n_ens=$1
+
 mkdir -p $RUN_DIR
 
-cp $WORK/RUN/EXP00_MEDUSA/* $RUN_DIR
+mkdir -p $RUN_DIR/namelists
+
+cp $WORK/RUN/EXP00_MEDUSA/* $RUN_DIR/namelists
 cp $WORK/code/nemo/cfgs/eORCA1-build/EXP00/nemo $RUN_DIR
 cp $WORK/code/xios-build/bin/xios_server.exe $RUN_DIR
 echo $starting_iter > $RUN_DIR/current_iter
@@ -9,28 +13,66 @@ printf -v iter_start_zero "%08d" $starting_iter
 
 INPUTS=$WORK/INPUTS
 
-# Domain and river files
-ln -s $INPUTS/PHYSICS/DOM/eORCA_R1_zps_domcfg.nc $RUN_DIR
-ln -s $INPUTS/PHYSICS/RIV/* $RUN_DIR
+# Duplicate nemo context reference line in iodef file 
+for i in $(seq 1 $(($n_ens-1)));
+do
+    echo $i
+    sed -i '0,/.*context_nemo.*/{s/.*context_nemo.*/&\n&/}' $RUN_DIR/namelists/iodef.xml
+done
 
-# Link restarts
-mkdir -p $RUN_DIR/restarts
-ln -s $INPUTS/PHYSICS/DOM/restart.nc $RUN_DIR/restarts/${NAME}_${iter_start_zero}_restart.nc
-ln -s $INPUTS/PHYSICS/DOM/restart_ice.nc $RUN_DIR/restarts/${NAME}_${iter_start_zero}_restart_ice.nc
+# Create numbered context nemo files and update context lines in iodef
+for i in $(seq -f "%03g" 1 $n_ens);
+do 
+    cp $RUN_DIR/namelists/context_nemo.xml $RUN_DIR/namelists/context_nemo_$i.xml
+    ./setup-update_ensemble_files --con_file $RUN_DIR/namelists/context_nemo_$i.xml \
+                          --ens_id $i \
+                          --iodef_file $RUN_DIR/namelists/iodef.xml
+done
+rm $RUN_DIR/namelists/context_nemo.xml
+ln -s $RUN_DIR/namelists/iodef.xml $RUN_DIR/iodef.xml
 
 
-mkdir -p $RUN_DIR/INPUTS
-ln -s $INPUTS/PHYSICS/DOM/weights* $RUN_DIR/INPUTS/
-ln -s $INPUTS/PHYSICS/DOM/eddy_viscosity_3D.nc $RUN_DIR/INPUTS/
-ln -s $INPUTS/PHYSICS/SBC/sss_absolute_salinity_WOA13_decav_Reg1L75_clim.nc $RUN_DIR/INPUTS/
-ln -s $INPUTS/PHYSICS/BBC/* $RUN_DIR/INPUTS/
-ln -s $INPUTS/PHYSICS/LBC/* $RUN_DIR/INPUTS/
+for i in $(seq 1 $n_ens)
+do
+    EnsRunDir=$RUN_DIR/ensemble_$i/
+    mkdir -p $EnsRunDir
+
+    # Domain and river files
+    ln -s $INPUTS/PHYSICS/DOM/eORCA_R1_zps_domcfg.nc $EnsRunDir
+    ln -s $INPUTS/PHYSICS/RIV/* $EnsRunDir
+
+    # Link restarts
+    mkdir -p $EnsRunDir/restarts
+    ln -s $INPUTS/PHYSICS/DOM/restart.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart.nc
+    ln -s $INPUTS/PHYSICS/DOM/restart_ice.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart_ice.nc
 
 
-# Link Medusa
-ln -s $INPUTS/MEDUSA/DOM/restart_trc.nc $RUN_DIR/restarts/${NAME}_${iter_start_zero}_restart_trc.nc
-ln -s $INPUTS/MEDUSA/SBC/*nc $RUN_DIR/INPUTS/
-ln -s $INPUTS/MEDUSA/SBC/pCO2/pCO2a.nc $RUN_DIR/INPUTS/
+    mkdir -p $EnsRunDir/INPUTS
+    ln -s $INPUTS/PHYSICS/DOM/weights* $EnsRunDir/INPUTS/
+    ln -s $INPUTS/PHYSICS/DOM/eddy_viscosity_3D.nc $EnsRunDir/INPUTS/
+    ln -s $INPUTS/PHYSICS/SBC/sss_absolute_salinity_WOA13_decav_Reg1L75_clim.nc $EnsRunDir/INPUTS/
+    ln -s $INPUTS/PHYSICS/BBC/* $EnsRunDir/INPUTS/
+    ln -s $INPUTS/PHYSICS/LBC/* $EnsRunDir/INPUTS/
 
-ln -s $INPUTS/PHYSICS/DOM/eddy_viscosity_3D.nc $RUN_DIR
-ln -s $INPUTS/PHYSICS/DOM/weights_coreII*nc $RUN_DIR
+
+    # Link Medusa
+    ln -s $INPUTS/MEDUSA/DOM/restart_trc.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart_trc.nc
+    ln -s $INPUTS/MEDUSA/SBC/*nc $EnsRunDir/INPUTS/
+    ln -s $INPUTS/MEDUSA/SBC/pCO2/pCO2a.nc $EnsRunDir/INPUTS/
+
+    ln -s $INPUTS/PHYSICS/DOM/eddy_viscosity_3D.nc $EnsRunDir
+    ln -s $INPUTS/PHYSICS/DOM/weights_coreII*nc $EnsRunDir
+
+    # Link executable
+    ln -s $RUN_DIR/nemo $EnsRunDir
+    ln -s $RUN_DIR/xios_server.exe $EnsRunDir
+
+    # Link namelists
+    ln -s $RUN_DIR/namelists/* $EnsRunDir
+
+    #########################################
+    ######todo: PDAF namelists ##############
+    ######todo: covariance file ##############
+    ######todo: observations   ##############
+    #########################################
+done
