@@ -7,7 +7,7 @@ export RUN_DIR=$WORK/RUN/$EXP_NAME
 export NAME=eORCA1
 
 export ystart=2000
-export yend=2020
+export yend=2004
 export starting_iter=0 # starting iteration
 
 # Default directories

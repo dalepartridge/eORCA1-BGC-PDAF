@@ -63,6 +63,7 @@ done
 yearp=$(($year + 1))
 if [ $yearp -le $yend ]; then
    echo 'Submitting' $yearp '...'
+   cd $CYCLE_DIR
    sbatch --export=year=$yearp cycle_year.slurm
    echo "Done."
 else
