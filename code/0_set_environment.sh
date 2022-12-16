@@ -24,6 +24,7 @@ export MEDUSA_CLONE=$CODE_DIR/medusa
 
 #PDAF Options
 export PDAF_CLONE=$CODE_DIR/pdaf
+export PDAF_HOME=$CODE_DIR/pdaf
 export PDAF_MYSRC=$CODE_DIR/pdaf-src
 
 #FABM options
@@ -40,3 +41,4 @@ export NEMO_CFG=eORCA1-build
 
 #NEMO_PDAF options
 export NEMO_PDAF_CLONE=$CODE_DIR/nemo_pdaf
+
