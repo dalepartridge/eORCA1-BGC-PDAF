@@ -5,13 +5,15 @@ mkdir -p $RUN_DIR
 
 mkdir -p $RUN_DIR/namelists
 
+INPUTS=$WORK/INPUTS
+
 cp $WORK/RUN/EXP00_MEDUSA/* $RUN_DIR/namelists
 cp $WORK/code/nemo/cfgs/eORCA1-build/EXP00/nemo $RUN_DIR
 cp $WORK/code/xios-build/bin/xios_server.exe $RUN_DIR
+cp $INPUTS/pdaf/namelist_cfg.pdaf $RUN_DIR
 echo $starting_iter > $RUN_DIR/current_iter
 printf -v iter_start_zero "%08d" $starting_iter
 
-INPUTS=$WORK/INPUTS
 
 # Duplicate nemo context reference line in iodef file 
 for i in $(seq 1 $(($n_ens-1)));
@@ -32,6 +34,7 @@ rm $RUN_DIR/namelists/context_nemo.xml
 ln -s $RUN_DIR/namelists/iodef.xml $RUN_DIR/iodef.xml
 
 
+ens_dirs='-D '
 for i in $(seq 1 $n_ens)
 do
     EnsRunDir=$RUN_DIR/ensemble_$i/
@@ -70,9 +73,18 @@ do
     # Link namelists
     ln -s $RUN_DIR/namelists/* $EnsRunDir
 
-    #########################################
-    ######todo: PDAF namelists ##############
-    ######todo: covariance file ##############
-    ######todo: observations   ##############
-    #########################################
+    # Link PDAF namelists
+    ln -s $RUN_DIR/namelist_cfg.pdaf $EnsRunDir
+
+    # Link initial covariance matrix
+    ln -s $INPUTS/pdaf/cov.nc $EnsRunDir
+
+    # Link observations
+    ln -s $INPUTS/obs $EnsRunDir/
+
+    # prepare for slurm scripts
+    ens_dirs=${ens_dirs}' ensemble_'$i
+
 done
+
+./mkslurm_hetjob_online_ensemble --gnu -a n01-nceo -C 176 $ens_dirs > submit.sh 

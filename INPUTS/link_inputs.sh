@@ -5,7 +5,8 @@ INPUT_DIR=$WORK/INPUTS
 # Source directories
 PHYS_DIR=/work/n01/n01/jdha/scratch/eORCA1/nemo/cfgs/eORCA1/INPUTS
 MEDUSA_DIR=/work/n01/n01/gle/eORCA1/INPUTS
-
+OBS_DIR=/work/n01/n01/ymchen/obs
+COV_DIR=/work/n01/n01/ymchen/cov
 
 ##### Link Physics Files #####
 mkdir -p $INPUT_DIR/PHYSICS
@@ -17,7 +18,7 @@ ln -s $PHYS_DIR/eORCA_R1_zps_domcfg.nc DOM/
 ln -s $INPUT_DIR/../RAW_DATA/restart_20000101.nc DOM/restart.nc
 ln -s $INPUT_DIR/../RAW_DATA/restart_ice_20000101.nc DOM/restart_ice.nc
 ln -s $PHYS_DIR/weights* DOM/
-ln -s $MEDUSA_DIR/../test1/nemo/cfgs/eORCA1/EXP00/eddy_viscosity_3D.nc
+ln -s $MEDUSA_DIR/../test1/nemo/cfgs/eORCA1/EXP00/eddy_viscosity_3D.nc DOM/
 
 #Surface BCs
 mkdir -p ./SBC
@@ -75,3 +76,11 @@ mkdir -p ./RIV
 ln -s $PHYS_DIR/runoff*nc RIV/
 
 ##### Link PDAF Files #####
+cd $INPUT_DIR
+mkdir -p ./pdaf
+cp $NEMO_PDAF_CLONE/MY_SRC_pdaf/namelist_cfg.pdaf pdaf/
+ln -s $COV_DIR/* pdaf/
+
+##### Link Observation Files #####
+mkdir -p ./obs
+ln -s $OBS_DIR/* obs/

@@ -1,0 +1,90 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use Getopt::Long;
+use Pod::Usage;
+
+# Arguments:
+my $con_file;              # Context file to edit
+my $ens_id;              # 3 digit Ensemble number
+my $iodef_file;
+my $help;
+
+# Process arguments:
+if (@ARGV > 0) {
+  GetOptions('f|con_file=s'         => \$con_file,
+             'e|ens_id=s'           => \$ens_id,
+             'i|iodef_file=s'       => \$iodef_file,
+             'help|?'               => \$help) or pod2usage(1);
+
+
+} else {
+# Requires an input file at a minimum
+  pod2usage(1);
+}
+
+pod2usage(1) if $help;
+
+print "  Creating context file: $con_file\n";
+my @lines = read_file($con_file);
+
+foreach my $line (@lines) {
+  $line =~ s/<context id="nemo">/<context id="nemo_$ens_id">/ if ($ens_id);
+}
+
+write_file($con_file,@lines);
+
+print "  Updating iodef file: $iodef_file\n";
+my @lines2 = read_file($iodef_file);
+my $flag = 0;
+
+foreach my $line2 (@lines2) {
+  if ($flag == 0) {
+    if ($line2 =~ /context_nemo.xml/) {
+     $line2 =~ s/  <context id="nemo" src=".\/context_nemo.xml"\/>/<context id="nemo_$ens_id" src=".\/context_nemo_$ens_id.xml"\/>/ if ($ens_id);
+     $flag=1;
+    }
+  }
+}
+write_file($iodef_file,@lines2);
+
+sub read_file {
+
+  my $file = shift;  # input filename
+  open (my $fh, '<', $file) or die "Cannot read $file: $!\n";
+  my @lines = <$fh>;
+  close $fh;
+  return @lines;
+}
+
+sub write_file {
+
+  my $file = shift;     # Output filename
+  my @lines = @_;       # Data for writing
+  open (my $fh, '>', $file) or die "Cannot write $file: $!\n";
+  print $fh @lines;
+  close $fh;
+  return;
+}
+
+
+__END__
+
+=head1 NAME
+
+update_nemo_nl - Update the NEMO namelist file
+
+=head1 SYNOPSIS
+
+update_ensemble_files -f <file> [OPTIONS]
+
+  Arguments:
+    --con_file, -f <file>                 File containing context file to edit
+    --ens_id, -e <string>             3-digit ensemble id string            
+    --iodef_file, -i <file>                 File containing iodef file to edit
+    --help, -?                        Display help
+
+=cut
+
