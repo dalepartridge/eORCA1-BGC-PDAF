@@ -10,6 +10,7 @@ use Pod::Usage;
 my $con_file;              # Context file to edit
 my $ens_id;              # 3 digit Ensemble number
 my $iodef_file;
+my $ens_file;
 my $help;
 
 # Process arguments:
@@ -17,6 +18,7 @@ if (@ARGV > 0) {
   GetOptions('f|con_file=s'         => \$con_file,
              'e|ens_id=s'           => \$ens_id,
              'i|iodef_file=s'       => \$iodef_file,
+	     'd|ens_file=s'         => \$ens_file,
              'help|?'               => \$help) or pod2usage(1);
 
 
@@ -32,6 +34,10 @@ my @lines = read_file($con_file);
 
 foreach my $line (@lines) {
   $line =~ s/<context id="nemo">/<context id="nemo_$ens_id">/ if ($ens_id);
+  # for eORCA1
+  $line =~ s/<file_definition src=".\/file_def_nemo-oce.xml"\/>/<file_definition src=".\/file_def_nemo-oce_$ens_file.xml"\/>/ if ($ens_file);
+  $line =~ s/<file_definition src=".\/file_def_nemo-ice.xml"\/>/<file_definition src=".\/file_def_nemo-ice_$ens_file.xml"\/>/ if ($ens_file);
+  $line =~ s/<file_definition src=".\/file_def_fabm.xml"\/>/<file_definition src=".\/file_def_fabm_$ens_file.xml"\/>/ if ($ens_file);
 }
 
 write_file($con_file,@lines);
@@ -84,6 +90,7 @@ update_ensemble_files -f <file> [OPTIONS]
     --con_file, -f <file>                 File containing context file to edit
     --ens_id, -e <string>             3-digit ensemble id string            
     --iodef_file, -i <file>                 File containing iodef file to edit
+    --ens_file, -d <file>            path to ensemble directory
     --help, -?                        Display help
 
 =cut

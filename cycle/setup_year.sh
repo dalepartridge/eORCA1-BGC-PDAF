@@ -1,5 +1,6 @@
 
 year=$1
+n_ens=$2
 INPUTS=$WORK/INPUTS
 
 

@@ -1,6 +1,8 @@
 
 n_ens=$1
 
+current_dir=$(pwd)
+
 mkdir -p $RUN_DIR
 
 mkdir -p $RUN_DIR/namelists
@@ -28,10 +30,19 @@ do
     cp $RUN_DIR/namelists/context_nemo.xml $RUN_DIR/namelists/context_nemo_$i.xml
     ./setup-update_ensemble_files --con_file $RUN_DIR/namelists/context_nemo_$i.xml \
                           --ens_id $i \
-                          --iodef_file $RUN_DIR/namelists/iodef.xml
+                          --iodef_file $RUN_DIR/namelists/iodef.xml \
+                          --ens_file $((10#$i))
 done
 rm $RUN_DIR/namelists/context_nemo.xml
 ln -s $RUN_DIR/namelists/iodef.xml $RUN_DIR/iodef.xml
+# 
+# ln -s $RUN_DIR/namelists/*.xml $RUN_DIR
+# 
+# for filedef in $(ls $RUN_DIR/file_def*.xml );
+# do
+#     echo $filedef
+#     unlink $filedef
+# done
 
 
 ens_dirs='-D '
@@ -72,6 +83,20 @@ do
 
     # Link namelists
     ln -s $RUN_DIR/namelists/* $EnsRunDir
+    cd $EnsRunDir
+    tmp_path=$(echo $RUN_DIR | sed 's/\//\\\//g')
+    echo $tmp_path
+    for filedef in $(ls file_def*.xml );
+    do
+        echo $filedef
+        unlink $filedef
+	for j in $(seq 1 $n_ens);
+        do
+            cp $RUN_DIR/namelists/$filedef ${filedef%.xml}_$j.xml
+	    sed -i 's/name="@expname@_@freq@_@startdate@_@enddate@"/name="'$tmp_path'\/ensemble_'$j'\/@expname@_@freq@_@startdate@_@enddate@"/g' ${filedef%.xml}_$j.xml 
+        done
+    done
+    cd ${current_dir}
 
     # Link PDAF namelists
     ln -s $RUN_DIR/namelist_cfg.pdaf $EnsRunDir
@@ -86,5 +111,6 @@ do
     ens_dirs=${ens_dirs}' ensemble_'$i
 
 done
+# cp $EnsRunDir/file_def*.xml $RUN_DIR
 
-./mkslurm_hetjob_online_ensemble --gnu -a n01-nceo -C 176 $ens_dirs > submit.sh 
+./mkslurm_hetjob_online_ensemble -a n01-nceo -S 32 -s 2 -C 180 -m 16 $ens_dirs -t 01:00:00 > submit.sh 
