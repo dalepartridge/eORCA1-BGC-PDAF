@@ -15,8 +15,8 @@ cd $INPUT_DIR/PHYSICS
 #Domain files
 mkdir -p ./DOM
 ln -s $PHYS_DIR/eORCA_R1_zps_domcfg.nc DOM/
-ln -s $INPUT_DIR/../RAW_DATA/restart_20000101.nc DOM/restart.nc
-ln -s $INPUT_DIR/../RAW_DATA/restart_ice_20000101.nc DOM/restart_ice.nc
+ln -s $INPUT_DIR/../RAW_DATA/restart_20150101.nc DOM/restart.nc
+ln -s $INPUT_DIR/../RAW_DATA/restart_ice_20150101.nc DOM/restart_ice.nc
 ln -s $PHYS_DIR/weights* DOM/
 ln -s $MEDUSA_DIR/../test1/nemo/cfgs/eORCA1/EXP00/eddy_viscosity_3D.nc DOM/
 

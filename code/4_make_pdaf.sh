@@ -5,5 +5,5 @@ if [ "$ARCHER2" = true ] ; then
    export PDAF_ARCH=cray_gfortran
 fi
 
-cd $PDAF_CLONE/src && make
+cd $PDAF_CLONE/src && make clean && make
 cd $CODE_DIR
