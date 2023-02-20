@@ -62,6 +62,7 @@ def main(args):
     # Environment
     string = f"""
     # Created by: {cmd}
+    source ../../code/archer2-files/ucx_env
     module list
     export OMP_NUM_THREADS=1
     """

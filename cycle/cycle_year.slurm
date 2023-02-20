@@ -2,16 +2,18 @@
 #SBATCH --job-name=eORCA1_ensemble
 #SBATCH --time=24:00:00
 #SBATCH --account=n01-nceo
-#SBATCH --partition=serial
-#SBATCH --qos=serial
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-core=1
+#SBATCH --partition=standard
+#SBATCH --qos=standard
+#SBATCH --ntasks=1
 
-# SUBMIT WITH: sbatch --export=year=XXXX --export=n_ens=XXX cycle_year.slurm
+# SUBMIT WITH: sbatch --export=year=XXXX,n_ens=XXX cycle_year.slurm
 
 export OMP_NUM_THREADS=1
 source ../code/archer2-files/ucx_env
 source set_environment.sh
+
+echo year $year
+echo n_ens $n_ens
 
 if [ ! -d $RUN_DIR ]; then
     $CYCLE_DIR/setup_run.sh $n_ens
@@ -23,7 +25,6 @@ cd $RUN_DIR/namelists/
 dt=`grep 'rn_rdt\s*=' namelist_cfg | tr -d '[:space:]' | cut -d'=' -f2 | cut -d'!' -f1` #get time-step
 cd $RUN_DIR
 
-month=04
 for month in 01 04 07 10; do
     echo "$SLURM_JOB_ID Submitting year/month" $year/$month >> $RUN_DIR/jobs.log
     
@@ -34,7 +35,6 @@ for month in 01 04 07 10; do
     nday1=`cal $(($month+1)) $year | grep -v '[A-Za-z]' | wc -w`
     nday2=`cal $(($month+2)) $year | grep -v '[A-Za-z]' | wc -w`
     nday=$(($nday+$nday1+$nday2))
-    echo $nday
     iter_end=$(($iter_start + 86400*$nday/$dt))
     iter_start=$(($iter_start + 1))
     
@@ -52,6 +52,7 @@ for month in 01 04 07 10; do
     # update the first assimilation time
     nday=`cal $month $year | grep -v '[A-Za-z]' | wc -w`
     step=$((86400*$nday/2/$dt))
+
     if [ $year != $ystart ] || [ $month != 01 ];
     then
         sed -i 's/type_ens_init = 3/type_ens_init = 4/g' $RUN_DIR/namelist_cfg.pdaf
@@ -66,7 +67,6 @@ for month in 01 04 07 10; do
     # remove delt_obs in namelist
     sed -i 's/delt_obs = '${step}'/delt_obs =/g' $RUN_DIR/namelist_cfg.pdaf
     s=`grep delt_obs $RUN_DIR/namelist_cfg.pdaf`
-    echo $s
 
     # Archive results
     for i in {1..30}; do
@@ -84,8 +84,9 @@ done
 
 yearp=$(($year + 1))
 if [ $yearp -le $yend ]; then
+   cd $CYCLE_DIR
    echo 'Submitting' $yearp '...'
-   sbatch --export=year=$yearp --export=n_ens=$n_ens cycle_year.slurm
+   sbatch --export=year=$year,n_ens=$n_ens cycle_year.slurm
    echo "Done."
 else
    echo "All done."

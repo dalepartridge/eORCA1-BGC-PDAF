@@ -113,5 +113,5 @@ do
 done
 # cp $EnsRunDir/file_def*.xml $RUN_DIR
 
-./mkslurm_hetjob_online_ensemble -a n01-nceo -S 16 -s 2 -C 180 -m 16 $ens_dirs -t 01:00:00 > submit.sh 
+./mkslurm_hetjob_online_ensemble -a n01-nceo -S 16 -s 2 -C 180 -m 16 $ens_dirs -t 05:00:00 > submit.sh 
 mv submit.sh $RUN_DIR/
