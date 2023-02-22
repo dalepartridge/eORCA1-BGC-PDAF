@@ -22,7 +22,49 @@
 
       <file_group id="6h" output_freq="6h"  output_level="10" enabled=".TRUE."/> <!-- 6h files -->     
       <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE."> <!-- 1d files -->
-         <file id="file60" name_suffix="_ptrc_T" description="tracer variables" sync_freq="1d">
+
+         <file id="file60" name_suffix="_ptrc1_T" description="tracer variables"  sync_freq="1d">
+          <field field_ref="pelagic_CHN" name='CHN' operation="average" />
+          <field field_ref="pelagic_CHD" name='CHD' operation="average" />
+          <field field_ref="pelagic_PHN" name='PHN' operation="average" />
+          <field field_ref="pelagic_PHD" name='PHD' operation="average" />
+          <field field_ref="pelagic_DTC" name='DTC' operation="average" />
+          <field field_ref="pelagic_ZMI" name='ZMI' operation="average" />
+          <field field_ref="pelagic_ZME" name='ZME' operation="average" />
+          <field field_ref="pelagic_ALK" name='ALK' operation="average" />
+          <field field_ref="pelagic_DiC" name='DiC' operation="average" />
+          <field field_ref="pelagic_PDS" name='PDS' operation="average" />
+          <field field_ref="pelagic_DIN" name='DIN' operation="average" />
+          <field field_ref="pelagic_FER" name='FER' operation="average" />
+          <field field_ref="pelagic_SIL" name='SIL' operation="average" />
+          <field field_ref="pelagic_DET" name='DET' operation="average" />
+          <field field_ref="pelagic_OXY" name='OXY' operation="average" />
+     </file>
+
+    <file id="file222" name_suffix="_diad_T" description="tracer variables"  sync_freq="1d">
+      <field field_ref="carbonate_CO2FLUX" name='CO2FLUX' operation="average" />
+          <field field_ref="carbonate_OCN_PCO2" name='OCN_PCO2' operation="average" />
+          <field field_ref="pelagic_PRN_VINT" name='PRN' operation="average" />
+          <field field_ref="pelagic_PRD_VINT" name='PRD' operation="average" />
+          <field field_ref="pelagic_MPN_VINT" name='MPN' operation="average" />
+          <field field_ref="pelagic_MPD_VINT" name='MPD' operation="average" />
+          <field field_ref="carbonate_ATM_PCO2" name='ATM_PCO2' operation="average" />
+          <field field_ref="carbonate_TALK" name='TALK' operation="average" />
+          <field field_ref="carbonate_TCO2" name='TCO2' operation="average" />
+          <field field_ref="pelagic_PHD_VINT" name='INT_PD' operation="average" />
+          <field field_ref="pelagic_PHN_VINT" name='INT_PN' operation="average" />
+          <field field_ref="pelagic_ZMI_VINT" name='INT_ZMI' operation="average" />
+          <field field_ref="pelagic_ZME_VINT" name='INT_ZME' operation="average" />
+          <field field_ref="pelagic_DTC_VINT" name='INT_DTC' operation="average" />
+     </file>
+      </file_group>
+
+      <file_group id="5d" output_freq="5d"  output_level="10" enabled=".TRUE."/>  <!-- 5d files -->
+
+
+
+      <file_group id="1m" output_freq="1mo" output_level="10" split_freq="1mo" enabled=".TRUE.">
+         <file id="file71" name_suffix="_ptrc_T" description="tracer variables">
           <field field_ref="pelagic_CHN" name='CHN' operation="average" />
           <field field_ref="pelagic_CHD" name='CHD' operation="average" />
           <field field_ref="pelagic_PHN" name='PHN' operation="average" />
@@ -40,7 +82,8 @@
           <field field_ref="pelagic_OXY" name='OXY' operation="average" />
      </file>
 
-    <file id="file222" name_suffix="_diad_T" description="tracer variables"  sync_freq="1d">
+
+    <file id="file223" name_suffix="_diad_T" description="tracer variables">
       <field field_ref="carbonate_CO2FLUX" name='CO2FLUX' operation="average" />
       <field field_ref="carbonate_OM_CAL3" name='OM_CAL3' operation="average" />
           <field field_ref="carbonate_PH3" name='PH3' operation="average" />
@@ -163,25 +206,9 @@
           <field field_ref="pelagic_regenSi_slow_VINT" name='TOTRG_SI' operation="average" />
       <field field_ref="C_PROD1_result_VINT" name='C_PROD' operation="average" />
      </file>
+
       </file_group>
 
-
-      <file_group id="5d" output_freq="5d"  output_level="10" enabled=".TRUE."/>  <!-- 5d files -->
-
-	      <!--        <file id="file99" name_suffix="_grid_T" description="global means">
-          <field field_ref="sshtot"       name="sshtot"     />
-          <field field_ref="voltot"       name="voltot"     />
-          <field field_ref="temptot_pot"  name="temptot_pot" />
-          <field field_ref="saltot"       name="saltot"     />
-          <field field_ref="masstot"      name="masstot"     />
-          <field field_ref="sshsteric"    name="sshsteric"  />
-        </file>
-
-
-      </file_group> -->
-
-
-      <file_group id="1m" output_freq="1mo" output_level="10" split_freq="1mo" enabled=".TRUE."/>
       <file_group id="2m" output_freq="2mo" output_level="10" enabled=".TRUE."/> <!-- real 2m files -->
       <file_group id="3m" output_freq="3mo" output_level="10" enabled=".TRUE."/> <!-- real 3m files -->
       <file_group id="4m" output_freq="4mo" output_level="10" enabled=".TRUE."/> <!-- real 4m files -->
