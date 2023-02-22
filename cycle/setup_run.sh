@@ -12,7 +12,6 @@ INPUTS=$WORK/INPUTS
 cp $WORK/RUN/EXP00_MEDUSA/* $RUN_DIR/namelists
 cp $WORK/code/nemo/cfgs/eORCA1-build/EXP00/nemo $RUN_DIR
 cp $WORK/code/xios-build/bin/xios_server.exe $RUN_DIR
-cp $INPUTS/pdaf/namelist_cfg.pdaf $RUN_DIR
 echo $starting_iter > $RUN_DIR/current_iter
 printf -v iter_start_zero "%08d" $starting_iter
 
@@ -97,9 +96,6 @@ do
         done
     done
     cd ${current_dir}
-
-    # Link PDAF namelists
-    ln -s $RUN_DIR/namelist_cfg.pdaf $EnsRunDir
 
     # Link initial covariance matrix
     ln -s $INPUTS/pdaf/cov.nc $EnsRunDir

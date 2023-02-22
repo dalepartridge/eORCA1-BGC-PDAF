@@ -55,18 +55,18 @@ for month in 01 04 07 10; do
 
     if [ $year != $ystart ] || [ $month != 01 ];
     then
-        sed -i 's/type_ens_init = 3/type_ens_init = 4/g' $RUN_DIR/namelist_cfg.pdaf
-        sed -i 's/ens_restart = .false./ens_restart = .true./g' $RUN_DIR/namelist_cfg.pdaf
+        sed -i 's/type_ens_init = 3/type_ens_init = 4/g' $RUN_DIR/namelists/namelist_cfg.pdaf
+        sed -i 's/ens_restart = .false./ens_restart = .true./g' $RUN_DIR/namelists/namelist_cfg.pdaf
     fi
-    sed -i 's/delt_obs =/delt_obs = '${step}'/g' $RUN_DIR/namelist_cfg.pdaf
+    sed -i 's/delt_obs =/delt_obs = '${step}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
 
     # Launch Run
     echo "Launching $year $month at $(date +%s) seconds since 1970-01-01 00:00:00"
-    sbatch --wait $RUN_DIR/submit.sh
+    # sbatch --wait $RUN_DIR/submit.sh
 
     # remove delt_obs in namelist
-    sed -i 's/delt_obs = '${step}'/delt_obs =/g' $RUN_DIR/namelist_cfg.pdaf
-    s=`grep delt_obs $RUN_DIR/namelist_cfg.pdaf`
+    sed -i 's/delt_obs = '${step}'/delt_obs =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
+    s=`grep delt_obs $RUN_DIR/namelists/namelist_cfg.pdaf`
 
     # Archive results
     for i in {1..30}; do
