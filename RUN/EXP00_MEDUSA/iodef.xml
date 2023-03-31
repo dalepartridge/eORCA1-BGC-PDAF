@@ -9,8 +9,8 @@
 
       <variable_definition>
 
-          <variable id="using_server2"             type="bool">true</variable>
-          <variable id="ratio_server2"             type="int">50</variable>
+          <variable id="using_server2"             type="bool">false</variable>
+          <variable id="ratio_server2"             type="int">20</variable>
           <variable id="number_pools_server2"      type="int">10</variable>
           <variable id="info_level"                type="int">10</variable>
           <variable id="using_server"              type="bool">true</variable>

@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+import yaml
+import numpy as np
+import os
+import sys
+import warnings
+
+assert len(sys.argv[1:]) <= 3, 'More than three argument is provided.'
+
+try:
+    dirname = sys.argv[1]
+except IndexError:
+    warnings.warn('No arguments are provided! Current directory with ensemble size of 30 is used.')
+    dirname = '.'
+    N = 30
+    exp_dir = '.'
+
+try:
+    N = int(sys.argv[2])
+except IndexError:
+    warnings.warn('No ensemble size and exp_name are provided! same dirname and exp_name are used with ensemble size of 30.')
+    N = 30
+    exp_dir = dirname
+
+try:
+    exp_dir = sys.argv[3]
+except IndexError:
+    warnings.warn('No exp_dir is provided! same dirname and exp_name are used.')
+    exp_dir = dirname
+
+
+params = ['xaln', 'xald', 'xnln', 'xnld',
+          'xvpn', 'xvpd', 'xmetapn', 'xmetapd', 
+          'xmpn', 'xmpd', 'xkphn', 'xkphd', 
+          'xkmi', 'xkme', 'xgmi', 
+          'xgme', 'xbetac', 'xkc']
+
+stream = open(f'{dirname}/fabm.yaml', 'r')
+f = yaml.safe_load(stream)
+stream.close()
+params = {p:f['instances']['pelagic']['parameters'][p] for p in params}
+print (params)
+params = {p: np.random.uniform(0.7*val, 1.3*val, 30) for p, val in params.items()}
+
+for i in range(1, N+1):
+    stream = open(f'{exp_dir}/ensemble_{i}/fabm.yaml', 'r')
+    f = yaml.safe_load(stream)
+    stream.close()
+    for p in params:
+        f['instances']['pelagic']['parameters'][p] = float(params[p][i-1])
+    stream = open(f'{exp_dir}/ensemble_{i}/fabm.yaml', 'w')
+    yaml.dump(f, stream, Dumper=yaml.CDumper)
+    stream.close()

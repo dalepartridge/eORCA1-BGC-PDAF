@@ -95,7 +95,10 @@ do
 	    sed -i 's/name="@expname@_@freq@_@startdate@_@enddate@"/name="'$tmp_path'\/ensemble_'$j'\/@expname@_@freq@_@startdate@_@enddate@"/g' ${filedef%.xml}_$j.xml 
         done
     done
+    unlink $EnsRunDir/fabm.yaml
+    # cp $RUN_DIR/namelists/fabm.yaml $EnsRunDir
     cd ${current_dir}
+    cp $WORK/RUN/EXP00_MEDUSA/ensemble_$i/fabm.yaml $EnsRunDir
 
     # Link initial covariance matrix
     ln -s $INPUTS/pdaf/cov.nc $EnsRunDir
@@ -105,9 +108,10 @@ do
 
     # prepare for slurm scripts
     ens_dirs=${ens_dirs}' ensemble_'$i
-
+    lfs setstripe -c -1 $EnsRunDir
 done
 # cp $EnsRunDir/file_def*.xml $RUN_DIR
 
-./mkslurm_hetjob_online_ensemble -a n01-nceo -S 16 -s 2 -C 180 -m 16 $ens_dirs -t 05:00:00 > submit.sh 
+# ./pert_params_medusa $RUN_DIR/namelists $n_ens $RUN_DIR
+./mkslurm_hetjob_online_ensemble -a n01-nceo -S 16 -s 2 -C 180 -m 16 $ens_dirs -t 05:00:00 -p standard > submit.sh 
 mv submit.sh $RUN_DIR/

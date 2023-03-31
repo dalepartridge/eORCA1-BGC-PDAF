@@ -50,6 +50,7 @@
    mode_bgc_PC = 1
    dist_bgc_PC = 'geo'
    path_bgc_PC = 'obs/' 
+   transform = 0
    ! choose the BGC model -> 0) ERSEM; 1) MEDUSA
    bgc_model = 1
    ! the index of observation field in the sfield
@@ -112,6 +113,7 @@
    sfields(1)%rst_file = 'restart_trc.nc'
    sfields(1)%min_limit = 1.D-5
    sfields(1)%limit = 1
+   sfields(1)%transform = 0
 
    sfields(2)%ndims = 3
    sfields(2)%variable = 'PHD'
@@ -127,7 +129,7 @@
    sfields(2)%rst_file = 'restart_trc.nc'
    sfields(2)%min_limit = 1.D-5
    sfields(2)%limit = 1
-
+   sfields(2)%transform = 0
 /
 &iau_nml
 /
