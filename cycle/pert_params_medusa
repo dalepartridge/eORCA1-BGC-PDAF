@@ -30,18 +30,19 @@ except IndexError:
 
 
 params = ['xaln', 'xald', 'xnln', 'xnld',
-          'xvpn', 'xvpd', 'xmetapn', 'xmetapd', 
-          'xmpn', 'xmpd', 'xkphn', 'xkphd', 
-          'xkmi', 'xkme', 'xgmi', 
+          'xvpn', 'xvpd', 'xmetapn', 'xmetapd',
+          'xmpn', 'xmpd', 'xkphn', 'xkphd',
+          'xkmi', 'xkme', 'xgmi',
           'xgme', 'xbetac', 'xkc']
 
 stream = open(f'{dirname}/fabm.yaml', 'r')
 f = yaml.safe_load(stream)
 stream.close()
 params = {p:f['instances']['pelagic']['parameters'][p] for p in params}
-print (params)
-params = {p: np.random.uniform(0.7*val, 1.3*val, 30) for p, val in params.items()}
+#print (params)
+params = {p: np.random.uniform(0.7*val, 1.3*val, N) for p, val in params.items()}
 
+#del f
 for i in range(1, N+1):
     stream = open(f'{exp_dir}/ensemble_{i}/fabm.yaml', 'r')
     f = yaml.safe_load(stream)
@@ -49,5 +50,5 @@ for i in range(1, N+1):
     for p in params:
         f['instances']['pelagic']['parameters'][p] = float(params[p][i-1])
     stream = open(f'{exp_dir}/ensemble_{i}/fabm.yaml', 'w')
-    yaml.dump(f, stream, Dumper=yaml.CDumper)
+    yaml.dump(f, stream, Dumper=yaml.SafeDumper)
     stream.close()

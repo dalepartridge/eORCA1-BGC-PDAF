@@ -52,10 +52,10 @@
 
 %CPP	             cpp
 %FC                  ftn
-%FCFLAGS             -fdefault-real-8 -O1 -funroll-all-loops -fcray-pointer -cpp -ffree-line-length-none
+%FCFLAGS             -fdefault-real-8 -O2 -funroll-all-loops -fcray-pointer -cpp -ffree-line-length-none -fallow-argument-mismatch # -fcheck=all -fbacktrace -g -Wall -Wextra
 %FFLAGS              %FCFLAGS
 %LD                  %FC
-%FPPFLAGS            -P -C -nostdinc -Dkey_nosignedzero %FABM_INC 
+%FPPFLAGS            -P -C -nostdinc -Dkey_nosignedzero %FABM_INC
 %LDFLAGS             -lstdc++ 
 %AR                  ar 
 %ARFLAGS             -r
