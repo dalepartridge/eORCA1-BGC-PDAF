@@ -3,15 +3,6 @@
    tasks = 30
    screen = 2
 /
-! offline-only namelist
-&nemo_nml
- screen = 0
- path_dims = './'
- cn_domcfg = 'domain_cfg.nc'
- use_wet_state = 3
- read_decomp = .false.
- file_ndastp = 'restart_trc.nc'
-/
 ! PDAF options
 &pdaf_nml
 ! verbosity of PDAF routines
@@ -21,9 +12,6 @@
    subtype = 0
    type_trans = 0
    type_sqrt = 0
-   incremental = 0
-   covartype = 1
-   rank_analysis_enkf = 0
    ! inflation options
    type_forget = 0
    forget = 0.95
@@ -31,33 +19,41 @@
    locweight = 0
    ! obs frenquency
    delt_obs =
+   obsfreq = 'd'
+/
+&io_nml
    ! pre/post-processing related IO options
-   save_var_time = 'both' ! when do we write variance at analysis step? 
-                          !  options: 'fcst', 'ana', 'both', 'none'
-   save_state = .true.    ! Do we write forecast and analysis state to a file?
+   verbose_io = 2
+   sgldbl_io = 'dbl'
+   ids_write(1) = 1
+   ! filenames related to type_ens_init/type_central_state
+   path_inistate = './'
+   path_ens = './'
+   file_ens = ''
+   file_covar = './cov.nc'
+   save_state = .false.
+   save_var = .false.
+   save_ens_sngl = .true.
    verbose_io = 2         ! verbosity of IO module
    sgldbl_io = 'sgl'      ! options for single/double precision for state file: 'sgl'/'dbl'
 /
+&update_nml
+   do_bgciau = .true.
+   steps_bgciau = 31
+   shape_bgciau = 0
+/
 &obs_bgc_PC_nml
+/
+&obs_bgc_chlo_nml
    screen = 3
-   assim_bgc_PC = .true.
+   assim_bgc_chlo = .true.
    ! the coefficient for obs. error variance
    ! currently it is 30% of the obs. value => 0.3**2 = 0.09
-   rms_obs_bgc_PC = 0.09
-   lradius_bgc_PC = 200000
-   sradius_bgc_PC = 200000
-   ! 0 - linear interpolation; 1 - superobing
-   mode_bgc_PC = 1
-   dist_bgc_PC = 'geo'
-   path_bgc_PC = 'obs/' 
-   transform = 0
-   ! choose the BGC model -> 0) ERSEM; 1) MEDUSA
-   bgc_model = 1
-   ! the index of observation field in the sfield
-   ! For ERSEM the observation field is ordered as P1_c, P2_c, P3_c, P4_c
-   ! For MEDUS is: pelagic_PHD, pelagic_PHN
-   i_bgc(1) = 2
-   i_bgc(2) = 1
+   lradius_bgc_chlo = 200000
+   sradius_bgc_chlo = 200000
+   dist_bgc_chlo = 'geo'
+   path_bgc_chlo = 'obs/'
+   ibgc_chlo = 1
 /
 &init_nml
    ! methods to initialise ensemble
@@ -68,68 +64,34 @@
    !  4 - initial ensemble is not read but collect from each ensemble member (ensemble restart option)
    type_ens_init = 3
    ! ensemble mean:  1 - read from a model field given by sfield%file_state
-   !                 2 - using state from model field 
+   !                 2 - using state from model field
    type_central_state = 2
    ! multiplicative inflation factor for initial ensemble perturbation
    ensscale = 1.0
    ! if the model restarts from an ensemble
    ens_restart = .false.
-   ! filenames related to type_ens_init/type_central_state
-   path_inistate = './' 
-   path_ens = './'
-   file_ens = ''
-   file_covar = './cov.nc'
-   ! DA incremental method
-   ln_asmdin = .true.
-   ln_asmiau = .false.
-/
-&output_nml
-   save_incr = .true.
-   save_restart = .true.
-   save_transformed = .false.
-   path_restart = 'restart.dat'
+   do_transform_init = .false.
 /
 &state_vector
+   screen = 3
+   n_fields_covar = 1
    sv_temp = .false.
    sv_salt = .false.
    sv_ssh  = .false.
    sv_uvel = .false.
    sv_vvel = .false.
    sv_vvel = .false.
-   n_bgc = 2
+   n_sv_trc = 1
+   id_trc(1) = 1
+   id_trc(2) = 1
 /
 &sfields_nml
-   sfields(1)%ndims = 3
-   sfields(1)%variable = 'PHN'
+   sfields(1)%ndims = 2
+   sfields(1)%variable = 'chlorophyll'
    sfields(1)%unit = 'mg C/m^3'
-   sfields(1)%jptrc = 3
-   ! see docs for init_nml
-   sfields(1)%file = 'restart_trc.nc'
-   sfields(1)%file_state = 'restart_trc.nc'
-   ! only relevant for offline mode
-   sfields(1)%name_incr = 'bckinslphynan'
-   sfields(1)%name_rest_n = 'TRNP2_c'
-   sfields(1)%name_rest_b = 'TRNP2_c'
-   sfields(1)%rst_file = 'restart_trc.nc'
-   sfields(1)%min_limit = 1.D-5
-   sfields(1)%limit = 1
-   sfields(1)%transform = 0
-
-   sfields(2)%ndims = 3
-   sfields(2)%variable = 'PHD'
-   sfields(2)%unit = 'mg C/m^3'
-   sfields(2)%jptrc = 4
-   ! see docs for init_nml
-   sfields(2)%file = 'restart_trc.nc'
-   sfields(2)%file_state = 'restart_trc.nc'
-   ! only relevant for offline mode
-   sfields(2)%name_incr = 'bckinslphynan'
-   sfields(2)%name_rest_n = 'TRNP2_c'
-   sfields(2)%name_rest_b = 'TRNP2_c'
-   sfields(2)%rst_file = 'restart_trc.nc'
-   sfields(2)%min_limit = 1.D-5
-   sfields(2)%limit = 1
-   sfields(2)%transform = 0
-/
-&iau_nml
+   sfields(1)%collect_op = 'sum'
+   sfields(1)%dist_op = 'bal'
+   sfields(1)%limit = 0
+   sfields(1)%transform = 1
+   sfields(1)%trafo_shift = 0.
 /

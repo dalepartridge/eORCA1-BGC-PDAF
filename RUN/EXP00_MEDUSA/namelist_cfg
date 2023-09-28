@@ -671,3 +671,258 @@
 &namsbc_wave   ! External fields from wave model
 !-----------------------------------------------------------------------
 /
+&namstopack
+! Switch on STOPACK
+ln_stopack=.true.,
+! Verbose diagnostics for STOPACK
+ln_stopack_diags=.true.,
+ln_stopack_restart=.false.,
+! Frequency of calls of the SPPT perturbation field
+nn_rndm_freq=6,
+!  Random generation
+!  Read from restart file previous perturbation
+! Reproducibility of random generation    
+ln_stopack_repr=.true.,
+! Seed for random number generator (no restart)
+nn_stopack_seed=843052,378174,60998,398305,
+!
+!  ***  SPPT scheme '
+! SPPT step (0: beginning; 1: before ZVD; 2: after ZVD)
+sppt_step=2,
+! Use map of decorr. time scale
+ln_sppt_taumap=.false.,
+! If ln_sppt_taumap FALSE, use this constant (in days)
+rn_sppt_tau=1.5,
+! Number of filter passes to correlate in space
+sppt_filter_pass=150,
+! Standard deviation of the white noise
+rn_sppt_stdev=0.1,
+! Apply global conservation constraints
+ln_sppt_glocon=.false.,
+!
+!       Perturbation on tracers:'
+! Switch for x advection
+ln_sppt_traxad=.false.,
+! Switch for y advection
+ln_sppt_trayad = .false.,
+! Switch for z advection
+ln_sppt_trazad = .false.,
+! Switch for z advection  (s- case)
+ln_sppt_trasad=.false.,
+! Switch for lateral diffusion
+ln_sppt_traldf=.true.,
+! Switch for vertical diffusion
+ln_sppt_trazdf=.true.,
+! Switch for pure vertical diffusion 
+ln_sppt_trazdfp=.false.,
+! Switch for enhanced vertical diffusion
+ln_sppt_traevd=.false.,
+! Switch for bottom boundary condition
+ln_sppt_trabbc=.false.,
+! Switch for bottom boundary layer 
+ln_sppt_trabbl=.false.,
+! Switch for non-penetrative convection
+ln_sppt_tranpc=.false.,
+! Switch for tracer damping 
+ln_sppt_tradmp=.true.,
+! Switch for solar radiation
+ln_sppt_traqsr=.false.,
+! Switch for non-solar rad. / freshwater flx flux
+ln_sppt_transr=.false.,
+! Switch for Asselin time-filter
+ln_sppt_traatf=.false.,
+!
+!       Perturbation on dynamics:'
+! Inflation coefficient for SPPT on DYN rn_uv_infl
+! Switch for horiz advection  
+ln_sppt_dynkeg=.false.,
+! Switch for z advection
+ln_sppt_dynzad=.false.,
+! Switch for wind stress ln_sppt_dyntau
+! Switch for lateral diffusion
+ln_sppt_dynldf=.true.,
+! Switch for vertical diffusion 
+ln_sppt_dynzdf=.true.,
+! Switch for planet. vorticity 
+ln_sppt_dynpvo=.false.,
+! Switch for relative vorticity
+ln_sppt_dynrvo=.false.,
+! Switch for hydrost. press. grad.  
+ln_sppt_dynhpg=.false.,
+! Switch for surface  press. grad. 
+ln_sppt_dynspg=.false.,
+! Switch for bottom friction 
+ln_sppt_dynbfr=.false.,
+! Switch for Asselin time-filter 
+ln_sppt_dynatf=.false.,
+! Switch for wind stress perturbation ln_sppt_tau
+!
+!   Perturbation on sea-ice:
+! Inflation coefficient for SPPT on ICE rn_ice_infl
+! Switch for sea-ice diffusivity
+ln_sppt_icehdf=.false.,
+! Switch for sea-ice lateral accretion
+ln_sppt_icelat=.false.,
+! Switch for sea-ice vertical thermodyn.
+ln_sppt_icezdf=.false.,
+! Bound for gaussian random numbers
+rn_sppt_bound=0.999,
+! Bound Step (0: nobound; 1: Gaussian; 2: Pert)
+nn_sppt_step_bound=2,
+! Definition of Tau (1: days; 2: timesteps)
+nn_deftau=1,
+! Smoothing of perturbation close to coast
+ln_distcoast=.false.,
+! Spatial scale of the smoothing near coasts (m)
+rn_distcoast=20000.,
+! Type of vertical weight: 
+nn_vwei=2,
+!  ***  SPP schemes
+! General switch for the SPP scheme  ln_spp
+! Number of passes for spatial filter (AR1 field)
+spp_filter_pass=300,
+! Standard deviation of random generator (AR1 field) 
+rn_spp_stdev=1.0,
+! Decorr. time scale                     (AR1 field)
+rn_spp_tau=10.0,   
+! SPP for bottom friction coef
+nn_spp_bfr=2,
+! STDEV
+rn_bfr_sd=0.05,
+! SPP for SST relaxation  coeff
+nn_spp_dqdt=0,
+! STDEV
+rn_dqdt_sd=0.2,  
+! SPP for SSS relaxation  coeff
+nn_spp_dedt=2,
+! STDEV
+rn_dedt_sd=0.2,
+! SPP for vertical tra mixing coeff (only TKE, GLS)
+nn_spp_avt=2,
+! STDEV
+rn_avt_sd=0.2,   
+! SPP for vertical dyn mixing coeff (only TKE, GLS)
+nn_spp_avm=2,
+! STDEV
+rn_avm_sd=0.2,
+! SPP for solar penetration scheme  (only RGB)
+nn_spp_qsi0=2,
+! STDEV
+rn_qsi0_sd=0.1,
+! SPP for horiz. diffusivity  U
+nn_spp_ahtu=2,
+! STDEV
+rn_ahtu_sd=0.2,
+! SPP for horiz. diffusivity  V
+nn_spp_ahtv=2,
+! STDEV
+rn_ahtv_sd=0.2,
+! SPP for horiz. diffusivity  W
+nn_spp_ahtw=2,
+! STDEV
+rn_ahtw_sd=0.2,
+! SPP for horiz. diffusivity  T
+nn_spp_ahtt=2,
+! STDEV
+rn_ahtt_sd=0.2,
+! SPP for horiz. viscosity (1/3)
+nn_spp_ahm1=0,
+! STDEV
+rn_ahm1_sd=0.1, 
+! SPP for horiz. viscosity (2/4)
+nn_spp_ahm2=2,
+! STDEV
+rn_ahm2_sd=0.2,
+! SPP for relative wind factor
+nn_spp_relw=0,
+!       (use 4, 5, 6 for nn_spp_relw to have options 1, 2, 3 with limits bounded to [0,1]'
+! STDEV
+rn_relw_sd=0.1,
+! SPP for mixing close to river mouth 
+nn_spp_arnf=2,  
+! STDEVrn_arnf_sd   
+rn_arnf_sd=0.1,
+!  SPP for geothermal heating
+nn_spp_geot=0,
+! STDEV
+rn_geot_sd=0.05, 
+! SPP for enhanced vertical diffusion
+nn_spp_aevd=0,
+! STDEV
+rn_aevd_sd=0.1,  
+! SPP for TKE rn_lc  Langmuir cell coefficient
+nn_spp_tkelc=2,
+! STDEV
+rn_tkelc_sd=0.1,
+! SPP for TKE rn_ediff Eddy diff. coefficient
+nn_spp_tkedf=0,
+!  STDEV
+rn_tkedf_sd=0.1,
+! SPP for TKE rn_ediss Kolmogoroff dissipation coeff.
+nn_spp_tkeds=2,
+! STDEV
+rn_tkeds_sd=0.1,  
+! SPP for TKE rn_ebb   Surface input of tke
+nn_spp_tkebb=0,
+!  STDEV
+rn_tkebb_sd=0.1,
+! SPP for TKE rn_efr   Fraction of srf TKE below ML
+nn_spp_tkefr=2,
+! STDEV
+rn_tkefr_sd=0.1,
+! SPP for BBL U  diffusivity
+nn_spp_ahubbl=0,
+! STDEV
+rn_ahubbl_sd=0.1,
+! SPP for BBL V  diffusivity
+nn_spp_ahvbbl=0,
+! STDEV
+rn_ahvbbl_sd=0.1,
+! SPP for Air-sea drag coefficient (CORE BULK)        nn_spp_blkd  
+! STDEV          rn_blkd_sd   
+! SPP for Air-sea sensible heat transfer (CORE BULK)  nn_spp_blkh  
+! STDEV          rn_blkh_sd   
+! SPP for Air-sea evaporation transfer (CORE BULK)    nn_spp_blke  
+! STDEV          rn_blke_sd   
+! SPP for tracer damping                              nn_spp_tdmp  
+! STDEV          rn_tdmp_sd   
+!
+!  ***  SPP schemes for sea-ice
+! Albedo
+nn_spp_icealb=0,
+! St. dev. for ice albedo
+rn_icealb_sd=0.1,
+! Ice Strength
+nn_spp_icestr=0,
+! St. dev. for ice strength
+rn_icestr_sd=0.1,
+!
+! SKEB Perturbation scheme
+! SKEB switch
+ln_skeb=.true.,  
+! SKEB ratio of backscattered energy
+rn_skeb=0.5,
+! Frequency update for dissipation mask
+nn_dcom_freq=1,
+! Numerical dissipation factor (resolut. dependent)
+rn_kh=100.,     
+! Number of passes for spatial filter (AR1 field)
+skeb_filter_pass=40,
+! Standard deviation of random generator (AR1 field)
+rn_skeb_stdev=1.0,
+! Decorr. time scale                     (AR1 field)
+rn_skeb_tau=0.5, 
+! Option of convection energy dissipation
+nn_dconv=2,  
+! Convection dissipation factor (resolut. dependent)
+rn_kc=4.e-4,   
+! Multiplier for numerical dissipation
+rn_beta_num=0.5, 
+! Multiplier for convection dissipation
+rn_beta_con=0.5,
+! Multiplier for EKE dissipation                      rn_beta_eke  
+! Read external U/V climatology for EKE dissipation   nn_uv_dta    
+! Tuning configuration for SKEB                       ln_skeb_tune 
+! Step of application of SKEB                         nn_skst      
+/
+
