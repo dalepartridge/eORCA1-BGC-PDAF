@@ -6,7 +6,7 @@
 &namrun        !   parameters of the run
 !-----------------------------------------------------------------------
        cn_exp=  'eORCA1'
-       nn_date0=20000101   !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
+       nn_date0=20150101   !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
        nn_it000=  1
        nn_itend=  992
        nn_stock=999999999
@@ -624,6 +624,8 @@
 /
 !-----------------------------------------------------------------------
 &namtrd        !   diagnostics on dynamics and/or tracer trends
+   ln_dyn_trd  = .true.   ! (T) 3D momentum trend output
+   ln_tra_trd  = .true.   ! (T) 3D tracer trend output
 !              !       and/or mixed-layer trends and/or barotropic vorticity
 !-----------------------------------------------------------------------
 /
@@ -678,7 +680,7 @@ ln_stopack=.true.,
 ln_stopack_diags=.true.,
 ln_stopack_restart=.false.,
 ! Frequency of calls of the SPPT perturbation field
-nn_rndm_freq=6,
+nn_rndm_freq=4,
 !  Random generation
 !  Read from restart file previous perturbation
 ! Reproducibility of random generation    
@@ -742,7 +744,7 @@ ln_sppt_dynzad=.false.,
 ! Switch for lateral diffusion
 ln_sppt_dynldf=.true.,
 ! Switch for vertical diffusion 
-ln_sppt_dynzdf=.true.,
+ln_sppt_dynzdf=.false., !.true.,
 ! Switch for planet. vorticity 
 ln_sppt_dynpvo=.false.,
 ! Switch for relative vorticity
@@ -905,7 +907,7 @@ rn_skeb=0.5,
 ! Frequency update for dissipation mask
 nn_dcom_freq=1,
 ! Numerical dissipation factor (resolut. dependent)
-rn_kh=100.,     
+rn_kh=400.,     
 ! Number of passes for spatial filter (AR1 field)
 skeb_filter_pass=40,
 ! Standard deviation of random generator (AR1 field)
@@ -915,13 +917,14 @@ rn_skeb_tau=0.5,
 ! Option of convection energy dissipation
 nn_dconv=2,  
 ! Convection dissipation factor (resolut. dependent)
-rn_kc=4.e-4,   
+rn_kc=64.e-4,   
 ! Multiplier for numerical dissipation
 rn_beta_num=0.5, 
 ! Multiplier for convection dissipation
 rn_beta_con=0.5,
 ! Multiplier for EKE dissipation                      rn_beta_eke  
-! Read external U/V climatology for EKE dissipation   nn_uv_dta    
+! Read external U/V climatology for EKE dissipation
+nn_uvdta = 0
 ! Tuning configuration for SKEB                       ln_skeb_tune 
 ! Step of application of SKEB                         nn_skst      
 /

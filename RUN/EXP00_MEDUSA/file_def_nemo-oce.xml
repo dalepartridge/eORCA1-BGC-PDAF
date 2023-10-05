@@ -8,7 +8,7 @@
 ============================================================================================================
     -->
    
-    <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4" split_freq='1mo'>
+    <file_definition type="multiple_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4" split_freq='1mo'>
     
       <file_group id="1ts" output_freq="1ts"  output_level="10" enabled=".TRUE."/> <!-- 1 time step files -->
 
@@ -29,8 +29,13 @@
       </file_group>
 
 
-      <file_group id="5d" output_freq="5d"  output_level="10" enabled=".TRUE."/>  <!-- 5d files -->
-
+      <file_group id="5d" output_freq="5d"  output_level="10" enabled=".TRUE.">  <!-- 5d files -->
+         <file id="file399" name_suffix="_grid_T" description="stopack vars"  sync_freq="5d">
+            <field field_ref="sppt_ar1" name="sppt_ar1"      long_name="sppt_ar1_perturbation" />
+            <field field_ref="spp_ar1" name="spp_ar1"        long_name="spp_ar1_perturbation" />
+            <field field_ref="skeb_ar1" name="skeb_ar1"      long_name="skeb_ar1_perturbation" />
+        </file>
+      </file_group>
 	      <!--        <file id="file99" name_suffix="_grid_T" description="global means">
           <field field_ref="sshtot"       name="sshtot"     />
           <field field_ref="voltot"       name="voltot"     />

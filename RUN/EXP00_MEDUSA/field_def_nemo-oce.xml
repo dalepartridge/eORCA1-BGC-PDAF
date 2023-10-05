@@ -1140,4 +1140,54 @@
       <field field_ref="ssv"          name="vos"     long_name="sea_surface_y_velocity"           />     
     </field_group>    
 
+    <!-- output for stopack -->
+    <field id="sppt_ar1"    name="SPPT perturbation field "   grid_ref="grid_T_3D"/>
+    <field id="spp_ar1"    name="SPP perturbation field "   grid_ref="grid_T_2D"/>
+    <field id="skeb_ar1"    name="SKEB perturbation field "   grid_ref="grid_T_2D"/>
+
+    <field id="spp_par01"    name="SPP param after perturbation 1"   grid_ref="grid_T_2D"/>
+    <field id="spp_par02"    name="SPP param after perturbation 2"   grid_ref="grid_T_2D"/>
+    <field id="spp_par03"    name="SPP param after perturbation 3"   grid_ref="grid_T_2D"/>
+    <field id="spp_par04"    name="SPP param after perturbation 4"   grid_ref="grid_T_2D"/>
+    <field id="spp_par05"    name="SPP param after perturbation 5"   grid_ref="grid_T_2D"/>
+    <field id="spp_par06"    name="SPP param after perturbation 6"   grid_ref="grid_T_2D"/>
+    <field id="spp_par07"    name="SPP param after perturbation 7"   grid_ref="grid_T_2D"/>
+    <field id="spp_par08"    name="SPP param after perturbation 8"   grid_ref="grid_T_2D"/>
+    <field id="spp_par09"    name="SPP param after perturbation 9"   grid_ref="grid_T_2D"/>
+    <field id="spp_par10"    name="SPP param after perturbation 10"   grid_ref="grid_T_2D"/>
+    <field id="spp_par11"    name="SPP param after perturbation 11"   grid_ref="grid_T_2D"/>
+    <field id="spp_par12"    name="SPP param after perturbation 12"   grid_ref="grid_T_2D"/>
+    <field id="spp_par13"    name="SPP param after perturbation 13"   grid_ref="grid_T_2D"/>
+    <field id="spp_par14"    name="SPP param after perturbation 14"   grid_ref="grid_T_2D"/>
+    <field id="spp_par15"    name="SPP param after perturbation 15"   grid_ref="grid_T_2D"/>
+    <field id="spp_par16"    name="SPP param after perturbation 16"   grid_ref="grid_T_2D"/>
+    <field id="spp_par17"    name="SPP param after perturbation 17"   grid_ref="grid_T_2D"/>
+    <field id="spp_par18"    name="SPP param after perturbation 18"   grid_ref="grid_T_2D"/>
+    <field id="spp_par19"    name="SPP param after perturbation 19"   grid_ref="grid_T_2D"/>
+    <field id="spp_par20"    name="SPP param after perturbation 20"   grid_ref="grid_T_2D"/>
+    <field id="spp_par21"    name="SPP param after perturbation 21"   grid_ref="grid_T_2D"/>
+    <field id="spp_par22"    name="SPP param after perturbation 22"   grid_ref="grid_T_2D"/>
+    <field id="spp_par23"    name="SPP param after perturbation 23"   grid_ref="grid_T_2D"/>
+    <field id="spp_par24"    name="SPP param after perturbation 24"   grid_ref="grid_T_2D"/>
+    <field id="spp_par25"    name="SPP param after perturbation 25"   grid_ref="grid_T_2D"/>
+    <field id="spp_par26"    name="SPP param after perturbation 26"   grid_ref="grid_T_2D"/>
+    <field id="spp_par27"    name="SPP param after perturbation 27"   grid_ref="grid_T_2D"/>
+    <field id="spp_par28"    name="SPP param after perturbation 28"   grid_ref="grid_T_2D"/>
+    <field id="spp_par29"    name="SPP param after perturbation 29"   grid_ref="grid_T_2D"/>
+    <field id="spp_par30"    name="SPP param after perturbation 30"   grid_ref="grid_T_2D"/>
+    <field id="spp_par31"    name="SPP param after perturbation 31"   grid_ref="grid_T_2D"/>
+ 
+    <field id="sppt_tem"    name="SPPT perturbed temp"   grid_ref="grid_T_3D"/>
+    <field id="sppt_sal"    name="SPPT perturbed salinity"   grid_ref="grid_T_3D"/>
+ 
+    <field id="sppt_uvl"    name="SPPT perturbed u"   grid_ref="grid_U_3D"/>
+    <field id="sppt_vvl"    name="SPPT perturbed v"   grid_ref="grid_V_3D"/>
+
+    <!--     <field id="sppt_ran"    name="SPPT AR1 noise"   grid_ref="grid_T_2D"/>
+    <field id="spp_ran"    name="SPPT AR1 noise"   grid_ref="grid_T_2D"/>
+    <field id="skeb_ran"    name="SPPT AR1 noise"   grid_ref="grid_T_2D"/> -->
+
+    <field id="ustar_skeb"    name="SKEB U perturbation"   grid_ref="grid_U_3D"/>
+    <field id="vstar_skeb"    name="SKEB V perturbation"   grid_ref="grid_V_3D"/>
+
    </field_definition>
