@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+import yaml
+import numpy as np
+import os
+import shutil
+import sys
+import warnings
+
+
+
+
+assert len(sys.argv[1:]) <= 3, 'More than three argument is provided.'
+
+try:
+    dirname = sys.argv[1]
+except IndexError:
+    warnings.warn('No arguments are provided! Current directory with ensemble size of 30 is used.')
+    dirname = '.'
+    N = 30
+    exp_dir = '.'
+
+try:
+    N = int(sys.argv[2])
+except IndexError:
+    warnings.warn('No ensemble size and exp_name are provided! same dirname and exp_name are used with ensemble size of 30.')
+    N = 30
+    exp_dir = dirname
+
+try:
+    exp_dir = sys.argv[3]
+except IndexError:
+    warnings.warn('No exp_dir is provided! same dirname and exp_name are used.')
+    exp_dir = dirname
+
+
+# params = ['xaln', 'xald', 'xnln', 'xnld',
+#           'xvpn', 'xvpd', 'xmetapn', 'xmetapd',
+#           'xmpn', 'xmpd', 'xkphn', 'xkphd',
+#           'xkmi', 'xkme', 'xgmi',
+#           'xgme', 'xbetac', 'xkc', 'xthetam', 'xthetamd']
+
+excludes = [
+           # exclude conversion ratios
+           'xxi', 'xthetad', 'xthetapn',
+           'xthetapd', 'xthetazmi', 'xthetazme',
+           # exclude integer options
+           'jphy', 'jmpn', 'jmpd', 'jmzmi',
+           'jmzme', 'jmd', 'jiron', 'seafloor',
+           # exclude logical parameters
+           'deep_fe_fix', 'jliebig']
+
+stream = open(f'{exp_dir}/fabm.yaml', 'r')
+f = yaml.safe_load(stream)
+stream.close()
+
+params = dict()
+
+instances = ['pelagic', 'iron_scavenging', 'benthic']
+for instance in instances:
+    for key in f['instances'][instance]['parameters']:
+        if key in excludes: continue
+        val = f['instances'][instance]['parameters'][key]
+        params[key] = np.random.uniform(0.7*val, 1.3*val, N)
+
+for i in range(1, N+1):
+    stream = open(f'{dirname}/fabm_{i}.yaml', 'w')
+    for instance in instances:
+        for key in f['instances'][instance]['parameters']:
+            if key in excludes: continue
+            f['instances'][instance]['parameters'][key] = float(params[key][i-1])
+    yaml.dump(f, stream, Dumper=yaml.Dumper, sort_keys=False)
+    stream.close()

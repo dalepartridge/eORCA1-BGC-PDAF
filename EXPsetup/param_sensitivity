@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+import yaml
+import numpy as np
+import os
+import sys
+import warnings
+
+dirname='/work/n01/n01/ymchen/eORCA1-BGC-PDAF/RUN/EXP00_MEDUSA'
+
+params = ['xaln', 'xald', 'xnln', 'xnld',
+          'xvpn', 'xvpd', 'xmetapn', 'xmetapd',
+          'xmpn', 'xmpd', 'xkphn', 'xkphd',
+          'xkmi', 'xkme', 'xgmi',
+          'xgme', 'xbetac', 'xkc', 'xthetam', 'xthetamd']
+
+stream = open(f'{dirname}/fabm.yaml', 'r')
+f = yaml.safe_load(stream)
+stream.close()
+params = {p:f['instances']['pelagic']['parameters'][p] for p in params}
+#print (params)
+# params = {p: np.random.uniform(0.7*val, 1.3*val, 1) for p, val in params.items()}
+params = {p: val*1.3 for p, val in params.items()}
+
+#del f
+for i, p in enumerate(params):
+    stream = open(f'fabm_{i+1}.yaml', 'r')
+    f = yaml.safe_load(stream)
+    stream.close()
+    f['instances']['pelagic']['parameters'][p] = float(params[p])
+    stream = open(f'fabm_{i+1}.yaml', 'w')
+    yaml.dump(f, stream, Dumper=yaml.SafeDumper)
+    stream.close()

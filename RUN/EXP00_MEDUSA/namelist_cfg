@@ -133,29 +133,43 @@
 &namsbc_blk    !   namsbc_blk  generic Bulk formula          (ln_blk =T)
 !-----------------------------------------------------------------------
    !                    !  bulk algorithm :
-   ln_NCAR     = .true.   ! "NCAR"      algorithm   (Large and Yeager 2008)
+   ln_NCAR     = .false.   ! "NCAR"      algorithm   (Large and Yeager 2008)
    ln_COARE_3p0 = .false.   ! "COARE 3.0" algorithm   (Fairall et al. 2003)
    ln_COARE_3p5 = .false.   ! "COARE 3.5" algorithm   (Edson et al. 2013)
-   ln_ECMWF    = .false.      ! "ECMWF"     algorithm   (IFS cycle 31)
+   ln_ECMWF    = .true.      ! "ECMWF"     algorithm   (IFS cycle 31)
       !
-      rn_zqt      = 10.       !  Air temperature & humidity reference height (m)
+      rn_zqt      = 2.       !  Air temperature & humidity reference height (m)
       rn_zu       = 10.       !  Wind vector reference height (m)
 
    cn_dir      = './INPUTS/'      !  root directory for the location of the flux files
 !              !  file name                   ! frequency (hours) ! variable  ! time interp. !  clim  ! 'yearly'/ ! weights                              ! rotation ! land/sea mask !
 !              !                              !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename                             ! pairing  ! filename      !
 
-   sn_cc       = 'NOT USED',                       24,         'CC',         .false.,      .true.,   'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_humi     = 'huss',                       3,          'huss',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_prec     = 'ptot',                       3,          'ptot',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_qlw      = 'rlds',                       3,          'rlds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_qsr      = 'rsds',                       3,          'rsds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_slp      = 'psl',                        3,          'psl',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_snow     = 'prsn',                       3,          'prsn',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_tair     = 'tas',                        3,          'tas',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_tdif     = 'taudif_core',                24,         'taudif',     .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-   sn_wndi     = 'uas',                        3,          'uas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Ume',   ''
-   sn_wndj     = 'vas',                        3,          'vas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Vme',   ''
+! JRA55
+!   sn_cc       = 'NOT USED',                       24,         'CC',         .false.,      .true.,   'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_humi     = 'huss',                       3,          'huss',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_prec     = 'ptot',                       3,          'ptot',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_qlw      = 'rlds',                       3,          'rlds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_qsr      = 'rsds',                       3,          'rsds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_slp      = 'psl',                        3,          'psl',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_snow     = 'prsn',                       3,          'prsn',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_tair     = 'tas',                        3,          'tas',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_tdif     = 'taudif_core',                24,         'taudif',     .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+!   sn_wndi     = 'uas',                        3,          'uas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Ume',   ''
+!   sn_wndj     = 'vas',                        3,          'vas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Vme',   ''
+
+! ERA5
+   sn_wndi     = 'ERA5_u10',                    3.,         'u10',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        'Uwnd',  ''
+   sn_wndj     = 'ERA5_v10',                    3.,         'v10',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        'Vwnd',  ''
+   sn_qsr      = 'ERA5_msdwswrf',              12.,         'msdwswrf',   .false.,     .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_qlw      = 'ERA5_msdwlwrf',              12.,         'msdwlwrf',   .false.,     .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_tair     = 'ERA5_t2m',                    3.,         't2m',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_humi     = 'ERA5_SPH',                    3.,         'SPH',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_prec     = 'ERA5_mtpr',                  12.,         'mtpr',       .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_snow     = 'ERA5_msr',                   12.,         'msr',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_slp      = 'ERA5_msl',                    3.,         'msl',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_cc       = 'NOT USED',                   24.,         'CC',         .true.,      .true.,   'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
+   sn_tdif     = 'NOT USED',                   24.,         'CC',         .false.,     .true.,   'yearly',   'weights_eORCA1_era5_bicub.nc',             '',      ''
 
 !   sn_wndi     = 'u_10_core_oonly'       ,         6         , 'U_10_MOD',   .true.     ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bicubic.nc'  , 'U1'    , ''
 !   sn_wndj     = 'v_10_core_oonly'       ,         6         , 'V_10_MOD',   .true.     ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bicubic.nc'  , 'V1'    , ''
@@ -677,7 +691,7 @@
 ! Switch on STOPACK
 ln_stopack=.true.,
 ! Verbose diagnostics for STOPACK
-ln_stopack_diags=.true.,
+ln_stopack_diags=.false.,
 ln_stopack_restart=.false.,
 ! Frequency of calls of the SPPT perturbation field
 nn_rndm_freq=8,
@@ -712,9 +726,9 @@ ln_sppt_trazad = .false.,
 ! Switch for z advection  (s- case)
 ln_sppt_trasad=.false.,
 ! Switch for lateral diffusion
-ln_sppt_traldf=.true.,
+ln_sppt_traldf=.false.,
 ! Switch for vertical diffusion
-ln_sppt_trazdf=.true.,
+ln_sppt_trazdf=.false.,
 ! Switch for pure vertical diffusion 
 ln_sppt_trazdfp=.false.,
 ! Switch for enhanced vertical diffusion
@@ -726,7 +740,7 @@ ln_sppt_trabbl=.false.,
 ! Switch for non-penetrative convection
 ln_sppt_tranpc=.false.,
 ! Switch for tracer damping 
-ln_sppt_tradmp=.true.,
+ln_sppt_tradmp=.false.,
 ! Switch for solar radiation
 ln_sppt_traqsr=.false.,
 ! Switch for non-solar rad. / freshwater flx flux
@@ -774,7 +788,7 @@ nn_sppt_step_bound=2,
 ! Definition of Tau (1: days; 2: timesteps)
 nn_deftau=1,
 ! Smoothing of perturbation close to coast
-ln_distcoast=.true.,
+ln_distcoast=.false.,
 ! Spatial scale of the smoothing near coasts (m)
 rn_distcoast=200000.,
 ! Type of vertical weight: 
@@ -915,7 +929,7 @@ ln_skeb=.true.,
 ! SKEB ratio of backscattered energy
 rn_skeb=0.4,
 ! Frequency update for dissipation mask
-nn_dcom_freq=3,
+nn_dcom_freq=2,
 ! Numerical dissipation factor (resolut. dependent)
 rn_kh=400.,     
 ! Number of passes for spatial filter (AR1 field)
@@ -933,12 +947,12 @@ rn_beta_num=0.,
 ! Multiplier for convection dissipation
 rn_beta_con=0.,
 ! Multiplier for EKE dissipation
-rn_beta_eke = 1.
+rn_beta_eke = 1.,
 ! Read external U/V climatology for EKE dissipation
 nn_uvdta = 1,
-cn_dir='/work/n01/n01/ymchen/eORCA1-BGC-PDAF/prepostprocess',
+cn_dir='/work/n01/n01/ymchen/eORCA1-BGC-PDAF/prepostprocess/',
 sn_uc = 'u_skeb_climatology.nc',  -12.  , 'uo'    ,   .false.     , .true. , 'yearly'  , ''       , ''       , '',
-sn_vc = 'v_skeb_climatology.nc',  -12.  , 'uo'    ,   .false.     , .true. , 'yearly'  , ''       , ''       , '',
+sn_vc = 'v_skeb_climatology.nc',  -12.  , 'vo'    ,   .false.     , .true. , 'yearly'  , ''       , ''       , '',
 rn_heke     = 1.,
 rn_veke     = 0.,
 ln_skeb_apply = .true.,

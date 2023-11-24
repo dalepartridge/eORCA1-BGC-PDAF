@@ -8,7 +8,7 @@ export NAME=eORCA1
 
 export ystart=2015
 export yend=2020
-export starting_iter=525952 # starting iteration
+export starting_iter=526336	 # 525952 # starting iteration
 
 # Default directories
 export DEFAULT_RUN_DIR=$WORK/RUN/EXP00_MEDUSA

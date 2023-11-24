@@ -1,0 +1,321 @@
+check_conservation: false
+instances:
+  light:
+    model: medusa/light
+    coupling:
+      CHN: pelagic/CHN
+      CHD: pelagic/CHD
+  gas_transfer:
+    model: medusa/gas_transfer
+    parameters:
+      eqn: 7
+  carbonate:
+    model: medusa/carbonate
+    schedule:
+      interior:
+        pattern: monthly
+    coupling:
+      DiC: pelagic/DiC
+      ALK: pelagic/ALK
+      KW660: gas_transfer/KW660
+  oxygen:
+    model: medusa/oxygen
+    coupling:
+      OXY: pelagic/OXY
+      KW660: gas_transfer/KW660
+  pelagic:
+    model: medusa/pelagic
+    parameters:
+      xxi: 0.01257
+      xaln: 11.982338336765798
+      xald: 13.980932398787068
+      jliebig: false
+      xnln: 0.3956374984368339
+      xfln: 0.00025376358380557046
+      xnld: 0.662430033773561
+      xsld: 3.7813727366071204
+      xfld: 0.0006141423060111001
+      xvpn: 0.8149244856948575
+      xvpd: 0.5686519400416663
+      jphy: 1
+      jq10: 1.2904135245578685
+      xsin0: 0.1476141425102954
+      xnsi0: 0.19330999585074102
+      xuif: 1.8673857547462793
+      xthetam: 0.04012254436091303
+      xthetamd: 0.06020167543246685
+      xkmi: 0.7099055357220567
+      xpmipn: 0.5990808505676789
+      xpmid: 0.28723043478273386
+      xkme: 0.3817123230139615
+      xpmepn: 0.12894376060980242
+      xpmepd: 0.32478737191966367
+      xpmezmi: 0.26629814018897874
+      xpmed: 0.17449601407703047
+      xgmi: 2.489504360980999
+      xgme: 0.3651601569422642
+      xthetad: 6.625
+      xphi: 0.2476844433861491
+      xthetapn: 6.625
+      xthetapd: 6.625
+      xbetan: 0.5574398116050739
+      xthetazmi: 5.625
+      xbetac: 0.7099480573140642
+      xkc: 0.8376396550308935
+      xthetazme: 5.625
+      xmetapn: 0.019921643029859375
+      xmetapd: 0.015121038324762985
+      xmetazmi: 0.01834460120607323
+      xmetazme: 0.017494760856570694
+      xmpn: 0.0917565776383539
+      xmpd: 0.09974599218382028
+      xmzmi: 0.07289444577158202
+      xmzme: 0.24452235555016336
+      xkphn: 0.4592201693233442
+      xkphd: 0.6152354674127345
+      xkzmi: 0.49397550347537567
+      xkzme: 0.8097172870087759
+      jmpn: 3
+      jmpd: 3
+      jmzmi: 3
+      jmzme: 3
+      jmd: 2
+      xmd: 0.014375558366500304
+      xmdc: 0.01192496724459207
+      xsdiss: 0.004451718575568256
+      xfdfrac1: 0.34944663338638415
+      xfdfrac2: 0.8565875377335384
+      xfdfrac3: 0.6795865408262025
+      xrfn: 3.561989579881305e-05
+      xridg_r0: 0.026467293648750563
+      xthetanit: 2.4301694509121416
+      xthetarem: 1.2416448069178916
+      xo2min: 4.706207732662238
+      wg: -3.671892992124513
+      wdep: 3.491749746134203
+      seafloor: 3
+    initialization:
+      CHN: 0.01
+      CHD: 0.01
+      PHN: 0.01
+      PHD: 0.01
+      PDS: 0.01
+      DIN: 30.0
+      FER: 0.001
+      SIL: 90.0
+      DET: 0.01
+      DTC: 0.06625
+      ZMI: 0.01
+      ZME: 0.01
+      ALK: 2450.0
+      DiC: 2330.0
+      OXY: 175.0
+    coupling:
+      tempn: fast_detritus/tempn
+      tempc: fast_detritus/tempc
+      tempsi: fast_detritus/tempsi
+      tempfe: fast_detritus/tempfe
+      tempca: fast_detritus/tempca
+      OM_CAL3: carbonate/OM_CAL3
+      BEN: benthic
+      BEN_FE: benthic/BEN_FE
+  iron_scavenging:
+    model: medusa/iron_scav
+    parameters:
+      deep_fe_fix: false
+      xk_FeL: 79.19098652318164
+      xLgT: 1.2667544540157323
+      xk_sc_Fe: 0.0009015985342303448
+      jiron: 1
+    coupling:
+      FER: pelagic/FER
+      ffastc_loc: fast_detritus/ffastc_loc
+      ffastsi_loc: fast_detritus/ffastsi_loc
+      ffastca_loc: fast_detritus/ffastca_loc
+      fscal_part: pelagic/fscal_part
+  fast_detritus:
+    model: medusa/fast_detritus
+    parameters:
+      seafloor: 3
+      xrfn: 3.0e-05
+      xfe_sed: 0.00228
+      dfe_sed: 500.0
+    coupling:
+      OXY: pelagic/OXY
+      DIN: pelagic/DIN
+      SIL: pelagic/SIL
+      FER: pelagic/FER
+      DiC: pelagic/DiC
+      DET: pelagic/DET
+      DTC: pelagic/DTC
+      ALK: pelagic/ALK
+      BEN: benthic
+      BEN_CA: benthic/BEN_CA
+      BEN_FE: benthic/BEN_FE
+      OM_CAL3: carbonate/OM_CAL3
+      CAL_CCD: ccd_cal/CCD
+  ccd_cal:
+    model: medusa/ccd
+    coupling:
+      OMEGA: carbonate/OM_CAL3
+  ccd_arg:
+    model: medusa/ccd
+    coupling:
+      OMEGA: carbonate/OM_ARG3
+  benthic:
+    model: medusa/benthic
+    use: true
+    parameters:
+      xsedc: 0.05271188652033962
+      xsedn: 0.05559492032868295
+      xsedfe: 0.04772076691608338
+      xsedsi: 0.008868254100909665
+      xsedca: 0.012468589864953191
+      xrfn: 3.561989579881305e-05
+    initialization:
+      BEN_C: 0.0
+      BEN_N: 0.0
+      BEN_FE: 0.0
+      BEN_SI: 0.0
+      BEN_CA: 0.0
+    coupling:
+      DIN: pelagic/DIN
+      SIL: pelagic/SIL
+      FER: pelagic/FER
+      DiC: pelagic/DiC
+      DET: pelagic/DET
+      DTC: pelagic/DTC
+      OXY: pelagic/OXY
+      ALK: pelagic/ALK
+      CAL_CCD: ccd_cal/CCD
+  N3_flux:
+    model: external_surface_flux
+    coupling:
+      target: pelagic/DIN
+  N4_flux:
+    model: external_surface_flux
+    coupling:
+      target: pelagic/DIN
+  N7_flux:
+    model: external_surface_flux
+    parameters:
+      scale_factor: 0.001
+    coupling:
+      target: pelagic/FER
+  pco2a:
+    model: horizontal_constant
+    parameters:
+      value: 400.0
+      standard_name: mole_fraction_of_carbon_dioxide_in_air
+  TPP3:
+    model: weighted_sum
+    long_name: Total primary production 3D
+    parameters:
+      n: 2
+    coupling:
+      term1: pelagic/PRN
+      term2: pelagic/PRD
+  REMIN3N:
+    model: weighted_sum
+    long_name: Total remin flux N 3D
+    parameters:
+      n: 2
+    coupling:
+      term1: pelagic/regen2d
+      term2: fast_detritus/freminn2d
+  DETFLUX3:
+    model: weighted_sum
+    long_name: Total detrital flux 3D
+    parameters:
+      n: 2
+      weight2: 86400.0
+    coupling:
+      term1: pelagic/fslownflux
+      term2: fast_detritus/ffastn_loc_3d
+  IBEN_C:
+    model: horizontal_weighted_sum
+    long_name: Benthic input carbon
+    parameters:
+      n: 2
+      weight2: 86400.0
+    coupling:
+      term1: pelagic/sbenin_c
+      term2: fast_detritus/ffastc
+  IBEN_N:
+    model: horizontal_weighted_sum
+    long_name: Benthic input nitrogen
+    parameters:
+      n: 2
+      weight2: 86400.0
+    coupling:
+      term1: pelagic/sbenin_n
+      term2: fast_detritus/ffastn
+  IBEN_FE:
+    model: horizontal_weighted_sum
+    long_name: Benthic input iron
+    parameters:
+      n: 2
+      weight2: 86400.0
+    coupling:
+      term1: pelagic/sbenin_fe
+      term2: fast_detritus/ffastfe
+  IBEN_SI:
+    model: horizontal_weighted_sum
+    long_name: Benthic input silicon
+    parameters:
+      n: 1
+      weight1: 86400.0
+    coupling:
+      term1: fast_detritus/ffastsi
+  IBEN_CA:
+    model: horizontal_weighted_sum
+    long_name: Benthic input CaCO3
+    parameters:
+      n: 1
+      weight1: 86400.0
+    coupling:
+      term1: fast_detritus/ffastca
+  MED_XPAR:
+    model: surface_layer
+    long_name: Top level radiation
+    coupling:
+      source: light/MED_XPAR
+  SFR_OCAL:
+    model: bottom_layer
+    long_name: Seafloor omega calcite
+    coupling:
+      source: carbonate/OM_CAL3
+  SFR_OARG:
+    model: bottom_layer
+    long_name: Seafloor omega aragonite
+    coupling:
+      source: carbonate/OM_ARG3
+  OCN_PH:
+    model: surface_layer
+    long_name: Surface ocean pH
+    coupling:
+      source: carbonate/PH3
+  OCNH2CO3:
+    model: surface_layer
+    long_name: Surface ocean H2CO3 conc
+    coupling:
+      source: carbonate/CarbA
+  OCN_HCO3:
+    model: surface_layer
+    long_name: Surface ocean HCO3 conc
+    coupling:
+      source: carbonate/BiCarb
+  OCN_CO3:
+    model: surface_layer
+    long_name: Surface ocean CO3 conc
+    coupling:
+      source: carbonate/Carb
+  C_PROD1:
+    model: weighted_sum
+    long_name: Carbon production pelagic with CaCO3 remin
+    parameters:
+      n: 2
+      weight2: 86400.0
+    coupling:
+      term1: pelagic/C_PROD
+      term2: fast_detritus/freminca

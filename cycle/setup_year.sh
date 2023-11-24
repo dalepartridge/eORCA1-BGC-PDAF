@@ -13,6 +13,8 @@ do
     rm -f $EnsRunDir/INPUTS/*y$yearm.nc
 
     # Link current year
+    ln -s $INPUTS/PHYSICS/SBC/ERA5_ens_$(((i-1)/3))/*y$year.nc $EnsRunDir/INPUTS/
+    # ln -s $INPUTS/PHYSICS/SBC/ERA5_ens_0/*y$year.nc $EnsRunDir/INPUTS/
     ln -s $INPUTS/PHYSICS/SBC/*y$year.nc $EnsRunDir/INPUTS/
     ln -s $INPUTS/MEDUSA/SBC/Ndep/*y$year.nc $EnsRunDir/INPUTS/
     ln -s $INPUTS/MEDUSA/SBC/pCO2/*y$year.nc $EnsRunDir/INPUTS/
