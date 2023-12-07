@@ -93,13 +93,16 @@ do
     # Link namelists
     ln -s $RUN_DIR/namelists/* $EnsRunDir/.
 
+    # link SKEB perturbations
+    ln -s $INPUTS/SKEB/* $EnsRunDir/
+
     # perturbed parameter files
     unlink $EnsRunDir/fabm.yaml
-    cp -v ${current_dir}/fabm_$i.yaml $EnsRunDir/fabm.yaml
+    cp -v $WORK/RUN/EXP00_MEDUSA/perturb_param/fabm_$i.yaml $EnsRunDir/fabm.yaml
 
     # Link initial covariance matrix
     cd ${current_dir}
-    ln -s $INPUTS/pdaf/cov-log-2D.nc $EnsRunDir/cov.nc
+    ln -s $INPUTS/pdaf/cov*.nc $EnsRunDir/
 
     # Link observations
     ln -s $INPUTS/obs $EnsRunDir/.

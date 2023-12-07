@@ -7,9 +7,9 @@ PHYS_DIR=/work/n01/n01/jdha/scratch/eORCA1/nemo/cfgs/eORCA1/INPUTS
 MEDUSA_DIR=/work/n01/n01/gle/eORCA1/INPUTS
 OBS_DIR=/work/n01/n01/ymchen/obs
 COV_DIR=/work/n01/n01/ymchen/cov
-ERA5_DIR=/work/n01/n01/dapa/NCEO/eORCA1-ERA5
-ERA5_DIR=/work/n01/n01/ymchen/eORCA1-BGC-PDAF/prepostprocess/INPUT/
+ERA5_DIR=/work/n01/n01/ymchen/ERA5Forcing
 RESTART_DIR=/work/n01/n01/ymchen/restarts/
+SKEB_climatology=/work/n01/n01/ymchen/SKEBClimatology/
 
 ##### Link Physics Files #####
 mkdir -p $INPUT_DIR/PHYSICS
@@ -80,11 +80,15 @@ ln -s $MEDUSA_DIR/ndep*nc SBC/Ndep/
 mkdir -p ./RIV
 ln -s $PHYS_DIR/runoff*nc RIV/
 
+#### Link STOPACK files #####
+cd $INPUT_DIR
+mkdir -p ./SKEB
+ln -s $SKEB_climatology/* SKEB/
+
 ##### Link PDAF Files #####
 cd $INPUT_DIR
 mkdir -p ./pdaf
 ln -s $COV_DIR/* pdaf/
-# restart files from free run
 ln -s $RESTART_DIR/* pdaf/
 
 ##### Link Observation Files #####

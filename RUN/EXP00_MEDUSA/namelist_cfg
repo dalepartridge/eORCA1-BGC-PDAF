@@ -950,7 +950,7 @@ rn_beta_con=0.,
 rn_beta_eke = 1.,
 ! Read external U/V climatology for EKE dissipation
 nn_uvdta = 1,
-cn_dir='/work/n01/n01/ymchen/eORCA1-BGC-PDAF/prepostprocess/',
+cn_dir='./',
 sn_uc = 'u_skeb_climatology.nc',  -12.  , 'uo'    ,   .false.     , .true. , 'yearly'  , ''       , ''       , '',
 sn_vc = 'v_skeb_climatology.nc',  -12.  , 'vo'    ,   .false.     , .true. , 'yearly'  , ''       , ''       , '',
 rn_heke     = 1.,

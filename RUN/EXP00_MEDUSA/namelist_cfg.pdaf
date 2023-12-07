@@ -18,24 +18,17 @@
    ! localisation options
    locweight = 0
    ! obs frenquency
-   delt_obs =
+   delt_obs = 1
    obsfreq = 'd'
 /
 &io_nml
    ! pre/post-processing related IO options
-   verbose_io = 2
-   sgldbl_io = 'dbl'
-   ids_write(1) = 1
+   verbose_io = 2         ! verbosity of IO module
+   sgldbl_io = 'sgl'      ! options for single/double precision for state file: 'sgl'/'dbl'
    ! filenames related to type_ens_init/type_central_state
-   path_inistate = './'
-   path_ens = './'
-   file_ens = ''
-   file_covar = './cov.nc'
    save_state = .false.
    save_var = .false.
    save_ens_sngl = .true.
-   verbose_io = 2         ! verbosity of IO module
-   sgldbl_io = 'sgl'      ! options for single/double precision for state file: 'sgl'/'dbl'
 /
 &update_nml
    do_bgciau = .true.
@@ -43,6 +36,15 @@
    shape_bgciau = 0
 /
 &obs_bgc_PC_nml
+   screen = 3
+   assim_bgc_pc = .false.
+   ! the coefficient for obs. error variance
+   ! currently it is 30% of the obs. value => 0.3**2 = 0.09
+   lradius_bgc_pc = 200000
+   sradius_bgc_pc = 200000
+   dist_bgc_pc = 'geo'
+   path_bgc_pc = 'obs/'
+   ibgc_pc = 2
 /
 &obs_bgc_chlo_nml
    screen = 3
@@ -55,26 +57,8 @@
    path_bgc_chlo = 'obs/'
    ibgc_chlo = 1
 /
-&init_nml
-   ! methods to initialise ensemble
-   !  0 - initialize from a trajectory of model snapshots (filename is given by sfields%file)
-   !  1 - read ensemble from a ensemble file from PDAF (filename is given by file_ens)
-   !  2 - read ensemble from a set of files by reading filenames from a .dat file where each filename is one line (filename is given by sfields%file)
-   !  3 - generating ensemble from a covariance file using PDAF_SampleEns subroutine (filename given by file_covar)
-   !  4 - initial ensemble is not read but collect from each ensemble member (ensemble restart option)
-   type_ens_init = 3
-   ! ensemble mean:  1 - read from a model field given by sfield%file_state
-   !                 2 - using state from model field
-   type_central_state = 2
-   ! multiplicative inflation factor for initial ensemble perturbation
-   ensscale = 1.0
-   ! if the model restarts from an ensemble
-   ens_restart = .false.
-   do_transform_init = .false.
-/
 &state_vector
    screen = 3
-   n_fields_covar = 1
    sv_temp = .false.
    sv_salt = .false.
    sv_ssh  = .false.
@@ -90,8 +74,40 @@
    sfields(1)%variable = 'chlorophyll'
    sfields(1)%unit = 'mg C/m^3'
    sfields(1)%collect_op = 'sum'
-   sfields(1)%dist_op = 'bal'
+   sfields(1)%dist_op = 'bal_chlo'
+   sfields(1)%path_covar = '.'
+   sfields(1)%file_covar = '.'
+   sfields(1)%do_covar = .false.
+   sfields(1)%ensscale = 1.0
    sfields(1)%limit = 0
    sfields(1)%transform = 1
    sfields(1)%trafo_shift = 0.
+/
+&pert_vector
+screen = 3
+do_init_pert = .true.
+pert(1) = .false.
+pert(2) = .false.
+pert(3) = .false.
+pert(4) = .false.
+pert(5) = .false.
+n_trc = 2
+id_trc(1) = 1
+id_trc(2) = 1
+id_trc(3) = 2
+id_trc(4) = 2
+/
+&pert_fields_nml
+   pert_fields(1)%ndims = 2
+   pert_fields(1)%variable = 'chlorophyll'
+   pert_fields(1)%unit = 'mg C/m^3'
+   pert_fields(1)%collect_op = 'sum'
+   pert_fields(1)%dist_op = 'bal_chlo'
+   pert_fields(1)%path_covar = '.'
+   pert_fields(1)%file_covar = 'cov-chlo.nc'
+   pert_fields(1)%do_covar = .false.
+   pert_fields(1)%ensscale = 1.0
+   pert_fields(1)%limit = 0
+   pert_fields(1)%transform = 1
+   pert_fields(1)%trafo_shift = 0.
 /
