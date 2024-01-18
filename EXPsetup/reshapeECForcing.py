@@ -1,9 +1,3 @@
-"""The purpose of reshaping forcing file
-is because some forcing files have step dimension
-which are forecast steps. In our exps, we only use
-analysis data as forcing so we remove those steps
-"""
-
 import numpy as np
 from netCDF4 import Dataset, Variable
 

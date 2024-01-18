@@ -2,7 +2,7 @@ program merge
 use netcdf
 use mpi
 implicit none
-integer, parameter :: Ne = 10
+integer, parameter :: Ne = 30
 ! integer :: nx = 362, ny = 332, nz = 75, Ne = 30
 integer :: nx, ny, nz = 1
 integer :: MPIerr
@@ -12,8 +12,10 @@ integer :: npes
 integer :: chunksize, remainder, displs
 integer :: nfiles, i_file
 CHARACTER(len=4) :: nfiles_c, i_file_index
+CHARACTER(len=1) :: doLogC
 CHARACTER(len=1024) :: BaseDir
 CHARACTER(len=1024) :: filename
+logical             :: do_logspace
 
 integer :: ncid
 integer :: ierr
@@ -33,11 +35,13 @@ CALL MPI_Comm_rank(MPI_COMM_WORLD, rank, MPIerr)
 CALL get_command_argument(1, BaseDir)
 CALL get_command_argument(2, filename)
 CALL get_command_argument(3, nfiles_c)
+CALL get_command_argument(4, doLogC)
+do_logspace = .false.
+if (doLogC == 'T') do_logspace = .true.
 
-! get number of files
+! get nfiles
 read(nfiles_c, *) nfiles
 
-! MPI task distribution
 chunksize = nfiles / npes + 1
 remainder = mod(nfiles, npes)
 displs = rank * chunksize
@@ -46,18 +50,26 @@ if (rank >= remainder) then
    displs = rank * chunksize + remainder
 end if
 
-! at least the state vector should be averaged in logspace
+if (rank == 0) print *, 'compute mean and std in the log space', do_logspace 
 print *, 'rank', rank, 'start', displs, 'end', displs+chunksize - 1
-
-! loop over files
 do i_file = displs, displs + chunksize - 1
    write(i_file_index, '(I4.4)') i_file
-   print *, 'Opening ',  trim(BaseDir)//'/'//trim(filename)//'_'//i_file_index//'.nc'
-   call check( nf90_open(trim(BaseDir)//'/'//trim(filename)//'_'//i_file_index//'.nc', nf90_write, ncid) )
+   if (do_logspace) then
+      print *, 'Opening ',  trim(BaseDir)//'/'//trim(filename)//'-log_'//i_file_index//'.nc'
+      call check( nf90_open(trim(BaseDir)//'/'//trim(filename)//'-log_'//i_file_index//'.nc', nf90_write, ncid) )
+   else
+      print *, 'Opening ',  trim(BaseDir)//'/'//trim(filename)//'_'//i_file_index//'.nc'
+      call check( nf90_open(trim(BaseDir)//'/'//trim(filename)//'_'//i_file_index//'.nc', nf90_write, ncid) )
+   endif
    call check( nf90_inquire(ncid, nVariables=nVariables, nAttributes=nAttributes) )
 
    call check( nf90_inq_dimid(ncid, 'time_counter', dimid) )
    call check( nf90_inquire_dimension(ncid, dimid, len=nt) )
+   ! if (npes /= nt) then
+   !    if (rank == 0) &
+   !       print *, npes, 'number of PEs with ', nt, 'steps'
+   !    CALL MPI_Abort(MPI_COMM_WORLD, 1, MPIerr)
+   ! endif
 
    call check( nf90_inq_dimid(ncid, 'x', dimid) )
    call check( nf90_inquire_dimension(ncid, dimid, len=nx) )
@@ -142,12 +154,14 @@ contains
          if (nf90_inquire_attribute(ncid, varid, 'long_name') == NF90_NOERR) then
             call check( nf90_get_att(ncid, varid, 'long_name', attval) )
             attval = 'ensemble mean of '//trim(attval)
+            if (do_logspace) attval = trim(attval)//'_in log10 space'
             call check( nf90_put_att(ncid, varid, 'long_name', trim(attval)) )
          end if
 
          if (nf90_inquire_attribute(ncid, varid, 'standard_name') == NF90_NOERR) then
             call check( nf90_get_att(ncid, varid, 'standard_name', attval) )
             attval = 'ens_mean_'//trim(attval)
+            if (do_logspace) attval = trim(attval)//'_in log10 space'
             call check( nf90_put_att(ncid, varid, 'standard_name', trim(attval)) )
          end if   
 
@@ -162,11 +176,13 @@ contains
             if (trim(attname) == 'long_name') then
                call check( nf90_get_att(ncid, varid, trim(attname), attval) )
                attval = 'ensemble std of '//trim(attval)
+               if (do_logspace) attval = trim(attval)//'_in log10 space'
                call check( nf90_put_att(ncid, varid_std, trim(attname), trim(attval)) )
             end if
             if (trim(attname) == 'standard_name') then
                call check( nf90_get_att(ncid, varid, trim(attname), attval) )
                attval = 'ens_std_'//trim(attval)
+               if (do_logspace) attval = trim(attval)//'_in log10 space'
                call check( nf90_put_att(ncid, varid_std, trim(attname), trim(attval) ) )
             end if
          end do
@@ -305,7 +321,18 @@ contains
                call check( nf90_get_var(ncid_ens, varid_ens, val_4d_d(:, :, :, :), &
                            start=[1, 1, 1, 1], count = [nx, ny, nz, nt]) )
          end if
-
+         if (do_logspace) then
+            where (val_4d_f > 0.)
+               val_4d_f = log10(val_4d_f)
+            else where
+               val_4d_f = -14
+            end where
+            where (val_4d_d > 0.)
+               val_4d_d = log10(val_4d_d)
+            else where
+               val_4d_d = -14
+            end where
+         end if
          mean_4d_f = mean_4d_f + val_4d_f/Ne
          mean_4d_d = mean_4d_d + val_4d_d/Ne
          call check( nf90_close(ncid_ens) )
@@ -367,7 +394,18 @@ contains
                call check( nf90_get_var(ncid_ens, varid_ens, val_4d_d(:, :, :, :), &
                            start=[1, 1, 1, 1], count = [nx, ny, nz, nt]) )
          end if
-
+         if (do_logspace) then
+            where (val_4d_f > 0.)
+               val_4d_f = log10(val_4d_f)
+            else where
+               val_4d_f = -14
+            end where
+            where (val_4d_d > 0.)
+               val_4d_d = log10(val_4d_d)
+            else where
+               val_4d_d = -14
+            end where
+         end if
          std_4d_f = std_4d_f + (val_4d_f - mean_4d_f)*(val_4d_f - mean_4d_f)/Ne
          std_4d_d = std_4d_d + (val_4d_d - mean_4d_d)*(val_4d_d - mean_4d_d)/Ne
          call check( nf90_close(ncid_ens) )

@@ -65,7 +65,7 @@ do
     mkdir -p $EnsRunDir/restarts
     if [ $is_freerun -eq 1 ];
     then
-        ln -s $INPUTS/pdaf/ensemble_$i/initPerturb/restart.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart.nc
+        ln -s $INPUTS/PHYSICS/DOM/restart.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart.nc
         ln -s $INPUTS/PHYSICS/DOM/restart_ice.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart_ice.nc
         ln -s $INPUTS/MEDUSA/DOM/restart_trc.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart_trc.nc
     fi

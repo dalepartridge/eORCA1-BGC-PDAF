@@ -11,10 +11,10 @@
 export OMP_NUM_THREADS=1
 source ../code/archer2-files/ucx_env
 source set_environment.sh
-expname=Chlo
+expname=GetRestart
 year=2015
 n_ens=30
-is_free=0
+is_free=1
 
 echo year $year
 echo n_ens $n_ens
@@ -37,15 +37,7 @@ for month in 01; do
     printf -v iter_start_zero "%08d" $iter_start
     echo $month 
     # get number of days in the next two months 
-    nday=`cal $month $year | grep -v '[A-Za-z]' | wc -w`
-    nday1=`cal $(($month+1)) $year | grep -v '[A-Za-z]' | wc -w`
-    nday=$(($nday + $nday1))
-    # remove the first 15 days from DA
-    if [ $year == $ystart ] && [ $month == 01 ] && [ $is_free != 1 ];
-    then
-       nday=$(($nday - 15))
-    fi
-    echo $nday
+    nday=15
 
     iter_end=$(($iter_start + 86400*$nday/$dt))
     iter_start=$(($iter_start + 1))

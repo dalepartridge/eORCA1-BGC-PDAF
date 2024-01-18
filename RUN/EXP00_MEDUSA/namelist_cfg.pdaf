@@ -1,6 +1,6 @@
 ! for controlling parallisation
 &tasks_nml
-   tasks = 30
+   tasks =
    screen = 2
 /
 ! PDAF options
@@ -45,6 +45,7 @@
    dist_bgc_pc = 'geo'
    path_bgc_pc = 'obs/'
    ibgc_pc = 2
+   update_PDS_pc = .false.
 /
 &obs_bgc_chlo_nml
    screen = 3
@@ -56,6 +57,7 @@
    dist_bgc_chlo = 'geo'
    path_bgc_chlo = 'obs/'
    ibgc_chlo = 1
+   update_PDS_chlo = .true.
 /
 &state_vector
    screen = 3
@@ -85,11 +87,17 @@
 /
 &pert_vector
 screen = 3
-do_init_pert = .true.
+do_init_pert = .false.
+! 
+! sshn
 pert(1) = .false.
-pert(2) = .false.
-pert(3) = .false.
+! temp
+pert(2) = .true.
+! salt
+pert(3) = .true.
+! u
 pert(4) = .false.
+! v
 pert(5) = .false.
 n_trc = 2
 id_trc(1) = 1
@@ -98,16 +106,49 @@ id_trc(3) = 2
 id_trc(4) = 2
 /
 &pert_fields_nml
-   pert_fields(1)%ndims = 2
-   pert_fields(1)%variable = 'chlorophyll'
-   pert_fields(1)%unit = 'mg C/m^3'
-   pert_fields(1)%collect_op = 'sum'
-   pert_fields(1)%dist_op = 'bal_chlo'
-   pert_fields(1)%path_covar = '.'
-   pert_fields(1)%file_covar = 'cov-chlo.nc'
-   pert_fields(1)%do_covar = .false.
+   pert_fields(1)%ndims = 3
+   pert_fields(1)%variable = 'toce_con'
+   pert_fields(1)%path_covar = './'
+   pert_fields(1)%file_covar = 'cov-SSSSST.nc'
+   pert_fields(1)%do_covar = .true.
    pert_fields(1)%ensscale = 1.0
    pert_fields(1)%limit = 0
-   pert_fields(1)%transform = 1
+   pert_fields(1)%transform = 0
    pert_fields(1)%trafo_shift = 0.
+
+   pert_fields(2)%ndims = 3
+   pert_fields(2)%variable = 'soce_abs'
+   pert_fields(2)%path_covar = './'
+   pert_fields(2)%file_covar = 'cov-SSSSST.nc'
+   pert_fields(2)%do_covar = .true.
+   pert_fields(2)%ensscale = 1.0
+   pert_fields(2)%limit = 0
+   pert_fields(2)%transform = 0
+   pert_fields(2)%trafo_shift = 0.
+
+   pert_fields(3)%ndims = 2
+   pert_fields(3)%variable = 'chlorophyll'
+   pert_fields(3)%unit = 'mg C/m^3'
+   pert_fields(3)%collect_op = 'sum'
+   pert_fields(3)%dist_op = 'bal_chlo'
+   pert_fields(3)%path_covar = './'
+   pert_fields(3)%file_covar = 'cov-chlo.nc'
+   pert_fields(3)%do_covar = .true.
+   pert_fields(3)%ensscale = 1.0
+   pert_fields(3)%limit = 0
+   pert_fields(3)%transform = 1
+   pert_fields(3)%trafo_shift = 0.
+
+   pert_fields(4)%ndims = 2
+   pert_fields(4)%variable = 'nitrogen'
+   pert_fields(4)%unit = 'mg C/m^3'
+   pert_fields(4)%collect_op = 'sum'
+   pert_fields(4)%dist_op = 'bal_carbon'
+   pert_fields(4)%path_covar = './'
+   pert_fields(4)%file_covar = 'cov-nitrogen.nc'
+   pert_fields(4)%do_covar = .true.
+   pert_fields(4)%ensscale = 1.0
+   pert_fields(4)%limit = 0
+   pert_fields(4)%transform = 1
+   pert_fields(4)%trafo_shift = 0.
 /
