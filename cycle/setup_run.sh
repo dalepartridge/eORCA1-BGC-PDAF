@@ -1,5 +1,6 @@
-n_ens=$1
-is_freerun=$2
+expname=$1
+n_ens=$2
+is_freerun=$3
 current_dir=$(pwd)
 
 mkdir -p $RUN_DIR
@@ -10,6 +11,9 @@ INPUTS=$WORK/INPUTS
 
 cd $WORK/RUN/EXP00_MEDUSA/
 find -maxdepth 1 -type f -exec cp {} $RUN_DIR/namelists \;
+
+# replace namelist_cfg.pdaf based on expname
+mv $RUN_DIR/namelists/namelist_cfg.pdaf-$expname $RUN_DIR/namelists/namelist_cfg.pdaf
 
 cd ${current_dir}
 cp $WORK/code/nemo/cfgs/eORCA1-build/EXP00/nemo $RUN_DIR
@@ -69,8 +73,8 @@ do
         ln -s $INPUTS/PHYSICS/DOM/restart_ice.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart_ice.nc
         ln -s $INPUTS/MEDUSA/DOM/restart_trc.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart_trc.nc
     fi
-    ln -s $INPUTS/pdaf/ensemble_$i/* $EnsRunDir/restarts/
-    
+    ln -s $INPUTS/pdaf/ensemble_$i/* $EnsRunDir/restarts/.
+
 
     mkdir -p $EnsRunDir/INPUTS
     ln -s $INPUTS/PHYSICS/DOM/weights* $EnsRunDir/INPUTS/.
@@ -94,7 +98,7 @@ do
     ln -s $RUN_DIR/namelists/* $EnsRunDir/.
 
     # link SKEB perturbations
-    ln -s $INPUTS/SKEB/* $EnsRunDir/
+    ln -s $INPUTS/SKEB/* $EnsRunDir/.
 
     # perturbed parameter files
     unlink $EnsRunDir/fabm.yaml
@@ -102,7 +106,7 @@ do
 
     # Link initial covariance matrix
     cd ${current_dir}
-    ln -s $INPUTS/pdaf/cov*.nc $EnsRunDir/
+    ln -s $INPUTS/pdaf/cov*.nc $EnsRunDir/.
 
     # Link observations
     ln -s $INPUTS/obs $EnsRunDir/.
@@ -114,5 +118,5 @@ done
 cp $EnsRunDir/file_def*.xml $RUN_DIR
 
 # ./pert_params_medusa $RUN_DIR/namelists $n_ens $RUN_DIR
-./mkslurm_hetjob_online_ensemble -a n01-nceo -S 16 -s 8 -C 180 -m 16 $ens_dirs -t 05:00:00 -p standard > submit.sh
+./mkslurm_hetjob_online_ensemble -a n01-nceo -S 16 -s 8 -C 180 -m 16 $ens_dirs -t 03:00:00 -p standard > submit.sh
 mv submit.sh $RUN_DIR/

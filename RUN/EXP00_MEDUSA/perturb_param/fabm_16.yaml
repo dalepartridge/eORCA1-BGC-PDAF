@@ -27,72 +27,72 @@ instances:
     model: medusa/pelagic
     parameters:
       xxi: 0.01257
-      xaln: 15.503752532461677
-      xald: 9.061621513907117
+      xaln: 15.0
+      xald: 11.25
       jliebig: false
-      xnln: 0.5336223307846435
-      xfln: 0.00032264560267458297
-      xnld: 0.93180959794929
-      xsld: 3.0332276721910176
-      xfld: 0.0005016230286653336
-      xvpn: 0.5749851018199486
-      xvpd: 0.5224382524350939
+      xnln: 0.5
+      xfln: 0.00033
+      xnld: 0.75
+      xsld: 3.0
+      xfld: 0.00067
+      xvpn: 0.64
+      xvpd: 0.6
       jphy: 1
-      jq10: 1.4503427696671036
-      xsin0: 0.16729453699655628
-      xnsi0: 0.15796288772978412
-      xuif: 1.5226922825266074
-      xthetam: 0.03624408859956687
-      xthetamd: 0.04488011413655059
-      xkmi: 0.8715724111718275
-      xpmipn: 0.5402363784158065
-      xpmid: 0.2847632955039326
-      xkme: 0.3010397903650016
-      xpmepn: 0.10594459119577387
-      xpmepd: 0.3065341931190019
-      xpmezmi: 0.4304105475027525
-      xpmed: 0.11123374053081268
-      xgmi: 1.716187188504585
-      xgme: 0.4890035520177376
+      jq10: 1.5
+      xsin0: 0.2
+      xnsi0: 0.2
+      xuif: 1.5
+      xthetam: 0.05
+      xthetamd: 0.05
+      xkmi: 0.8
+      xpmipn: 0.75
+      xpmid: 0.25
+      xkme: 0.3
+      xpmepn: 0.144094
+      xpmepd: 0.355906
+      xpmezmi: 0.355906
+      xpmed: 0.144094
+      xgmi: 2.0
+      xgme: 0.5
       xthetad: 6.625
-      xphi: 0.24652610872844988
+      xphi: 0.236255
       xthetapn: 6.625
       xthetapd: 6.625
-      xbetan: 0.6346371550781592
+      xbetan: 0.633258
       xthetazmi: 5.625
-      xbetac: 0.73162431580419
-      xkc: 0.5659196526006403
+      xbetac: 0.652675
+      xkc: 0.92339
       xthetazme: 5.625
-      xmetapn: 0.01859121822684718
-      xmetapd: 0.020594694028780645
-      xmetazmi: 0.015524243059568123
-      xmetazme: 0.01597986160374878
-      xmpn: 0.10192213415565482
-      xmpd: 0.08605487310392011
-      xmzmi: 0.07016732303646417
-      xmzme: 0.23108983528796295
-      xkphn: 0.5727110116272364
-      xkphd: 0.4795324614236056
-      xkzmi: 0.38702107888746584
-      xkzme: 0.5721259523397414
+      xmetapn: 0.022931
+      xmetapd: 0.016493
+      xmetazmi: 0.0205
+      xmetazme: 0.016711
+      xmpn: 0.1
+      xmpd: 0.1
+      xmzmi: 0.1
+      xmzme: 0.2
+      xkphn: 0.5
+      xkphd: 0.5
+      xkzmi: 0.5
+      xkzme: 0.75
       jmpn: 3
       jmpd: 3
       jmzmi: 3
       jmzme: 3
       jmd: 2
-      xmd: 0.01583051843532004
-      xmdc: 0.01678593194574729
-      xsdiss: 0.006552397141328357
-      xfdfrac1: 0.3579087582075722
-      xfdfrac2: 1.0932607278034439
-      xfdfrac3: 0.9322334236877977
-      xrfn: 3.627693529804019e-05
-      xridg_r0: 0.02457111314996696
-      xthetanit: 2.44115168138757
-      xthetarem: 1.0328333686064568
-      xo2min: 4.728384445893014
-      wg: -2.6865547152013596
-      wdep: 2.750085721800958
+      xmd: 0.019
+      xmdc: 0.0152
+      xsdiss: 0.006
+      xfdfrac1: 0.333
+      xfdfrac2: 1.0
+      xfdfrac3: 0.8
+      xrfn: 3.0e-05
+      xridg_r0: 0.026
+      xthetanit: 2.0
+      xthetarem: 1.1226
+      xo2min: 4.0
+      wg: -2.999808
+      wdep: 2.999808
       seafloor: 3
     initialization:
       CHN: 0.01
@@ -123,9 +123,9 @@ instances:
     model: medusa/iron_scav
     parameters:
       deep_fe_fix: false
-      xk_FeL: 129.21953527900624
-      xLgT: 1.0461970051999554
-      xk_sc_Fe: 0.0009837475793361566
+      xk_FeL: 100.0
+      xLgT: 1.0
+      xk_sc_Fe: 0.001
       jiron: 1
     coupling:
       FER: pelagic/FER
@@ -166,12 +166,12 @@ instances:
     model: medusa/benthic
     use: true
     parameters:
-      xsedc: 0.04309372945243005
-      xsedn: 0.06393409170656385
-      xsedfe: 0.05887506782937148
-      xsedsi: 0.011092647084134984
-      xsedca: 0.011025937844424297
-      xrfn: 3.627693529804019e-05
+      xsedc: 0.05
+      xsedn: 0.05
+      xsedfe: 0.05
+      xsedsi: 0.01
+      xsedca: 0.01
+      xrfn: 3.0e-05
     initialization:
       BEN_C: 0.0
       BEN_N: 0.0

@@ -133,53 +133,29 @@
 &namsbc_blk    !   namsbc_blk  generic Bulk formula          (ln_blk =T)
 !-----------------------------------------------------------------------
    !                    !  bulk algorithm :
-   ln_NCAR     = .false.   ! "NCAR"      algorithm   (Large and Yeager 2008)
+   ln_NCAR     = .true.   ! "NCAR"      algorithm   (Large and Yeager 2008)
    ln_COARE_3p0 = .false.   ! "COARE 3.0" algorithm   (Fairall et al. 2003)
    ln_COARE_3p5 = .false.   ! "COARE 3.5" algorithm   (Edson et al. 2013)
-   ln_ECMWF    = .true.      ! "ECMWF"     algorithm   (IFS cycle 31)
+   ln_ECMWF    = .false.      ! "ECMWF"     algorithm   (IFS cycle 31)
       !
-      rn_zqt      = 2.       !  Air temperature & humidity reference height (m)
+      rn_zqt      = 10.       !  Air temperature & humidity reference height (m)
       rn_zu       = 10.       !  Wind vector reference height (m)
 
    cn_dir      = './INPUTS/'      !  root directory for the location of the flux files
 !              !  file name                   ! frequency (hours) ! variable  ! time interp. !  clim  ! 'yearly'/ ! weights                              ! rotation ! land/sea mask !
 !              !                              !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename                             ! pairing  ! filename      !
 
-! JRA55
-!   sn_cc       = 'NOT USED',                       24,         'CC',         .false.,      .true.,   'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_humi     = 'huss',                       3,          'huss',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_prec     = 'ptot',                       3,          'ptot',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_qlw      = 'rlds',                       3,          'rlds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_qsr      = 'rsds',                       3,          'rsds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_slp      = 'psl',                        3,          'psl',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_snow     = 'prsn',                       3,          'prsn',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_tair     = 'tas',                        3,          'tas',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_tdif     = 'taudif_core',                24,         'taudif',     .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
-!   sn_wndi     = 'uas',                        3,          'uas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Ume',   ''
-!   sn_wndj     = 'vas',                        3,          'vas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Vme',   ''
-
-! ERA5
-   sn_wndi     = 'ERA5_u10',                    3.,         'u10',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        'Uwnd',  ''
-   sn_wndj     = 'ERA5_v10',                    3.,         'v10',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        'Vwnd',  ''
-   sn_qsr      = 'ERA5_msdwswrf',              12.,         'msdwswrf',   .false.,     .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_qlw      = 'ERA5_msdwlwrf',              12.,         'msdwlwrf',   .false.,     .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_tair     = 'ERA5_t2m',                    3.,         't2m',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_humi     = 'ERA5_SPH',                    3.,         'SPH',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_prec     = 'ERA5_mtpr',                  12.,         'mtpr',       .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_snow     = 'ERA5_msr',                   12.,         'msr',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_slp      = 'ERA5_msl',                    3.,         'msl',        .true.,      .false.,  'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_cc       = 'NOT USED',                   24.,         'CC',         .true.,      .true.,   'yearly',   'weights_eORCA1_era5_bicub.nc',        '',      ''
-   sn_tdif     = 'NOT USED',                   24.,         'CC',         .false.,     .true.,   'yearly',   'weights_eORCA1_era5_bicub.nc',             '',      ''
-
-!   sn_wndi     = 'u_10_core_oonly'       ,         6         , 'U_10_MOD',   .true.     ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bicubic.nc'  , 'U1'    , ''
-!   sn_wndj     = 'v_10_core_oonly'       ,         6         , 'V_10_MOD',   .true.     ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bicubic.nc'  , 'V1'    , ''
-!   sn_qsr      = 'rad_core_oonly'        ,        24         , 'SWDN_MOD',   .false.    ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bilinear.nc' , ''      , ''
-!   sn_qlw      = 'rad_core_oonly'        ,        24         , 'LWDN_MOD',   .true.     ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bilinear.nc' , ''      , ''
-!   sn_tair     = 't_10_core_oonly'       ,         6         , 'T_10_MOD',   .false.    ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bilinear.nc' , ''      , ''
-!   sn_humi     = 'q_10_core_oonly'       ,         6         , 'Q_10_MOD',   .false.    ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bilinear.nc' , ''      , ''
-!   sn_prec     = 'tprecip_core_oonly'    ,        -1         , 'TPRECIP' ,   .true.     ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bilinear.nc' , ''      , ''
-!   sn_snow     = 'tprecip_core_oonly'    ,        -1         , 'SNOW'    ,   .true.     ,  .false. , 'yearly'  , 'weights_coreII_2_eorca1_bilinear.nc' , ''      , ''
-!   sn_slp      = 'slp_core_oonly'        ,         6         , 'SLP'     ,   .true.     , .false.  , 'yearly'  , 'weights_coreII_2_eorca1_bilinear.nc' , ''      , ''
+   sn_cc       = 'NOT USED',                       24,         'CC',         .false.,      .true.,   'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_humi     = 'huss',                       3,          'huss',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_prec     = 'ptot',                       3,          'ptot',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_qlw      = 'rlds',                       3,          'rlds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_qsr      = 'rsds',                       3,          'rsds',       .false.,      .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_slp      = 'psl',                        3,          'psl',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_snow     = 'prsn',                       3,          'prsn',       .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_tair     = 'tas',                        3,          'tas',        .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_tdif     = 'taudif_core',                24,         'taudif',     .true.,       .false.,  'yearly',   'weights_JRA_bilinear.nc',             '',      ''
+   sn_wndi     = 'uas',                        3,          'uas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Ume',   ''
+   sn_wndj     = 'vas',                        3,          'vas',        .true.,       .false.,  'yearly',   'weights_JRA_bicubic.nc',              'Vme',   ''
 /
 !-----------------------------------------------------------------------
 &namsbc_cpl    !   coupled ocean/atmosphere model                       ("key_oasis3")

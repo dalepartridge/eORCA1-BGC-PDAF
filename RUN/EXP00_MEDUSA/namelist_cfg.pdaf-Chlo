@@ -1,0 +1,227 @@
+! for controlling parallisation
+&tasks_nml
+   ! number of ensemble member
+   tasks =
+   ! verbosity of the PDAF screen output for parallelisation
+   screen = 2
+/
+! PDAF options
+&pdaf_nml
+   ! verbosity of PDAF routines
+   screen = 2
+   ! filter-related options
+   filtertype = 7
+   subtype = 0
+   type_trans = 0
+   type_sqrt = 0
+   ! inflation options
+   type_forget = 0
+   forget = 0.95
+   ! localisation options
+   locweight = 0
+   ! the time steps for the first assimilation after the start of the model
+   delt_obs = 1
+   ! observation frequency, 'd' for daily, 'm' for monthly
+   obsfreq = 'd'
+/
+&io_nml
+   ! pre/post-processing related IO options
+   verbose_io = 2         ! verbosity of IO module
+   sgldbl_io = 'sgl'      ! options for single/double precision for state file: 'sgl'/'dbl'
+   ! filenames related to type_ens_init/type_central_state
+   save_state = .false.
+   save_var = .false.
+   save_ens_sngl = .true.
+/
+&update_nml
+   ! switch for IAU of BGC variables
+   do_bgciau = .true.
+   ! number of steps of the IAU
+   steps_bgciau = 31
+   ! 0 for constant weighting 1 for hat shaped weighting
+   shape_bgciau = 0
+/
+&obs_bgc_PC_nml
+   ! screen output for bgc module
+   screen = 3
+   ! switch for assimilation carbon data
+   assim_bgc_pc = .true.
+   ! localisation radius of carbon data
+   ! See table in this webpage for a better idea
+   ! https://pdaf.awi.de/trac/wiki/OMI_observation_modules#init_dim_obs_l_OBSTYPE
+   lradius_bgc_pc = 200000
+   sradius_bgc_pc = 200000
+   ! distance type of the localisation
+   ! 'geo' for geographical distance
+   ! 'gp' for number of grid points
+   dist_bgc_pc = 'geo'
+   ! path to the observation data
+   path_bgc_pc = 'obs/'
+   ! index of the carbon data in sfields
+   ibgc_pc = 1
+   ! if day_of_month = i, then carbon data is assimilated at i-th day of the month 
+   day_of_month =
+   ! switch for updating PDS based on carbon data
+   update_PDS_pc = .false.
+/
+&obs_bgc_chlo_nml
+   ! screen output for bgc module
+   screen = 3
+   ! switch for assimilation chlorophyll data
+   assim_bgc_chlo = .true.
+   ! localisation radius of carbon data
+   ! See table in this webpage for a better idea
+   ! https://pdaf.awi.de/trac/wiki/OMI_observation_modules#init_dim_obs_l_OBSTYPE
+   lradius_bgc_chlo = 200000
+   sradius_bgc_chlo = 200000
+   ! distance type of the localisation
+   ! 'geo' for geographical distance
+   ! 'gp' for number of grid points
+   dist_bgc_chlo = 'geo'
+   ! path to the observation data
+   path_bgc_chlo = 'obs/'
+   ! index of the corresponding state vector in sfields
+   ibgc_chlo = 1
+   ! switch for updating PDS based on chlorophyll data
+   update_PDS_chlo = .false.
+/
+&state_vector
+   ! screen output for sfield module
+   screen = 3
+   ! switch for physical variables
+   sv_temp = .false.
+   sv_salt = .false.
+   sv_ssh  = .false.
+   sv_uvel = .false.
+   sv_vvel = .false.
+   sv_vvel = .false.
+   ! number of bgc variables in sfields
+   n_sv_trc = 1
+   ! the index of the id_trc is the index of sn_tracer in namelist_top_cfg
+   ! e.g. id_trc(i) represents the tracer of sn_tracer(i)
+   ! for id_trc(i) = j
+   ! j is the i-th bgc field in sfield
+   ! for example, if we have 3 physical variables in sfield,
+   ! we will have 3 + n_sv_trc number of sfields
+   ! the j-th bgc field in the sfield is (j + n_sv_trc)-th sfield
+   id_trc(1) = 1
+   id_trc(2) = 1
+/
+&sfields_nml
+   ! definition of sfield
+   ! dimension of the field
+   sfields(1)%ndims = 2
+   ! variable name of the chlorophyll
+   ! this name is used for PDAF output
+   sfields(1)%variable = 'chlorophyll'
+   ! unit of the model variable
+   sfields(1)%unit = 'mg C/m^3'
+   ! operator that map the model fields to state vector
+   sfields(1)%collect_op = 'sum'
+   ! balancing operator that distribute state vector
+   ! to model fields: 'bal_chlo', 'bal_carbon'
+   sfields(1)%dist_op = 'bal_chlo'
+   ! switch for distribute increment to non-observed variables
+   sfields(1)%dist_unobs = .false.
+   ! type of limit of the 
+   ! 0: no limits, 1: lower limit,
+   ! 2: upper limit, 3: both limits
+   sfields(1)%limit = 0
+   ! Type of variable transformation
+   ! 1: log10; 2: ln
+   sfields(1)%transform = 1
+   ! Constant to shift value in transformation
+   sfields(1)%trafo_shift = 0.
+/
+&pert_vector
+   ! screen output for initial perturbation module
+   screen = 3
+   ! switch of initial perturbation
+   ! this switch overwrites all switch for specific variable
+   do_init_pert = .false.
+   ! sshn switch
+   pert(1) = .false.
+   ! temp switch
+   pert(2) = .true.
+   ! salt switch
+   pert(3) = .true.
+   ! u switch
+   pert(4) = .false.
+   ! v switch
+   pert(5) = .false.
+   ! number of bgc variables
+   n_trc = 2
+   ! similar to id_trc in state_vector nml
+   id_trc(1) = 1
+   id_trc(2) = 1
+   id_trc(3) = 2
+   id_trc(4) = 2
+/
+&pert_fields_nml
+   ! sfields for initial perturbation
+   ! temp field
+   ! dimension of the field
+   pert_fields(1)%ndims = 3
+   ! variable name of the chlorophyll
+   ! this name is used for reading from covariance file
+   pert_fields(1)%variable = 'toce_con'
+   ! path to the covariance matrix for perturbation
+   pert_fields(1)%path_covar = './'
+   ! filename of the covariance matrix for perturbation
+   pert_fields(1)%file_covar = 'cov-SSSSST.nc'
+   ! switch of perturbation using covariance matrix file
+   pert_fields(1)%do_covar = .true.
+   ! inflation factor for the initial ensemble spread
+   pert_fields(1)%ensscale = 1
+   ! type of limit of the 
+   ! 0: no limits, 1: lower limit,
+   ! 2: upper limit, 3: both limits
+   pert_fields(1)%limit = 1
+   pert_fields(1)%min_limit = 0.
+   pert_fields(1)%transform = 0
+   pert_fields(1)%trafo_shift = 0.
+
+   ! salinity field
+   pert_fields(2)%ndims = 3
+   pert_fields(2)%variable = 'soce_abs'
+   pert_fields(2)%path_covar = './'
+   pert_fields(2)%file_covar = 'cov-SSSSST.nc'
+   pert_fields(2)%do_covar = .true.
+   pert_fields(2)%ensscale = 1
+   pert_fields(2)%limit = 1
+   pert_fields(2)%min_limit = 0.
+   pert_fields(2)%transform = 0
+   pert_fields(2)%trafo_shift = 0.
+
+   ! chlorophyll field
+   pert_fields(3)%ndims = 2
+   pert_fields(3)%variable = 'chlorophyll'
+   pert_fields(3)%unit = 'mg C/m^3'
+   pert_fields(3)%collect_op = 'sum'
+   pert_fields(3)%dist_op = 'bal_chlo'
+   ! path to the covariance matrix for perturbation
+   pert_fields(3)%path_covar = './'
+   ! filename of the covariance matrix for perturbation
+   pert_fields(3)%file_covar = 'cov-chlo.nc'
+   ! switch of perturbation using covariance matrix file
+   pert_fields(3)%do_covar = .true.
+   ! inflation factor for the initial ensemble spread
+   pert_fields(3)%ensscale = 1.
+   pert_fields(3)%limit = 0
+   pert_fields(3)%transform = 1
+   pert_fields(3)%trafo_shift = 0.
+
+   ! nitrogen field
+   pert_fields(4)%ndims = 2
+   pert_fields(4)%variable = 'nitrogen'
+   pert_fields(4)%unit = 'mg C/m^3'
+   pert_fields(4)%collect_op = 'sum'
+   pert_fields(4)%dist_op = 'bal_carbon'
+   pert_fields(4)%path_covar = './'
+   pert_fields(4)%file_covar = 'cov-nitrogen.nc'
+   pert_fields(4)%do_covar = .true.
+   pert_fields(4)%ensscale = 1.
+   pert_fields(4)%limit = 0
+   pert_fields(4)%transform = 1
+   pert_fields(4)%trafo_shift = 0.
+/

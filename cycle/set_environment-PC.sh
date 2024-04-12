@@ -2,13 +2,14 @@
 
 #Config options
 export WORK=/work/n01/n01/ymchen/eORCA1-BGC-PDAF
-export EXP_NAME=EXP-MEDUSA_2000-2020
+export EXP_NAME=EXP-MEDUSA_PC
 export RUN_DIR=$WORK/RUN/$EXP_NAME
 export NAME=eORCA1
 
 export ystart=2015
 export yend=2020
-export starting_iter=526336	 # 525952 # starting iteration
+# starting the experiment from 1st Feb. 2015
+export starting_iter=526944 # 525952 # starting iteration
 
 # Default directories
 export DEFAULT_RUN_DIR=$WORK/RUN/EXP00_MEDUSA

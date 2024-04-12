@@ -27,72 +27,72 @@ instances:
     model: medusa/pelagic
     parameters:
       xxi: 0.01257
-      xaln: 11.982338336765798
-      xald: 13.980932398787068
+      xaln: 15.0
+      xald: 11.25
       jliebig: false
-      xnln: 0.3956374984368339
-      xfln: 0.00025376358380557046
-      xnld: 0.662430033773561
-      xsld: 3.7813727366071204
-      xfld: 0.0006141423060111001
-      xvpn: 0.8149244856948575
-      xvpd: 0.5686519400416663
+      xnln: 0.5
+      xfln: 0.00033
+      xnld: 0.75
+      xsld: 3.0
+      xfld: 0.00067
+      xvpn: 0.64
+      xvpd: 0.6
       jphy: 1
-      jq10: 1.2904135245578685
-      xsin0: 0.1476141425102954
-      xnsi0: 0.19330999585074102
-      xuif: 1.8673857547462793
-      xthetam: 0.04012254436091303
-      xthetamd: 0.06020167543246685
-      xkmi: 0.7099055357220567
-      xpmipn: 0.5990808505676789
-      xpmid: 0.28723043478273386
-      xkme: 0.3817123230139615
-      xpmepn: 0.12894376060980242
-      xpmepd: 0.32478737191966367
-      xpmezmi: 0.26629814018897874
-      xpmed: 0.17449601407703047
-      xgmi: 2.489504360980999
-      xgme: 0.3651601569422642
+      jq10: 1.5
+      xsin0: 0.2
+      xnsi0: 0.2
+      xuif: 1.5
+      xthetam: 0.05
+      xthetamd: 0.05
+      xkmi: 0.8
+      xpmipn: 0.75
+      xpmid: 0.25
+      xkme: 0.3
+      xpmepn: 0.122568
+      xpmepd: 0.377432
+      xpmezmi: 0.377432
+      xpmed: 0.122568
+      xgmi: 2.0
+      xgme: 0.5
       xthetad: 6.625
-      xphi: 0.2476844433861491
+      xphi: 0.207972
       xthetapn: 6.625
       xthetapd: 6.625
-      xbetan: 0.5574398116050739
+      xbetan: 0.865025
       xthetazmi: 5.625
-      xbetac: 0.7099480573140642
-      xkc: 0.8376396550308935
+      xbetac: 0.559149
+      xkc: 0.652058
       xthetazme: 5.625
-      xmetapn: 0.019921643029859375
-      xmetapd: 0.015121038324762985
-      xmetazmi: 0.01834460120607323
-      xmetazme: 0.017494760856570694
-      xmpn: 0.0917565776383539
-      xmpd: 0.09974599218382028
-      xmzmi: 0.07289444577158202
-      xmzme: 0.24452235555016336
-      xkphn: 0.4592201693233442
-      xkphd: 0.6152354674127345
-      xkzmi: 0.49397550347537567
-      xkzme: 0.8097172870087759
+      xmetapn: 0.018466
+      xmetapd: 0.023132
+      xmetazmi: 0.0205
+      xmetazme: 0.019946
+      xmpn: 0.1
+      xmpd: 0.1
+      xmzmi: 0.1
+      xmzme: 0.2
+      xkphn: 0.5
+      xkphd: 0.5
+      xkzmi: 0.5
+      xkzme: 0.75
       jmpn: 3
       jmpd: 3
       jmzmi: 3
       jmzme: 3
       jmd: 2
-      xmd: 0.014375558366500304
-      xmdc: 0.01192496724459207
-      xsdiss: 0.004451718575568256
-      xfdfrac1: 0.34944663338638415
-      xfdfrac2: 0.8565875377335384
-      xfdfrac3: 0.6795865408262025
-      xrfn: 3.561989579881305e-05
-      xridg_r0: 0.026467293648750563
-      xthetanit: 2.4301694509121416
-      xthetarem: 1.2416448069178916
-      xo2min: 4.706207732662238
-      wg: -3.671892992124513
-      wdep: 3.491749746134203
+      xmd: 0.019
+      xmdc: 0.0152
+      xsdiss: 0.006
+      xfdfrac1: 0.333
+      xfdfrac2: 1.0
+      xfdfrac3: 0.8
+      xrfn: 3.0e-05
+      xridg_r0: 0.026
+      xthetanit: 2.0
+      xthetarem: 1.1226
+      xo2min: 4.0
+      wg: -2.999808
+      wdep: 2.999808
       seafloor: 3
     initialization:
       CHN: 0.01
@@ -123,9 +123,9 @@ instances:
     model: medusa/iron_scav
     parameters:
       deep_fe_fix: false
-      xk_FeL: 79.19098652318164
-      xLgT: 1.2667544540157323
-      xk_sc_Fe: 0.0009015985342303448
+      xk_FeL: 100.0
+      xLgT: 1.0
+      xk_sc_Fe: 0.001
       jiron: 1
     coupling:
       FER: pelagic/FER
@@ -166,12 +166,12 @@ instances:
     model: medusa/benthic
     use: true
     parameters:
-      xsedc: 0.05271188652033962
-      xsedn: 0.05559492032868295
-      xsedfe: 0.04772076691608338
-      xsedsi: 0.008868254100909665
-      xsedca: 0.012468589864953191
-      xrfn: 3.561989579881305e-05
+      xsedc: 0.05
+      xsedn: 0.05
+      xsedfe: 0.05
+      xsedsi: 0.01
+      xsedca: 0.01
+      xrfn: 3.0e-05
     initialization:
       BEN_C: 0.0
       BEN_N: 0.0
