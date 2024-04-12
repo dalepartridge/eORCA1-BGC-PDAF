@@ -7,8 +7,6 @@ import sys
 import warnings
 
 
-
-
 assert len(sys.argv[1:]) <= 3, 'More than three argument is provided.'
 
 try:
@@ -32,14 +30,21 @@ except IndexError:
     warnings.warn('No exp_dir is provided! same dirname and exp_name are used.')
     exp_dir = dirname
 
-
-# params = ['xaln', 'xald', 'xnln', 'xnld',
-#           'xvpn', 'xvpd', 'xmetapn', 'xmetapd',
-#           'xmpn', 'xmpd', 'xkphn', 'xkphd',
-#           'xkmi', 'xkme', 'xgmi',
-#           'xgme', 'xbetac', 'xkc', 'xthetam', 'xthetamd']
-
 excludes = [
+           'xaln', 'xald',
+           # exclude grazing related parameters
+           'xgmi', 'xgme',
+           #  microzooplankton and mesozooplankton maximum loss rate
+           'xmzmi', 'xmzme', 'xmpn', 'xmpd', 'xvpn', 'xvpd',
+           # # exclude carbon related parameters
+           # 'xbetac', 'xkc', 'xmdc',
+           # # exclude saturation parameters
+           'xnln', 'xfln', 'xnld', 'xsld', 'xfld',
+           'xkmi', 'xkme', 'xkphd', 'xkphn', 'xkzmi',
+           'xkzme',
+           # # exclude some ratios
+           'xsin0', 'xnsi0', 'xuif', 'xthetam', 'xthetamd',
+           'xridg_r0',
            # exclude conversion ratios
            'xxi', 'xthetad', 'xthetapn',
            'xthetapd', 'xthetazmi', 'xthetazme',
@@ -47,26 +52,44 @@ excludes = [
            'jphy', 'jmpn', 'jmpd', 'jmzmi',
            'jmzme', 'jmd', 'jiron', 'seafloor',
            # exclude logical parameters
-           'deep_fe_fix', 'jliebig']
+           'deep_fe_fix', 'jliebig',
+           # exclude fast detritus fraction loss
+           'xfdfrac1', 'xfdfrac2', 'xfdfrac3',
+           # exclude parameter also in fast detritus section
+           'xrfn'
+           ]
 
+keys = ['xpmezmi', 'xphi', 'xbetan',
+        'xbetac', 'xkc', 'xmetapn', 'xmetapd',
+        'xmetazme',]
 stream = open(f'{exp_dir}/fabm.yaml', 'r')
 f = yaml.safe_load(stream)
 stream.close()
 
 params = dict()
 
-instances = ['pelagic', 'iron_scavenging', 'benthic']
+# instances = ['pelagic', 'iron_scavenging', 'benthic']
+instances = ['pelagic', ]
 for instance in instances:
-    for key in f['instances'][instance]['parameters']:
-        if key in excludes: continue
+    for key in keys: 
+    # for key in f['instances'][instance]['parameters']:
+        # if key in excludes: continue
         val = f['instances'][instance]['parameters'][key]
-        params[key] = np.random.uniform(0.7*val, 1.3*val, N)
+        params[key] = np.round(np.random.uniform(0.8*val, 1.2*val, N), 6)
+
+
+# control the percentage
+params['xpmid'] = np.round(1. - params['xpmipn'], 6)
+params['xpmepd'] = params['xpmezmi']
+params['xpmepn'] = np.round(0.5 - params['xpmepd'], 6)
+params['xpmed'] = params['xpmepn']
 
 for i in range(1, N+1):
     stream = open(f'{dirname}/fabm_{i}.yaml', 'w')
     for instance in instances:
-        for key in f['instances'][instance]['parameters']:
-            if key in excludes: continue
+        for key in keys:
+        # for key in f['instances'][instance]['parameters']:
+            # if key in excludes: continue
             f['instances'][instance]['parameters'][key] = float(params[key][i-1])
     yaml.dump(f, stream, Dumper=yaml.Dumper, sort_keys=False)
     stream.close()
