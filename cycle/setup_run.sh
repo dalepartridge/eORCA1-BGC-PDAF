@@ -1,6 +1,6 @@
 expname=$1
 n_ens=$2
-is_freerun=$3
+is_spinup=$3
 current_dir=$(pwd)
 
 mkdir -p $RUN_DIR
@@ -67,7 +67,7 @@ do
 
     # Link restarts
     mkdir -p $EnsRunDir/restarts
-    if [ $is_freerun -eq 1 ];
+    if [ $is_spinup -eq 1 ];
     then
         ln -s $INPUTS/PHYSICS/DOM/restart.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart.nc
         ln -s $INPUTS/PHYSICS/DOM/restart_ice.nc $EnsRunDir/restarts/${NAME}_${iter_start_zero}_restart_ice.nc

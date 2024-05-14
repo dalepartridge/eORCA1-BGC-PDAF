@@ -158,7 +158,11 @@ contains
       integer :: dimid
       integer :: varid
       integer :: dim_olat, dim_olon
+      ! integer :: j
+      real(kind=8) :: p, lg10
+      real(kind=8) :: FillValue
 
+      lg10 = log(10.)
       call check( nf90_open(obsfilename, nf90_nowrite, ncid) )
       if (obstype == 'chlo') then
          print *, 'reading chlorophyll data'
@@ -179,13 +183,25 @@ contains
          call check( nf90_get_var(ncid, varid, phyto_aux(:, 3), &
                                  start=[1,1,1], &
                                  count=[dim_olon,dim_olat,1]) )
+         call check( nf90_get_att(ncid, varid, '_FillValue', FillValue) )
          call check( nf90_close(ncid) )
 
-         ! bias correction for chlor_a:
-         phyto_aux(:, 3) = sqrt(abs(phyto_aux(:, 3)*phyto_aux(:, 3) - phyto_aux(:, 2)*phyto_aux(:, 2)))
-         phyto_aux(:, 4) = log10(phyto_aux(:, 1)) + phyto_aux(:, 2) - 0.5*log(10.)*phyto_aux(:, 3)
-         !phyto_aux(:, 2) = 1.057*(1-exp(-0.851*phyto_aux(:, 4)))
-         !phyto_aux(:, 1) = phyto_aux(:, 4) - phyto_aux(:, 2)
+         where ( abs(phyto_aux(:, 1) - FillValue) < 1e-6 .or. &
+                 abs(phyto_aux(:, 2) - FillValue) < 1e-6 .or. &
+                 abs(phyto_aux(:, 3) - FillValue) < 1e-6 &
+                )
+               phyto_aux(:, 4) = 1e20
+               phyto_aux(:, 3) = 1e20
+         else where
+            ! bias correction for chlor_a:
+            ! get variance
+            phyto_aux(:, 3) = abs(phyto_aux(:, 3)*phyto_aux(:, 3) - phyto_aux(:, 2)*phyto_aux(:, 2))
+            ! get observation
+            phyto_aux(:, 4) = log10(phyto_aux(:, 1)) + phyto_aux(:, 2) - 0.5*lg10*phyto_aux(:, 3)
+            ! get std
+            phyto_aux(:, 3) = sqrt(phyto_aux(:, 3))
+         end where
+
       else if (obstype == 'pc') then
          call check( nf90_inq_dimid(ncid, "lat", dimid) )
          call check( nf90_Inquire_dimension(ncid, dimid, len=dim_olat) )
@@ -205,12 +221,30 @@ contains
          call check( nf90_get_var(ncid, varid, phyto_aux(:, 3), &
                                   start=[1,1,1], &
                                   count=[dim_olon,dim_olat, 1]) )
+         ! we know that all variable of C_micro/nano/pico uses the same fillval
+         call check( nf90_get_att(ncid, varid, '_FillValue', FillValue) )
          call check( nf90_close(ncid) )
 
          ! bias correction for chlor_a:
-         phyto_aux(:, 4) = phyto_aux(:, 1) + phyto_aux(:, 2) + phyto_aux(:, 3)
-         phyto_aux(:, 4) = phyto_aux(:, 4)/6.625
-         phyto_aux(:, 3) = 0.3*phyto_aux(:, 4)
+         ! percentage of observation error
+         p = 0.3
+         where ( abs(phyto_aux(:, 1) - FillValue) < 1e-6 .or. &
+                 abs(phyto_aux(:, 2) - FillValue) < 1e-6 .or. &
+                 abs(phyto_aux(:, 3) - FillValue) < 1e-6 &
+                )
+               phyto_aux(:, 4) = 1e20
+               phyto_aux(:, 3) = 1e20
+         else where
+               phyto_aux(:, 4) = phyto_aux(:, 1) + phyto_aux(:, 2) + phyto_aux(:, 3)
+               ! convert observation from carbon to nitrogen
+               phyto_aux(:, 4) = phyto_aux(:, 4) / 6.625
+               ! compute the observation variance in normal distribution from log-normal variable
+               phyto_aux(:, 3) = log10(1. + p*p)/lg10 
+               ! obs. mean in normal distribution
+               phyto_aux(:, 4) = log10(phyto_aux(:, 4)) - 0.5*lg10*phyto_aux(:, 3)
+               ! get std
+               phyto_aux(:, 3) = sqrt(phyto_aux(:, 3))
+         end where
       else
          print *, 'unrecoginised obstype:', obstype
       end if

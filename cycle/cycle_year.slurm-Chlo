@@ -67,20 +67,7 @@ for month in 01; do
     nday=`cal $month $year | grep -v '[A-Za-z]' | wc -w`
     # setup the task the ensemble size
     sed -i 's/tasks =/tasks = '${n_ens}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    # set delt_obs to day 15 of the month
-    if [ $expname == PC ];
-    then
-        if [ $year == $ystart ] && [ $month == 01 ];
-        then
-          delt_obs=$(($nday1/2))
-        else
-          delt_obs=$(($nday0/2))
-        fi
-        echo $delt_obs
-        delt_obs=$((86400*$delt_obs/$dt))
-        echo $delt_obs
-        sed -i 's/delt_obs = 1/delt_obs ='$delt_obs'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
+
     # Launch Run
     echo "Launching $year $month at $(date +%s) seconds since 1970-01-01 00:00:00"
     sbatch --wait $RUN_DIR/submit.sh
@@ -96,10 +83,5 @@ for month in 01; do
     echo $iter_end > $RUN_DIR/current_iter
     # reset tasks to empty
     sed -i 's/tasks = '${n_ens}'/tasks =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    # set delt_obs back to 1
-    if [ $expname == PC ];
-    then
-        sed -i 's/delt_obs ='$delt_obs'/delt_obs = 1/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
     cd $RUN_DIR
 done

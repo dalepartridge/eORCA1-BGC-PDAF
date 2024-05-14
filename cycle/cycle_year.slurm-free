@@ -11,16 +11,16 @@
 export OMP_NUM_THREADS=1
 source ../code/archer2-files/ucx_env
 source set_environment-free.sh
-expname=Freerun
-year=2015
+expname=free
+year=2016
 n_ens=30
-is_free=1
+is_spinup=0
 
 echo year $year
 echo n_ens $n_ens
 
 if [ ! -d $RUN_DIR ]; then
-    $CYCLE_DIR/setup_run.sh $n_ens $is_free
+    $CYCLE_DIR/setup_run.sh $expname $n_ens $is_spinup
 fi
 
 $CYCLE_DIR/setup_year.sh $year $n_ens
@@ -30,7 +30,7 @@ dt=`grep 'rn_rdt\s*=' namelist_cfg | tr -d '[:space:]' | cut -d'=' -f2 | cut -d'
 cd $RUN_DIR
 
 set -e 
-for month in 01; do
+for month in 11; do
     echo "$SLURM_JOB_ID Submitting year/month" $year/$month >> $RUN_DIR/jobs.log
     # Set namelists
     iter_start=`cat $RUN_DIR/current_iter` #get iteration number
@@ -65,23 +65,11 @@ for month in 01; do
 
     bash $CYCLE_DIR/change_stopack_seed.sh $RUN_DIR/namelists
 
-    # for the initial free run, we need to generate
-    # state vector perturbation from covariance matrix
-    if [ $year == $ystart ] && [ $month == 01 ] && [ $is_free == 1 ];
-    then
-        sed -i 's/do_init_pert = .false./do_init_pert = .true./g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
-    # use very large delt_obs to avoid DA in free run
-    if [ $is_free == 1 ];
-    then
-        sed -i 's/delt_obs = 1/delt_obs = 9999/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
     # setup the task the ensemble size
     sed -i 's/tasks =/tasks = '${n_ens}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     # Launch Run
     echo "Launching $year $month at $(date +%s) seconds since 1970-01-01 00:00:00"
     sbatch --wait $RUN_DIR/submit.sh
-    echo $iter_end > $RUN_DIR/current_iter
     # Archive results
     for i in $(seq 1 $n_ens); do
         outdir=$OUTPUT_DIR/$expname/$year/$month/ensemble_$i
@@ -90,12 +78,7 @@ for month in 01; do
     done
     outdir=$OUTPUT_DIR/$expname/$year/$month
     cp namelists/namelist* $outdir
-    mv ensemble_1/state_*.nc $outdir
-    # reset do_init_pert as .false. after the first run
-    if [ $year == $ystart ] && [ $month == 01 ] && [ $is_free == 1 ];
-    then
-        sed -i 's/do_init_pert = .true./do_init_pert = .false./g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
+    echo $iter_end > $RUN_DIR/current_iter
     # reset tasks to empty
     sed -i 's/tasks = '${n_ens}'/tasks =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     cd $RUN_DIR

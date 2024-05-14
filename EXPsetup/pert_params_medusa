@@ -7,6 +7,8 @@ import sys
 import warnings
 
 
+
+
 assert len(sys.argv[1:]) <= 3, 'More than three argument is provided.'
 
 try:
@@ -59,9 +61,10 @@ excludes = [
            'xrfn'
            ]
 
-keys = ['xpmezmi', 'xphi', 'xbetan',
-        'xbetac', 'xkc', 'xmetapn', 'xmetapd',
-        'xmetazme',]
+keys = ['xpmipn', 'xpmid', 'xpmepn', 'xpmepd',
+                'xpmezmi', 'xpmed', 'xphi', 'xbetan',
+                'xbetac', 'xkc', 'xmetapn', 'xmetapd',
+                'xmetazmi', 'xmetazme',]
 stream = open(f'{exp_dir}/fabm.yaml', 'r')
 f = yaml.safe_load(stream)
 stream.close()

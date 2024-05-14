@@ -14,13 +14,13 @@ source set_environment-spinup.sh
 expname=spinup
 year=2015
 n_ens=30
-is_free=1
+is_spinup=1
 
 echo year $year
 echo n_ens $n_ens
 
 if [ ! -d $RUN_DIR ]; then
-    $CYCLE_DIR/setup_run.sh $n_ens $is_free
+    $CYCLE_DIR/setup_run.sh $expname $n_ens $is_spinup
 fi
 
 $CYCLE_DIR/setup_year.sh $year $n_ens
@@ -58,14 +58,9 @@ for month in 01; do
 
     # for the initial free run, we need to generate
     # state vector perturbation from covariance matrix
-    if [ $year == $ystart ] && [ $month == 01 ] && [ $is_free == 1 ];
+    if [ $year == $ystart ] && [ $month == 01 ];
     then
         sed -i 's/do_init_pert = .false./do_init_pert = .true./g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
-    # use very large delt_obs to avoid DA in free run
-    if [ $is_free == 1 ];
-    then
-        sed -i 's/delt_obs = 1/delt_obs = 9999/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     fi
     # setup the task the ensemble size
     sed -i 's/tasks =/tasks = '${n_ens}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
@@ -84,7 +79,7 @@ for month in 01; do
     cp namelists/namelist* $outdir
     mv ensemble_1/state_*.nc $outdir
     # reset do_init_pert as .false. after the first run
-    if [ $year == $ystart ] && [ $month == 01 ] && [ $is_free == 1 ];
+    if [ $year == $ystart ] && [ $month == 01 ];
     then
         sed -i 's/do_init_pert = .true./do_init_pert = .false./g' $RUN_DIR/namelists/namelist_cfg.pdaf
     fi

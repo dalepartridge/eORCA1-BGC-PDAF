@@ -18,7 +18,7 @@
    ! localisation options
    locweight = 0
    ! obs frenquency
-   delt_obs = 1
+   delt_obs = 99999
    obsfreq = 'd'
 /
 &io_nml
@@ -31,7 +31,7 @@
    save_ens_sngl = .true.
 /
 &update_nml
-   do_bgciau = .true.
+   do_bgciau = .false.
    steps_bgciau = 31
    shape_bgciau = 0
 /
@@ -49,7 +49,7 @@
 /
 &obs_bgc_chlo_nml
    screen = 3
-   assim_bgc_chlo = .true.
+   assim_bgc_chlo = .false.
    ! the coefficient for obs. error variance
    ! currently it is 30% of the obs. value => 0.3**2 = 0.09
    lradius_bgc_chlo = 200000

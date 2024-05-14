@@ -47,6 +47,15 @@ for month in 01; do
     fi
     echo $nday
 
+    if [ $year == $ystart ] && [ $month == 01 ];
+    then
+      day_of_month=$(($nday1/2))
+    else
+      day_of_month=$(($nday0/2))
+    fi
+
+    delt_obs=$((86400*$day_of_month/$dt))
+
     iter_end=$(($iter_start + 86400*$nday/$dt))
     iter_start=$(($iter_start + 1))
     echo $iter_start $iter_end
@@ -68,21 +77,12 @@ for month in 01; do
     # setup the task the ensemble size
     sed -i 's/tasks =/tasks = '${n_ens}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     # set delt_obs to day 15 of the month
-    if [ $expname == PC ];
-    then
-        if [ $year == $ystart ] && [ $month == 01 ];
-        then
-          delt_obs=$(($nday1/2))
-          sed -i 's/day_of_month =/day_of_month ='$nday1'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-        else
-          delt_obs=$(($nday0/2))
-          sed -i 's/day_of_month =/day_of_month ='$nday0'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-        fi
-        echo $delt_obs
-        delt_obs=$((86400*$delt_obs/$dt))
-        echo $delt_obs
-        sed -i 's/delt_obs = 1/delt_obs ='$delt_obs'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
+
+    sed -i 's/day_of_month =/day_of_month ='${day_of_month}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
+    echo $day_of_month
+    echo $delt_obs
+    sed -i 's/delt_obs = 1/delt_obs ='${delt_obs}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
+
     # Launch Run
     echo "Launching $year $month at $(date +%s) seconds since 1970-01-01 00:00:00"
     sbatch --wait $RUN_DIR/submit.sh
@@ -99,10 +99,7 @@ for month in 01; do
     # reset tasks to empty
     sed -i 's/tasks = '${n_ens}'/tasks =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     # set delt_obs back to 1
-    if [ $expname == PC ];
-    then
-        sed -i 's/day_of_month ='$nday0'/day_of_month =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-        sed -i 's/delt_obs ='$delt_obs'/delt_obs = 1/g' $RUN_DIR/namelists/namelist_cfg.pdaf
-    fi
+    sed -i 's/day_of_month ='${day_of_month}'/day_of_month =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
+    sed -i 's/delt_obs ='${delt_obs}'/delt_obs = 1/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     cd $RUN_DIR
 done
