@@ -45,7 +45,7 @@
    path_bgc_pc = 'obs/'
    ! index of the carbon data in sfields
    ibgc_pc = 1
-   day_of_month = 15
+   day_of_month_pc =
    update_PDS_pc = .false.
 /
 &obs_bgc_chlo_nml
@@ -56,6 +56,8 @@
    dist_bgc_chlo = 'geo'
    path_bgc_chlo = 'obs/'
    ibgc_chlo = 1
+   is_monthly_chlo = .false.
+   day_of_month_chlo = 1
    update_PDS_chlo = .false.
 /
 &state_vector

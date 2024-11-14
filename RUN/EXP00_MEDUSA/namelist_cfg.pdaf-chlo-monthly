@@ -17,9 +17,10 @@
    forget = 0.95
    ! localisation options
    locweight = 0
-   ! obs frenquency
-   delt_obs = 99999
-   obsfreq = 'd'
+   ! the number of steps for first observation
+   delt_obs = 1
+   ! observation frequency, 'd' means daily and 'm' means monthly
+   obsfreq = 'm'
 /
 &io_nml
    ! pre/post-processing related IO options
@@ -31,34 +32,31 @@
    save_ens_sngl = .true.
 /
 &update_nml
-   do_bgciau = .false.
+   do_bgciau = .true.
    steps_bgciau = 31
    shape_bgciau = 0
 /
 &obs_bgc_PC_nml
    screen = 3
    assim_bgc_pc = .false.
-   ! the coefficient for obs. error variance
-   ! currently it is 30% of the obs. value => 0.3**2 = 0.09
    lradius_bgc_pc = 200000
    sradius_bgc_pc = 200000
    dist_bgc_pc = 'geo'
    path_bgc_pc = 'obs/'
-   day_of_month_pc = 15
+   ! index of the carbon data in sfields
    ibgc_pc = 2
+   day_of_month_pc = 
    update_PDS_pc = .false.
 /
 &obs_bgc_chlo_nml
    screen = 3
-   assim_bgc_chlo = .false.
-   ! the coefficient for obs. error variance
-   ! currently it is 30% of the obs. value => 0.3**2 = 0.09
+   assim_bgc_chlo = .true.
    lradius_bgc_chlo = 200000
    sradius_bgc_chlo = 200000
    dist_bgc_chlo = 'geo'
    path_bgc_chlo = 'obs/'
-   is_monthly_chlo = .false.
-   day_of_month_chlo = 1
+   is_monthly_chlo = .true.
+   day_of_month_chlo = 
    ibgc_chlo = 1
    update_PDS_chlo = .false.
 /
@@ -71,6 +69,11 @@
    sv_vvel = .false.
    sv_vvel = .false.
    n_sv_trc = 1
+   ! the index of the id_trc is the index of sn_tracer in namelist_top_cfg
+   ! the RHS is i, where i is the i-th bgc field in sfield
+   ! for example, if we have 3 physical sfield and then
+   ! the first bgc field in the sfield leads to i = 1 even if 
+   ! it is the 4-th variable in sfields
    id_trc(1) = 1
    id_trc(2) = 1
 /

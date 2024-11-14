@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=eORCA1_ensemble
+#SBATCH --job-name=assim_chlo_pc
 #SBATCH --time=24:00:00
 #SBATCH --account=n01-nceo
 #SBATCH --partition=standard
@@ -10,9 +10,9 @@
 
 export OMP_NUM_THREADS=1
 source ../code/archer2-files/ucx_env
-source set_environment-PC.sh
-expname=PC
-year=2015
+source set_environment-chlo-pc.sh
+expname=chlo-pc
+year=2016
 n_ens=30
 
 echo year $year
@@ -77,6 +77,7 @@ for month in 11; do
     # setup the task the ensemble size
     sed -i 's/tasks =/tasks = '${n_ens}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     # set delt_obs to day 15 of the month
+    sed -i 's/day_of_month_chlo =/day_of_month_chlo ='${day_of_month}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     sed -i 's/day_of_month_pc =/day_of_month_pc ='${day_of_month}'/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     echo $day_of_month
     echo $delt_obs
@@ -98,6 +99,7 @@ for month in 11; do
     # reset tasks to empty
     sed -i 's/tasks = '${n_ens}'/tasks =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     # set delt_obs back to 1
+    sed -i 's/day_of_month_chlo ='${day_of_month}'/day_of_month_chlo =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     sed -i 's/day_of_month_pc ='${day_of_month}'/day_of_month_pc =/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     sed -i 's/delt_obs ='${delt_obs}'/delt_obs = 1/g' $RUN_DIR/namelists/namelist_cfg.pdaf
     cd $RUN_DIR

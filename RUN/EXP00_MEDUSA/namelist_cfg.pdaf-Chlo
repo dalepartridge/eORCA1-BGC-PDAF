@@ -44,6 +44,7 @@
    sradius_bgc_pc = 200000
    dist_bgc_pc = 'geo'
    path_bgc_pc = 'obs/'
+   day_of_month_pc = 15
    ibgc_pc = 2
    update_PDS_pc = .false.
 /
@@ -56,6 +57,8 @@
    sradius_bgc_chlo = 200000
    dist_bgc_chlo = 'geo'
    path_bgc_chlo = 'obs/'
+   is_monthly_chlo = .false.
+   day_of_month_chlo = 1
    ibgc_chlo = 1
    update_PDS_chlo = .false.
 /
