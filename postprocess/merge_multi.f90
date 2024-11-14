@@ -252,42 +252,42 @@ contains
          end do
          ! compute the average value
          if (do_logspace) then
-            where (intmd_4d_f > 0. .and. abs(intmd_4d_f - missing_value_f) > 1e-6)
-               intmd_4d_f = log10(intmd_4d_f)
-            else where (abs(intmd_4d_f - missing_value_f) < 1e-6)
+            where (abs(val_4d_f - missing_value_f) < 1e-6)
                intmd_4d_f = missing_value_f
-            else where
-               intmd_4d_f = -14
+            else where 
+               intmd_4d_f = log10(intmd_4d_f)
             end where
 
-            where (intmd_4d_d > 0..and. abs(intmd_4d_d - missing_value_d) > 1e-6)
-               intmd_4d_d = log10(intmd_4d_d)
-            else where (abs(intmd_4d_d - missing_value_d) < 1e-6)
+            where (abs(val_4d_d - missing_value_d) < 1e-6)
                intmd_4d_d = missing_value_d
-            else where
+            else where 
+               intmd_4d_d = log10(intmd_4d_d)
+            end where
+           
+            ! this causes issues in log10 ensemble mean calculations! 
+            ! it should <= -14 rather than 0.....
+            ! nearly all data uses < = 0. for 2015 plus an unreliable mean value !!
+            where (intmd_4d_f <= -14 .and. abs(intmd_4d_f - missing_value_f) > 1e-6)
+               intmd_4d_f = -14
+            end where
+            where (intmd_4d_d <= -14 .and. abs(intmd_4d_d - missing_value_d) > 1e-6)
                intmd_4d_d = -14
             end where
          end if
          ! calculate mean value
-         where (abs(intmd_4d_f - missing_value_f) < 1e-6)
+         where (abs(val_4d_f - missing_value_f) < 1e-6)
             mean_4d_f = missing_value_f
          else where
             mean_4d_f = mean_4d_f + intmd_4d_f/Ne
          end where
 
-         where (abs(intmd_4d_d - missing_value_d) < 1e-6)
+         where (abs(val_4d_d - missing_value_d) < 1e-6)
             mean_4d_d = missing_value_d
          else where
             mean_4d_d = mean_4d_d + intmd_4d_d/Ne
          end where
          call check ( nf90_close (ncid_ens) )
       end do
-      where (mean_4d_f > missing_value_f)
-         mean_4d_f = missing_value_f
-      end where
-      where (mean_4d_d > missing_value_d)
-         mean_4d_d = missing_value_d
-      end where
    end subroutine calculate_total_phytoplankton_mean
 
    subroutine calculate_total_phytoplankton_std(varname, xtype, &
@@ -348,42 +348,45 @@ contains
          end do
          ! compute the value in log-space
          if (do_logspace) then
-            where (intmd_4d_f > 0. .and. abs(intmd_4d_f - missing_value_f) > 1e-6)
-               intmd_4d_f = log10(intmd_4d_f)
-            else where (abs(intmd_4d_f - missing_value_f) < 1e-6)
-               intmd_4d_f = missing_value_f
-            else where
-               intmd_4d_f = -14
-            end where
+             where (abs(val_4d_f - missing_value_f) < 1e-6)
+                intmd_4d_f = missing_value_f
+             else where
+                intmd_4d_f = log10(intmd_4d_f)
+             end where
 
-            where (intmd_4d_d > 0..and. abs(intmd_4d_d - missing_value_d) > 1e-6)
-               intmd_4d_d = log10(intmd_4d_d)
-            else where (abs(intmd_4d_d - missing_value_d) < 1e-6)
-               intmd_4d_d = missing_value_d
-            else where
-               intmd_4d_d = -14
-            end where
+             where (abs(val_4d_d - missing_value_d) < 1e-6)
+                intmd_4d_d = missing_value_d
+             else where
+                intmd_4d_d = log10(intmd_4d_d)
+             end where
+
+             where (intmd_4d_f <= -14 .and. abs(intmd_4d_f - missing_value_f) > 1e-6)
+                intmd_4d_f = -14
+             end where
+             where (intmd_4d_d <= -14 .and. abs(intmd_4d_d - missing_value_d) > 1e-6)
+                intmd_4d_d = -14
+             end where
          end if
          ! compute standard deviation
-         where (abs(intmd_4d_f - missing_value_f) < 1e-6)
+         where (abs(val_4d_f - missing_value_f) < 1e-6)
             std_4d_f = missing_value_f
          else where
             std_4d_f = std_4d_f + (intmd_4d_f - mean_4d_f)*(intmd_4d_f - mean_4d_f)/Ne
          end where
 
-         where (abs(intmd_4d_d - missing_value_d) < 1e-6)
+         where (abs(val_4d_d - missing_value_d) < 1e-6)
             std_4d_d = missing_value_d
          else where
             std_4d_d = std_4d_d + (intmd_4d_d - mean_4d_d)*(intmd_4d_d - mean_4d_d)/Ne
          end where
          call check( nf90_close(ncid_ens) )
       end do
-      where (std_4d_f > missing_value_f)
+      where (abs(std_4d_f - missing_value_f) < 1e-6)
          std_4d_f = missing_value_f
       else where
          std_4d_f = sqrt(std_4d_f)
       end where
-      where (std_4d_d > missing_value_d)
+      where (abs(std_4d_d - missing_value_d) < 1e-6)
          std_4d_d = missing_value_d
       else where
          std_4d_d = sqrt(std_4d_d)
@@ -634,18 +637,23 @@ contains
             end if
             ! compute the average value
             if (do_logspace) then
-               where (val_4d_f > 0. .and. abs(val_4d_f - missing_value_f) > 1e-6)
-                  val_4d_f = log10(val_4d_f)
-               else where (abs(val_4d_f - missing_value_f) < 1e-6)
+               where (abs(val_4d_f - missing_value_f) < 1e-6)
                   val_4d_f = missing_value_f
                else where
-                  val_4d_f = -14
+                  val_4d_f = log10(val_4d_f)
                end where
-               where (val_4d_d > 0..and. abs(val_4d_d - missing_value_d) > 1e-6)
-                  val_4d_d = log10(val_4d_d)
-               else where (abs(val_4d_d - missing_value_d) < 1e-6)
+
+               where (abs(val_4d_d - missing_value_d) < 1e-6)
                   val_4d_d = missing_value_d
                else where
+                  val_4d_d = log10(val_4d_d)
+               end where
+
+               ! nearly all data uses < = 0. for 2015 plus an unreliable mean value !!
+               where (val_4d_f <= -14 .and. abs(val_4d_f - missing_value_f) > 1e-6)
+                  val_4d_f = -14
+               end where
+               where (val_4d_d <= -14 .and. abs(val_4d_d - missing_value_d) > 1e-6)
                   val_4d_d = -14
                end where
             end if
@@ -664,10 +672,10 @@ contains
             call check( nf90_close(ncid_ens) )
          end do
 
-         where (mean_4d_f > missing_value_f)
+         where (abs(mean_4d_f - missing_value_f) < 1e-6)
             mean_4d_f = missing_value_f
          end where
-         where (mean_4d_d > missing_value_d)
+         where (abs(mean_4d_d - missing_value_d) < 1e-6)
             mean_4d_d = missing_value_d
          end where
       end if
@@ -730,18 +738,24 @@ contains
                               start=[1, 1, 1, 1], count = [nx, ny, nz, nt]) )
             end if
             if (do_logspace) then
-               where (val_4d_f > 0. .and. abs(val_4d_f - missing_value_f) > 1e-6)
-                  val_4d_f = log10(val_4d_f)
-               else where (abs(val_4d_f - missing_value_f) < 1e-6)
+               where (abs(val_4d_f - missing_value_f) < 1e-6)
                   val_4d_f = missing_value_f
                else where
-                  val_4d_f = -14
+                  val_4d_f = log10(val_4d_f)
                end where
-               where (val_4d_d > 0..and. abs(val_4d_d - missing_value_d) > 1e-6)
-                  val_4d_d = log10(val_4d_d)
-               else where (abs(val_4d_d - missing_value_d) < 1e-6)
+
+               where (abs(val_4d_d - missing_value_d) < 1e-6)
                   val_4d_d = missing_value_d
                else where
+                  val_4d_d = log10(val_4d_d)
+               end where
+               ! the same error exists for the std calculation!!!
+               ! should be < = -14 plust an unreliable mean value !!
+               ! nearly all data uses < = 0. for 2015 plus an unreliable mean value !!
+               where (val_4d_f <= -14 .and. abs(val_4d_f - missing_value_f) > 1e-6)
+                  val_4d_f = -14
+               end where
+               where (val_4d_d <= -14 .and. abs(val_4d_d - missing_value_d) > 1e-6)
                   val_4d_d = -14
                end where
             end if
@@ -759,12 +773,12 @@ contains
             end where
             call check( nf90_close(ncid_ens) )
          end do
-         where (std_4d_f > missing_value_f)
+         where (abs(std_4d_f - missing_value_f) < 1e-6)
             std_4d_f = missing_value_f
          else where
             std_4d_f = sqrt(std_4d_f)
          end where
-         where (std_4d_d > missing_value_d)
+         where (abs(std_4d_d - missing_value_d) < 1e-6)
             std_4d_d = missing_value_d
          else where
             std_4d_d = sqrt(std_4d_d)
