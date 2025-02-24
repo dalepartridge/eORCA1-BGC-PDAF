@@ -5,23 +5,21 @@
 #SBATCH --partition=serial
 #SBATCH --qos=serial
 #SBATCH --ntasks=1
+#SBATCH --ntasks-per-node=1
 source ../../code/archer2-files/ucx_env
-
-year=2015
-icycle=01
 
 BaseDir=${year}/${icycle}/analysis/
 
 set -e
 for fname in $(ls $BaseDir/state_*_001.nc)
 do
-    if [[ $fname == *201504* ]]; then
+    if [[ $fname == *201604* ]]; then
         continue
     fi
-    if [[ $fname == *201508* ]]; then
+    if [[ $fname == *201608* ]]; then
         continue
     fi
-    if [[ $fname == *201512* ]]; then
+    if [[ $fname == *201612* ]]; then
         continue
     fi
     start=`date +%s`

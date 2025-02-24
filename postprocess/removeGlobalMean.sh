@@ -1,7 +1,5 @@
 #!/bin/bash --login
 
-year=2015
-icycle=01
 BaseDir=${year}/${icycle}
 cd $BaseDir
 for i in  {1..30}

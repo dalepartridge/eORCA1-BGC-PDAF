@@ -1,14 +1,12 @@
 #!/bin/bash --login
 #SBATCH --job-name=stat
-#SBATCH --time=12:00:00
+#SBATCH --time=24:00:00
 #SBATCH --account=n01-nceo
 #SBATCH --partition=serial
 #SBATCH --qos=serial
 #SBATCH --ntasks=32
+#SBATCH --ntasks-per-node=32
 source ../../code/archer2-files/ucx_env
-
-year=2015
-icycle=07
 
 BaseDir=${year}/${icycle}
 
@@ -17,15 +15,16 @@ cp ../../code/nemo/tools/REBUILD_NEMO/rebuild_nemo.exe $BaseDir/.
 cp ../../code/nemo/tools/REBUILD_NEMO/nam_rebuild $BaseDir/.
 
 set -e
+# for fname in $(ls $BaseDir/ensemble_1/eORCA1_1d_*_0000.nc | grep -v "globmean")
 for fname in $(ls $BaseDir/ensemble_1/eORCA1_1d_*_0000.nc | grep -v "globmean")
 do
-    if [[ $fname == *201504-201504* ]]; then
+    if [[ $fname == *201604-201604* ]]; then
         continue
     fi
-    if [[ $fname == *201508-201508* ]]; then
+    if [[ $fname == *201608-201608* ]]; then
         continue
     fi
-    if [[ $fname == *201512-201512* ]]; then
+    if [[ $fname == *201612-201612* ]]; then
         continue
     fi
     start=`date +%s`

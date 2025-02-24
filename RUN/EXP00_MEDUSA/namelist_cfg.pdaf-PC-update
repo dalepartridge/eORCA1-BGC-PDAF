@@ -1,0 +1,163 @@
+! for controlling parallisation
+&tasks_nml
+   tasks =
+   screen = 2
+/
+! PDAF options
+&pdaf_nml
+! verbosity of PDAF routines
+   screen = 2
+   ! filter-related options
+   filtertype = 7
+   subtype = 0
+   type_trans = 0
+   type_sqrt = 0
+   ! inflation options
+   type_forget = 0
+   forget = 0.95
+   ! localisation options
+   locweight = 0
+   ! the number of steps for first observation
+   delt_obs = 1
+   ! observation frequency, 'd' means daily and 'm' means monthly
+   obsfreq = 'm'
+/
+&io_nml
+   ! pre/post-processing related IO options
+   verbose_io = 2         ! verbosity of IO module
+   sgldbl_io = 'sgl'      ! options for single/double precision for state file: 'sgl'/'dbl'
+   ! filenames related to type_ens_init/type_central_state
+   save_state = .false.
+   save_var = .false.
+   save_ens_sngl = .true.
+/
+&update_nml
+   do_bgciau = .true.
+   steps_bgciau = 31
+   shape_bgciau = 0
+/
+&obs_bgc_PC_nml
+   screen = 3
+   assim_bgc_pc = .true.
+   lradius_bgc_pc = 200000
+   sradius_bgc_pc = 200000
+   dist_bgc_pc = 'geo'
+   path_bgc_pc = 'obs/'
+   ! index of the carbon data in sfields
+   ibgc_pc = 1
+   day_of_month_pc =
+   update_PDS_pc = .false.
+/
+&obs_bgc_chlo_nml
+   screen = 3
+   assim_bgc_chlo = .false.
+   lradius_bgc_chlo = 200000
+   sradius_bgc_chlo = 200000
+   dist_bgc_chlo = 'geo'
+   path_bgc_chlo = 'obs/'
+   ibgc_chlo = 1
+   is_monthly_chlo = .false.
+   day_of_month_chlo = 1
+   update_PDS_chlo = .false.
+/
+&state_vector
+   screen = 3
+   sv_temp = .false.
+   sv_salt = .false.
+   sv_ssh  = .false.
+   sv_uvel = .false.
+   sv_vvel = .false.
+   sv_vvel = .false.
+   n_sv_trc = 1
+   ! the index of the id_trc is the index of sn_tracer in namelist_top_cfg
+   ! the RHS is i, where i is the i-th bgc field in sfield
+   ! for example, if we have 3 physical sfield and then
+   ! the first bgc field in the sfield leads to i = 1 even if 
+   ! it is the 4-th variable in sfields
+   id_trc(3) = 1
+   id_trc(4) = 1
+/
+&sfields_nml
+   sfields(1)%ndims = 2
+   sfields(1)%variable = 'carbon'
+   sfields(1)%unit = 'mg C/m^3'
+   sfields(1)%collect_op = 'sum'
+   sfields(1)%dist_op = 'bal_carbon'
+   sfields(1)%dist_unobs = .true.
+   sfields(1)%path_covar = '.'
+   sfields(1)%file_covar = '.'
+   sfields(1)%do_covar = .false.
+   sfields(1)%ensscale = 1.0
+   sfields(1)%limit = 0
+   sfields(1)%transform = 1
+   sfields(1)%trafo_shift = 0.
+/
+&pert_vector
+screen = 3
+do_init_pert = .false.
+! 
+! sshn
+pert(1) = .false.
+! temp
+pert(2) = .true.
+! salt
+pert(3) = .true.
+! u
+pert(4) = .false.
+! v
+pert(5) = .false.
+n_trc = 2
+id_trc(1) = 1
+id_trc(2) = 1
+id_trc(3) = 2
+id_trc(4) = 2
+/
+&pert_fields_nml
+   pert_fields(1)%ndims = 3
+   pert_fields(1)%variable = 'toce_con'
+   pert_fields(1)%path_covar = './'
+   pert_fields(1)%file_covar = 'cov-SSSSST.nc'
+   pert_fields(1)%do_covar = .true.
+   pert_fields(1)%ensscale = 1
+   pert_fields(1)%limit = 1
+   pert_fields(1)%min_limit = 0.
+   pert_fields(1)%transform = 0
+   pert_fields(1)%trafo_shift = 0.
+
+   pert_fields(2)%ndims = 3
+   pert_fields(2)%variable = 'soce_abs'
+   pert_fields(2)%path_covar = './'
+   pert_fields(2)%file_covar = 'cov-SSSSST.nc'
+   pert_fields(2)%do_covar = .true.
+   pert_fields(2)%ensscale = 1
+   pert_fields(2)%limit = 1
+   pert_fields(2)%min_limit = 0.
+   pert_fields(2)%transform = 0
+   pert_fields(2)%trafo_shift = 0.
+
+   pert_fields(3)%ndims = 2
+   pert_fields(3)%variable = 'chlorophyll'
+   pert_fields(3)%unit = 'mg C/m^3'
+   pert_fields(3)%collect_op = 'sum'
+   pert_fields(3)%dist_op = 'bal_chlo'
+   pert_fields(3)%path_covar = './'
+   pert_fields(3)%file_covar = 'cov-chlo.nc'
+   pert_fields(3)%do_covar = .true.
+   pert_fields(3)%ensscale = 1.
+   pert_fields(3)%limit = 0
+   pert_fields(3)%transform = 1
+   pert_fields(3)%trafo_shift = 0.
+
+   pert_fields(4)%ndims = 2
+   pert_fields(4)%variable = 'nitrogen'
+   pert_fields(4)%unit = 'mg C/m^3'
+   pert_fields(4)%collect_op = 'sum'
+   pert_fields(4)%dist_op = 'bal_carbon'
+   pert_fields(4)%path_covar = './'
+   pert_fields(4)%file_covar = 'cov-nitrogen.nc'
+   pert_fields(4)%do_covar = .true.
+   pert_fields(4)%ensscale = 1.
+   pert_fields(4)%limit = 0
+   pert_fields(4)%transform = 1
+   pert_fields(4)%trafo_shift = 0.
+/
