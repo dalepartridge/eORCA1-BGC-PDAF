@@ -80,7 +80,7 @@ def plot_timeseries() -> None:
     fig.clf()
     gs: mgs.GridSpec = mgs.GridSpec(
         1, 2, figure=fig,
-        wspace=0.45, hspace=0., left=0.07, right=0.915,
+        wspace=0.59, hspace=0., left=0.07, right=0.90,
         bottom=0.38, top=0.93)
 
     locator: mdates.MonthLocator
@@ -112,6 +112,7 @@ def plot_timeseries() -> None:
         ax.tick_params(axis='x', rotation=30)
         ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0))
         ax.set_xlabel('Time')
+        ax1.tick_params(axis='y', labelcolor='r')
 
         if i == 0:
             ax1.set_ylabel(r'Freerun pCO$_2$', color='r')
@@ -119,10 +120,10 @@ def plot_timeseries() -> None:
             ax.set_ylabel('Differences from freerun')
         if i == 1:
             ax1.set_ylabel(
-                r'Freerun Oxygen ($mmol \cdot O_2 \cdot m^3$)', color='r')
+                'Freerun Oxygen\n'r'($mmol \cdot O_2 \cdot m^3$)', color='r')
             ax.set_title('b) Oxygen')
             ax.set_ylabel(
-                r'Differences from freerun ($mmol \cdot O_2 \cdot m^3$)')
+                'Differences from freerun\n'r'($mmol \cdot O_2 \cdot m^3$)')
         line, = ax1.plot(t, f_free['data'], color=colours[0],
                          linestyle=linestyles[0],
                          label=config.exp_labels['free'], alpha=1)

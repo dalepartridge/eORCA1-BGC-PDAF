@@ -136,7 +136,7 @@ def save_data() -> None:
             save_data_per_var(vname)
 
 
-def plot_axes(fig, ax, expname: str, vname: str) -> None:
+def plot_axes(i: int, fig, ax, expname: str, vname: str) -> None:
     """plot the axes"""
     lons, lats = utils.get_coord()
     ax.set_global()
@@ -168,7 +168,10 @@ def plot_axes(fig, ax, expname: str, vname: str) -> None:
     pc = ax.pcolormesh(
         lons, lats, data, transform=ccrs.PlateCarree(),
         cmap=cmap, norm=norm)
-    ax.set_title(config.exp_labels[expname])
+    if vname == 'chlo-monthly':
+        ax.set_title(chr(ord('`')+i+1) + ') ' + config.exp_labels[expname])
+    if vname == 'nitrogen-monthly':
+        ax.set_title(chr(ord('`')+8+i+1) + ') ' + config.exp_labels[expname])
     ax.coastlines(color='k', linewidth=.8)
     ax.add_feature(cfeature.LAND, zorder=3)
     # locator = mticker.FixedLocator(
@@ -188,27 +191,35 @@ def plot() -> None:
                            'chlo-monthly-update', 'free', 'PC',
                            'PC-update', 'chlo-pc',
                            ]
-    vnames: list[str] = ['nitrogen-monthly', 'chlo-monthly']
+    vnames: list[str] = ['chlo-monthly', 'nitrogen-monthly']
 
-    for vname in vnames:
-        fig: plt.Figure = plt.figure()
-        w, h = fig.get_size_inches()
-        fig.set_size_inches(w*2.5, h*1.2)
+    fig: plt.Figure = plt.figure()
+    w, h = fig.get_size_inches()
+    fig.set_size_inches(w*2.5, h*2.4)
+    fig.text(
+        0.29, 0.97, 'Total chlorophyll adjustments (mg Chl m$^{-3})$)',
+        fontsize=25)
+    fig.text(
+        0.29, 0.45, 'Total nitrogen adjustments (mmol N m$^{-3})$)',
+        fontsize=25)
+    for j, vname in enumerate(vnames):
+        bottom = 0.01 if j == 1 else 0.51
+        top = 0.92 if j == 0 else 0.4
         gs: mgs.GridSpec = mgs.GridSpec(2, 4,
                                         figure=fig,
                                         wspace=0.01,
-                                        hspace=0.17,
+                                        hspace=0.21,
                                         left=0., right=1.,
-                                        bottom=0.01, top=0.93)
+                                        bottom=bottom, top=top)
         for i, expname in enumerate(expnames):
             ax = fig.add_subplot(
                 gs[i], projection=ccrs.Robinson())
-            plot_axes(fig, ax, expname, vname)
-        fig.savefig(f'figs/clim_diff_{vname}.png', dpi=300)
+            plot_axes(i, fig, ax, expname, vname)
+    fig.savefig('figs/clim_diff.png', dpi=300)
 
 
 if __name__ == '__main__':
     # save_data()
-    save_obs_data('pc')
-    save_obs_data('chlo-monthly')
+    # save_obs_data('pc')
+    # save_obs_data('chlo-monthly')
     plot()

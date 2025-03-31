@@ -107,7 +107,7 @@ def plot_timeseries() -> None:
     fig.clf()
     gs: mgs.GridSpec = mgs.GridSpec(
         2, 2, figure=fig,
-        wspace=0.43, hspace=0.4, left=0.09, right=0.92,
+        wspace=0.43, hspace=0.4, left=0.1, right=0.92,
         bottom=0.14, top=0.96)
 
     locator: mdates.MonthLocator
@@ -141,6 +141,7 @@ def plot_timeseries() -> None:
         # Set the major formatter to display the date in 'Month-Day' format
         ax.xaxis.set_major_formatter(mdates.AutoDateFormatter(locator))
         ax.tick_params(axis='x', rotation=20)
+        ax.set_ylim((-0.11, 0.01))
         if i == 0:
             ax.set_ylabel('normalised RMSD difference')
         ax.set_xlabel('Time')
@@ -156,7 +157,7 @@ def plot_timeseries() -> None:
         ax1.tick_params(axis='y', labelcolor='r')
         if i == 0:
             ax.set_title(f'a) phytoplankton {vname}')
-            ax1.set_ylabel(r'Freerun RMSD (mg C m$^{-3}$)', color='r')
+            ax1.set_ylabel(r'Freerun RMSD (mg Chl m$^{-3}$)', color='r')
         if i == 1:
             ax.set_title(f'b) phytoplankton {vname}')
             ax1.set_ylabel(r'Freerun RMSD (mmol N m$^{-3}$)', color='r')
@@ -165,18 +166,34 @@ def plot_timeseries() -> None:
     for i, varname in enumerate(['chlo-monthly', 'nitrogen-monthly']):
         metric = plot_crps.get_crps_series(varname)
         ax = fig.add_subplot(gs[2 + i])
-        for exp, linestyle, colour in zip(exps, linestyles, colours):
+        ax1 = ax.twinx()
+        ax.axhline(y=0, color='lightgrey')
+        for exp, linestyle, colour in zip(
+                exps[1:],
+                linestyles[1:],
+                colours[1:]):
             ax.plot(
-                t, metric[f'{exp}_reli'],
-                linestyle=linestyle, marker='.',
-                color=colour)
+                t, np.array(metric[f'{exp}_reli']) -
+                np.array(metric['free_reli']),
+                linestyle=linestyle, marker='.', color=colour)
             if varname == 'chlo-monthly':
                 vname = 'Chl'
             if varname == 'nitrogen-monthly':
                 vname = 'N'
             ax.set_title(f'Reliability of {vname}')
 
-        ax.set_ylabel('Reliability')
+        # plot the freerun RMSD as a reference
+        line, = ax1.plot(
+            t, metric['free_reli'],
+            color='r', linestyle=':', label='Freerun', alpha=1)
+        ax1.tick_params(axis='y', labelcolor='r')
+        if i == 0:
+            ax.set_ylabel('Reliability difference')
+            ax.set_title(f'c) phytoplankton {vname}')
+            ax1.set_ylabel(r'Freerun reliability', color='r')
+        if i == 1:
+            ax.set_title(f'd) phytoplankton {vname}')
+            ax1.set_ylabel(r'Freerun reliability', color='r')
         # Set the major locator to be every day
         ax.xaxis.set_major_locator(locator)
         # Set the major formatter to display the date in 'Month-Day' format
@@ -201,14 +218,14 @@ if __name__ == '__main__':
                            'chlo-monthly-update', 'PC',
                            'PC-update', 'chlo-pc',]
 
-    for expname in expnames:
-        config.exp = expname
-        obs_types: list[typing.Literal['chlo-monthly', 'pc']] = [
-            'chlo-monthly', 'pc']
-        for obs_t in obs_types:
-            save_monthly(os.path.join(
-                'data',
-                config.exp, 'ensmean_{varname}-monthly_{year}{month}01.npz'),
-                obs_t)
+    # for expname in expnames:
+    #     config.exp = expname
+    #     obs_types: list[typing.Literal['chlo-monthly', 'pc']] = [
+    #         'chlo-monthly', 'pc']
+    #     for obs_t in obs_types:
+    #         save_monthly(os.path.join(
+    #             'data',
+    #             config.exp, 'ensmean_{varname}-monthly_{year}{month}01.npz'),
+    #             obs_t)
 
     plot_timeseries()

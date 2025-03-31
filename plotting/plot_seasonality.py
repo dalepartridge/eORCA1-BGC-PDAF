@@ -10,6 +10,7 @@ import cartopy.feature as cfeature  # type: ignore
 import cmocean  # type: ignore # pylint: disable=unused-import
 import matplotlib.colors as mcolors
 import matplotlib.gridspec as mgs
+import matplotlib.lines as mlines
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -188,9 +189,12 @@ def plot_axes(
                        ) - np.squeeze(f_free[seasons[season]] - clim_free)
         norm = norm_diff[vname]
     print(np.nanmin(d), np.nanmax(d), np.nanpercentile(d, [5, 95]))
+    cmap = 'cmo.balance'
+    if exp in ['obs', 'free']:
+        cmap = 'cmo.diff'
     pc = ax.pcolormesh(
         lons, lats, np.squeeze(d), transform=ccrs.PlateCarree(),
-        cmap='cmo.balance', norm=norm)
+        cmap=cmap, norm=norm)
 
     ax.coastlines(color='k', linewidth=.8)
     ax.add_feature(cfeature.LAND, zorder=3)
@@ -232,7 +236,11 @@ def plot_diff_map(vname: str) -> None:
             ax = fig.add_axes((0.065 + 0.197*(i - 15), 0.07, 0.12, 0.02))
             fig.colorbar(pc, cax=ax, orientation='horizontal', pad=0.05,
                          shrink=0.5, norm=norm)
-
+    fig.add_artist(
+        mlines.Line2D(
+            [0.418, 0.418],
+            [0., 1],
+            transform=fig.transFigure, color='black', linestyle='--'))
     fig.savefig(f'figs/season_{vname}_diff_map.png', dpi=300)
 
 
@@ -254,6 +262,6 @@ if __name__ == '__main__':
     #         if varname == 'nitrogen-monthly':
     #             save_seasonal_obs_data('pc')
 
-    for varname in variables[:1]:
+    for varname in variables:
         print(varname)
         plot_diff_map(varname)

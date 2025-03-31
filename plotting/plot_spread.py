@@ -22,7 +22,7 @@ import utils
 
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Times New Roman'] + plt.rcParams['font.serif']
-plt.rcParams['font.size'] = 16
+plt.rcParams['font.size'] = 18
 
 
 def get_model_timeseries(varname: str, exp: str) -> np.ndarray:
@@ -358,7 +358,7 @@ def get_onestep_physc(spread, inc, i, f_info: file_info.FileInfo, exp: str,
                       varname: str) -> None:
     """Get the one-step spread and ensemble mean increment in physical space"""
     data = get_pdaf_physic(f_info, exp, varname)
-    print ()
+    print()
     spread[i*config.ny*config.nx:(i+1)*config.ny*config.nx] = \
         (data[1] - data[0]).ravel()
     data = get_pdaf_physicval(f_info, exp, varname)
@@ -370,7 +370,7 @@ def get_onestep(spread, inc, i, f_info: file_info.FileInfo, exp: str,
                 varname: str) -> None:
     """Get the one-step spread and ensemble mean increment"""
     data = get_pdaf(f_info, exp, varname)
-    print (data[0].shape, config.nx, config.nx)
+    print(data[0].shape, config.nx, config.nx)
     spread[i*config.ny*config.nx:(i+1)*config.ny*config.nx] = \
         (data[1] - data[0]).ravel()
     data = get_pdaf_val(f_info, exp, varname)
@@ -460,10 +460,10 @@ def plot_scatter() -> None:
     w, h = fig.get_size_inches()
     fig.set_size_inches(w * 4, h * 2)
     gs: mgs.GridSpec = mgs.GridSpec(2, 4, figure=fig,
-                                    wspace=0.25,
-                                    hspace=0.27,
-                                    left=0.04, right=0.99,
-                                    bottom=0.12, top=0.96)
+                                    wspace=0.29,
+                                    hspace=0.31,
+                                    left=0.05, right=0.99,
+                                    bottom=0.14, top=0.96)
 
     axes = [fig.add_subplot(gs[i]) for i in range(8)]
     for ax in axes:
@@ -471,15 +471,16 @@ def plot_scatter() -> None:
         ax.axhline(0, color='gray', linestyle='--')
         ax.set_yscale('symlog', linthresh=0.3)
         ax.set_xscale('symlog', linthresh=0.3)
-        ax.set_xlabel('Spread increment')
-        ax.set_ylabel('Ensemble mean increment')
 
     for i, varname in enumerate(['chlorophyll', 'nitrogen']):
         vname = ''
+        unit = ''
         if varname == 'chlorophyll':
             vname = 'Chl'
+            unit = r'(mg Chl m$^{-3})$'
         if varname == 'nitrogen':
             vname = 'N'
+            unit = r'(mmol N m$^{-3})$'
         j = 0
         for exp, colour in zip(exps, colours):
             if exp in ['PC', 'PC-update', ] and varname == 'chlorophyll':
@@ -490,15 +491,34 @@ def plot_scatter() -> None:
                 os.path.join('data', exp,
                              f'spread_inc_scatter_{varname}.npz')
             )
-            print (varname, exp, j)
-            axes[4*i + 2*j].scatter(f['spread'], f['inc'], s=0.2, c=colour, alpha=0.1)
-            axes[4*i + 2*j].set_title(f'Lognormal parameters ({config.exp_labels[exp]}: {vname})')
-            axes[4*i + 2*j + 1].set_title(f'Physical values ({config.exp_labels[exp]}: {vname})')
+            print(varname, exp, j)
+            axes[4*i + 2*j].scatter(f['spread'], f['inc'],
+                                    s=0.2, c=colour, alpha=0.1)
+            if exp == 'chlo-pc':
+                axes[4*i + 2*j].set_title(
+                    f'{chr(97+4*i + 2*j)}) '
+                    f'Transformed ({config.exp_labels[exp]}: {vname})')
+                axes[4*i + 2*j + 1].set_title(
+                    f'{chr(97+4*i + 2*j + 1)}) '
+                    f'Physical ({config.exp_labels[exp]}: {vname})')
+            else:
+                axes[4*i + 2*j].set_title(
+                    f'{chr(97+4*i + 2*j)}) '
+                    f'Transformed ({config.exp_labels[exp][:-1]}[+]: {vname})')
+                axes[4*i + 2*j + 1].set_title(
+                    f'{chr(97+4*i + 2*j + 1)}) '
+                    f'Physical ({config.exp_labels[exp][:-1]}[+]: {vname})')
             axes[4*i + 2*j + 1].scatter(f['spread_physc'],
                                         f['inc_physc'], s=0.2,
                                         c=colour, alpha=0.1)
+
             if exp in ['chlo-monthly-update', 'PC-update', ]:
                 j += 1
+
+            axes[4*i + 2*j].set_xlabel(f'Spread increment (log{unit})')
+            axes[4*i + 2*j].set_ylabel(f'Increment ((log{unit})')
+            axes[4*i + 2*j+1].set_xlabel(f'Spread increment {unit}')
+            axes[4*i + 2*j+1].set_ylabel(f'Increment {unit}')
 
     fig.legend(
         loc='outside lower center',
@@ -508,7 +528,7 @@ def plot_scatter() -> None:
             linewidth=0, marker='.', markersize=12, color=colour)
             for colour in colours],
         labels=[config.exp_labels[exp] for exp in exps],
-        ncols=5, fontsize=12, markerscale=0.5)
+        ncols=5, fontsize=16, markerscale=0.5)
 
     fig.savefig('figs/spread_scatter.png', dpi=300)
 
@@ -526,11 +546,11 @@ if __name__ == '__main__':
     # plot_timeseries()
     expnames: list[str] = ['chlo-monthly', 'chlo-monthly-update',
                            'PC', 'PC-update', 'chlo-pc',
-                          ]
-    for expname in expnames:
-        config.output_path = config.output_path_format.format(exp=expname)
-        if expname in ['chlo-monthly','chlo-monthly-update', 'chlo-pc']:
-            get_all_pdaf(expname, 'chlorophyll')
-        if expname in ['PC', 'PC-update', 'chlo-pc']:
-            get_all_pdaf(expname, 'nitrogen')
+                           ]
+    # for expname in expnames:
+    #     config.output_path = config.output_path_format.format(exp=expname)
+    #     if expname in ['chlo-monthly','chlo-monthly-update', 'chlo-pc']:
+    #         get_all_pdaf(expname, 'chlorophyll')
+    #     if expname in ['PC', 'PC-update', 'chlo-pc']:
+    #         get_all_pdaf(expname, 'nitrogen')
     plot_scatter()

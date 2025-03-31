@@ -195,7 +195,6 @@ def plot_axes(
     j = 0
     for exp, linestyle, colour in zip(exps,
                                       linestyles, colours):
-        print(varname, exp, bias[exp].shape)
         if varname == 'nitrogen' and exp in ['chlo',
                                              'chlo-monthly',
                                              'chlo-monthly-update'
@@ -204,12 +203,19 @@ def plot_axes(
 
         if varname == 'chlorophyll' and exp in ['PC', 'PC-update']:
             continue
+
+        print(varname, exp, bias[exp].shape)
+        if varname == 'chlorophyll':
+            rangeval = (-3.0, 3.0)
+        else:
+            rangeval = (-2.0, 2.0)
         ax.hist(bias[exp], bins=100,
                 density=True,
                 histtype='step', color=colour,
+                range=rangeval,
                 linestyle=linestyle,
                 linewidth=3, label=exp)
-        loc_text = 0.02 if i == 1 else 0.64
+        loc_text = 0.64
         ax.text(loc_text, 0.9 - 0.1*j,
                 f'{config.exp_labels[exp]}:'
                 f' {np.nanmean(bias[exp]):.2f}',
@@ -252,9 +258,9 @@ def plot_bias_histogram(varnames: list[str]) -> None:
         ax = fig.add_subplot(gs[i])
         # plot the histogram for current varname
         ax = plot_axes(i, ax, varname, exps, linestyles, colours)
-        unit = r'$mmol/m^3$' if varname == 'nitrogen' else r'$mg/m^3$'
-        ax.set_xlabel(f'o - b ({unit})')
-        ax.set_title(varname)
+        unit = r'(mmol N m$^{-3})$' if varname == 'nitrogen' else r'(mg Chl m$^{-3})$'
+        ax.set_xlabel(f'o - b (log'+unit+')')
+        ax.set_title(f'{chr(97+i)}) {varname}')
         ax.set_ylabel('Frequency')
 
     lines = [mlines.Line2D([], [], color=color, linestyle=linestyle)
@@ -271,27 +277,27 @@ def plot_bias_histogram(varnames: list[str]) -> None:
 
 
 if __name__ == '__main__':
-    expnames: list[str] = ['chlo', 'chlo-monthly',
-                           'chlo-monthly-update', 'PC',
-                           'PC-update', 'chlo-pc',
-                           ]
-    for expname in expnames:
-        config.exp = expname
-        if expname in ['PC', 'PC-update', 'chlo-pc', ]:
-            save_monthly_bias(
-                'nitrogen', 'pc', os.path.join(
-                    'data', expname,
-                    'pdaf_ensmean_nitrogen_{year}{month}{day}.npz'))
-        if expname in ['chlo-monthly', 'chlo-pc', 'chlo-monthly-update']:
-            save_monthly_bias(
-                'chlorophyll', 'chlo-monthly', os.path.join(
-                    'data', expname,
-                    'pdaf_ensmean_chlorophyll_{year}{month}{day}.npz'))
-        if expname in ['chlo', ]:
-            save_monthly_bias(
-                'chlorophyll', 'chlo', os.path.join(
-                    'data', expname,
-                    'pdaf_ensmean_chlorophyll_{year}{month}{day}.npz'))
+    # expnames: list[str] = ['chlo', 'chlo-monthly',
+    #                        'chlo-monthly-update', 'PC',
+    #                        'PC-update', 'chlo-pc',
+    #                        ]
+    # for expname in expnames:
+    #     config.exp = expname
+    #     if expname in ['PC', 'PC-update', 'chlo-pc', ]:
+    #         save_monthly_bias(
+    #             'nitrogen', 'pc', os.path.join(
+    #                 'data', expname,
+    #                 'pdaf_ensmean_nitrogen_{year}{month}{day}.npz'))
+    #     if expname in ['chlo-monthly', 'chlo-pc', 'chlo-monthly-update']:
+    #         save_monthly_bias(
+    #             'chlorophyll', 'chlo-monthly', os.path.join(
+    #                 'data', expname,
+    #                 'pdaf_ensmean_chlorophyll_{year}{month}{day}.npz'))
+    #     if expname in ['chlo', ]:
+    #         save_monthly_bias(
+    #             'chlorophyll', 'chlo', os.path.join(
+    #                 'data', expname,
+    #                 'pdaf_ensmean_chlorophyll_{year}{month}{day}.npz'))
 
     plot_bias_histogram(['chlorophyll', 'nitrogen',])
 
